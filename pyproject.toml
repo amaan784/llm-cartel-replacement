@@ -1,0 +1,15 @@
+[project]
+name = "llm-cartel-replacement"
+version = "0.1.0"
+description = "Does LLM price collusion survive replacing an agent? Apart AI Collusion Sprint, question 1.2 (analysis + orchestration)"
+requires-python = ">=3.10"
+# Only the analysis needs third-party packages; the game harness has its own environment
+# (vendor/collusion_hackathon/llm-cartel, set up by the organizers' setup.sh).
+dependencies = [
+    "numpy>=1.26",
+    "matplotlib>=3.8",
+    "pypandoc-binary>=1.17",
+]
+
+[tool.uv]
+package = false
