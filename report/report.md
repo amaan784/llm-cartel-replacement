@@ -606,8 +606,8 @@ edge.](../out/extended/fig2_effects.png){width=80%}
 ## LLM Usage Statement
 
 The author chose the research question, decided which arms and models to add, set the budget, and directed and
-reviewed the work. An AI coding assistant (Claude) was used to implement the pipeline and analysis code, to draft
-and revise the text, to write the classifier's 20 reference labels (Appendix A) and to check the draft and the
+reviewed the work. An AI coding assistant (Claude) was used to implement the pipeline and analysis code, to help
+write the text, to write the classifier's 20 reference labels (Appendix A) and to check the draft and the
 references against their sources. OpenAI's Codex and xAI's Grok were used to review drafts. Every result in the
 report is computed by `src/analyze.py` from the logged runs and listed with its source file in `out/numbers.json`
 (robustness seeds: `out/extended/numbers.json`); run settings and the token-cap change are documented in
