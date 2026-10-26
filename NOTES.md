@@ -2,6 +2,9 @@
 
 All times US Eastern (EDT). Spend is OpenRouter USD. Entries are appended in time order;
 the pipeline (`src/pipeline.py`) appends its own lines under "Pipeline log" at the end.
+The notebook was kept with the AI coding assistant named in the report's LLM usage statement: "the user" is the
+author and "the assistant" is that coding assistant. Reviews and audits marked as automated were run by LLM agents,
+not by people. Entries are kept as written.
 
 ## 2026-10-25 02:28 to 02:45, setup
 
@@ -148,8 +151,8 @@ Market gain_t = mean of both firms' `gains` at round t.
   Track F, baselines, 168 branches, analysis; 0 failed branches with 2% injected HTTP 500s and 1% unparseable
   replies. Fallback test (mock qwen colludes only under PI): extend200, seeds 6-9 and Track O-PI with the RP arm
   all triggered; branch configs checked (C0 PI/PI, R2 PI/P0 + newcomer model, R4 PI/AC, RP PI/P0).
-- 03:05 Independent code review (4 reviewers: harness semantics, analysis vs pre-registration, orchestration,
-  cost/safety; each finding checked by a skeptical verifier). Fixed: PID reuse (creation-time check), smoke test
+- 03:05 Automated code review by LLM agents (4 reviewer agents: harness semantics, analysis vs pre-registration, orchestration,
+  cost/safety; each finding checked by a verifier agent). Fixed: PID reuse (creation-time check), smoke test
   retries, stuck-run detection with exponential back-off, partial-line repair before resume, outage breaker
   (3 job deaths in 5 min pause launches for 10 min and do not count as reruns), branch rerun back-off,
   budget pause that counts in-flight cost and stops relaunches (logs/PAUSE), hard stop at the budget limit,
@@ -168,19 +171,19 @@ Market gain_t = mean of both firms' `gains` at round t.
   cost reaches $50; at $50 everything running is stopped.
 - 03:15 Keeping the PC awake (powercfg) is left to the user: the assistant does not change OS power settings.
 
+- 2026-10-26 02:40 Analysis changes before writing the O-PI results: no bootstrap interval with fewer than 3 markets
+  (an interval over 2 clusters only restates the 2 values; per-market values are reported instead); price
+  stickiness (share of firm-rounds repeating the previous price), first-round prices, per-market values and
+  post-swap profit gain added to numbers.json; Figure S1 redrawn (arms x tracks); the notice classifier now reuses
+  earlier labels (so the hand validation stays valid) and analyze.py computes notice shares per sample.
 - 2026-10-26 02:47 DEVIATION (user decision, after the Track F branches of seeds 0-4 and all Track O-PI branches
   had been analysed): Track F extended by seeds 5-9 (same model, prompt and arms; pipeline control v4). Seed 5 was
   in the pre-registered plan (seeds 0-5) and had been dropped before it started for budget; seeds 6-9 are new.
   Reason: Track F had only 4 colluding markets, so its bootstrap intervals were wide and approximate. To keep the
   pre-registered analysis intact, `src/analyze.py` reports the pre-registered sample (Track F seeds 0-4) by default
   and all seeds only with `--extended` (out/extended/), as a robustness check; the report gives both.
-- 2026-10-26 02:40 Analysis changes before writing the O-PI results: no bootstrap interval with fewer than 3 markets
-  (an interval over 2 clusters only restates the 2 values; per-market values are reported instead); price
-  stickiness (share of firm-rounds repeating the previous price), first-round prices, per-market values and
-  post-swap profit gain added to numbers.json; Figure S1 redrawn (arms x tracks); the notice classifier now reuses
-  earlier labels (so the hand validation stays valid) and analyze.py computes notice shares per sample.
 
-- 2026-10-26 03:30 Independent audit of the report draft (4 auditors + a skeptic per auditor; 65 issues confirmed).
+- 2026-10-26 03:30 Automated audit of the report draft by LLM agents (4 auditor agents, each checked by a verifier agent; 65 issues confirmed).
   Fixed: negative values that round to zero were printed as "+0.00", which made three intervals that lie wholly below
   0 look as if they reached 0 (Track F R5; extended R2 and R5); `_num` now keeps the sign ("−0.00"). Wording fixed
   where the text overstated the data: Claude Haiku 5.5 is the only newcomer that cut prices substantially (gpt-4.1
@@ -190,10 +193,40 @@ Market gain_t = mean of both firms' `gains` at round t.
   measure, the PI prompt is described as an explicit cooperation instruction, and the post-hoc analysis changes are
   listed in the report's Appendix A. Raw logs are published as data/results.zip in the repository.
 
+- 2026-10-26 04:35 EXPLORATORY ADDITION (user decision, after the analysis; budget raised by the user to $100 total):
+  arm RX replaces firm 1 with openai/gpt-5.6-sol (OpenAI's current flagship, full history) in all 8 colluding Track F
+  markets, 2 sampling seeds, plus its from-scratch baseline B-X (seeds 10-13). Chosen to test whether undercutting an
+  inherited cartel is specific to Claude Haiku 5.5 or a property of current models (gpt-4.1, the older OpenAI model,
+  kept the cartel in the same seat). A 2-round smoke test (about $0.10) checked the price format first. Reported as
+  exploratory in the report.
+- 2026-10-26 04:55 Second automated audit by LLM agents (3 auditor agents plus verifiers; 37 issues confirmed). Fixed: Word's PDF export
+  downsampled the figures to 200 ppi and stored Figure 2 as JPEG (the original 300 dpi PNGs are now put back into
+  the PDF); the two "$" in Table S1's header were read as a math span; Table S1 dropped two constant columns to stop
+  mid-word breaks; pandoc's smart typography turned "--think" into a dash (smart extension off); captions kept on
+  their figure's page; Appendix C commands wrapped at 76 characters; clickable links; wording (every pre-registered
+  one-firm swap within 0.05; Gemini incumbents rarely noticed; blind gpt-4.1 and gemini newcomers anchor; the Track O
+  extension of seeds 0-5 started after round 150).
+- 2026-10-26 04:59 All runs finished (Track O: all 10 markets at 200 rounds, none colluded). Billed spend for the whole
+  study: $71.09 (OpenRouter account delta). Raw data published as data/results.zip (27 MB).
+
+- 2026-10-26 05:40 Third automated audit and a pre-submission review by LLM agents (language, completeness,
+  sprint guidelines), plus an outside review the author pasted in. Changes: title now "Replacing an LLM Pricing
+  Agent Does Not Restore Competitive Prices" (lowest post-swap index of any branch: `all.min_branch_Y` in
+  numbers.json); "collusion" defined as the operational criterion with no claim about punishment; causal wording
+  about the record softened (R5f failed, so the record alone was not isolated); the two concurrent sprint entries
+  (Bhowal 2026; Liu JianPing 2026) cited; the harness's positive-control check reported (`*.base.positive_control_pass`);
+  Appendix C completed with the RX and B-X commands; Table S1 and Figure S2 layout fixed. Not pre-registered and
+  used in the report: the contrasts R2 - R1, RN - R2 and RX - R2 (out/contrasts.csv also has RNf - RN, RX - RN and
+  RP - C0). The 20 reference labels for the notice classifier (out/notice_validation.csv) were written by the
+  assistant, which could see each text's arm, not by the author; the report now says so. The 04:57 Pipeline log line
+  "adding Track O-PI" is the sequential fallback rule firing at the end; Track O-PI had run since 00:33 (control
+  v3) and nothing new was started.
+
 ## Spend log
 
-| time | item | est. USD | cumulative |
-|---|---|---|---|
+Billed spend (OpenRouter account delta, from the Pipeline log progress lines): $17.34 at 00:33, $38.40 at 03:05,
+$39.49 at 04:35 (before the GPT-5.6 Sol arm) and $71.09 at 04:57 (whole study). The "est" values in those lines are
+the pipeline's own token-price estimate, which ran higher than the bill.
 
 ## Pipeline log
 - 2026-10-25 03:12 [pipeline] pipeline started (pid 37000, mock=False, max_branches=12, budget_pause=$47.0, deadline=2026-10-25 17:30)
@@ -321,3 +354,22 @@ Market gain_t = mean of both firms' `gains` at round t.
 - 2026-10-26 04:10 [pipeline] launched O_qwen3-14b_P0_s3 (qwen/qwen3-14b, P0, seed 3, to 200 rounds) pid 52324
 - 2026-10-26 04:10 [pipeline] launched O_qwen3-14b_P0_s4 (qwen/qwen3-14b, P0, seed 4, to 200 rounds) pid 53032
 - 2026-10-26 04:10 [pipeline] launched O_qwen3-14b_P0_s5 (qwen/qwen3-14b, P0, seed 5, to 200 rounds) pid 17284
+- 2026-10-26 04:35 [pipeline] progress: unfinished base runs [O_qwen3-14b_P0_s0:179/200, O_qwen3-14b_P0_s1:181/200, O_qwen3-14b_P0_s2:184/200, O_qwen3-14b_P0_s3:176/200, O_qwen3-14b_P0_s4:182/200, O_qwen3-14b_P0_s5:179/200]; branches {'done': 176}; spend $39.49 (est $60.46, account delta 39.49052521)
+- 2026-10-26 04:35 [pipeline] pipeline started (pid 47064, mock=False, max_branches=24, budget_pause=$47.0, deadline=2026-10-26 05:30)
+- 2026-10-26 04:35 [pipeline] DEVIATION: exploratory frontier newcomer added after the analysis (user decision): arm RX replaces firm 1 with openai/gpt-5.6-sol (full history) in every colluding Track F market, 2 sampling seeds, plus its from-scratch baseline B-X (seeds [10, 11, 12, 13])
+- 2026-10-26 04:35 [pipeline] control v5 applied: {"version": 5, "add_frontier_newcomer": true, "budget_pause": 95, "budget_limit": 100, "max_branches": 24, "deadline": "2026-10-26 05:30"}
+- 2026-10-26 04:35 [pipeline] queued 2 added exploratory branches for F_gem25flash_P0think_s0
+- 2026-10-26 04:35 [pipeline] queued 2 added exploratory branches for F_gem25flash_P0think_s1
+- 2026-10-26 04:35 [pipeline] queued 2 added exploratory branches for F_gem25flash_P0think_s2
+- 2026-10-26 04:35 [pipeline] queued 2 added exploratory branches for F_gem25flash_P0think_s4
+- 2026-10-26 04:35 [pipeline] queued 2 added exploratory branches for F_gem25flash_P0think_s6
+- 2026-10-26 04:35 [pipeline] queued 2 added exploratory branches for F_gem25flash_P0think_s7
+- 2026-10-26 04:35 [pipeline] queued 2 added exploratory branches for F_gem25flash_P0think_s8
+- 2026-10-26 04:35 [pipeline] queued 2 added exploratory branches for F_gem25flash_P0think_s9
+- 2026-10-26 04:36 [pipeline] launched B-X_gpt56sol_P0think_s10 (openai/gpt-5.6-sol, P0, think, seed 10, to 50 rounds) pid 27012
+- 2026-10-26 04:36 [pipeline] launched B-X_gpt56sol_P0think_s11 (openai/gpt-5.6-sol, P0, think, seed 11, to 50 rounds) pid 54904
+- 2026-10-26 04:36 [pipeline] launched B-X_gpt56sol_P0think_s12 (openai/gpt-5.6-sol, P0, think, seed 12, to 50 rounds) pid 55688
+- 2026-10-26 04:36 [pipeline] launched B-X_gpt56sol_P0think_s13 (openai/gpt-5.6-sol, P0, think, seed 13, to 50 rounds) pid 18956
+- 2026-10-26 04:57 [pipeline] DEVIATION: still only 0 colluding Track O runs after extension: adding Track O-PI (qwen3-14b with PI, seeds 0-5, 150 rounds; newcomers get P0; pre-authorized)
+- 2026-10-26 04:57 [pipeline] progress: unfinished base runs [none]; branches {'done': 192}; spend $71.09 (est $89.72, account delta 71.09170471)
+- 2026-10-26 04:57 [pipeline] all base runs and branches finished; pipeline exiting

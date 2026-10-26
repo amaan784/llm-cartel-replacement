@@ -2,7 +2,8 @@
 
 Everything here was run on Windows 11 (Git Bash and Command Prompt); the same commands work on macOS/Linux.
 Requirements: [uv](https://docs.astral.sh/uv/), git, Python 3.10+, an [OpenRouter](https://openrouter.ai) key with
-about $50 of credit.
+about $50 of credit for the default (pre-registered) run. The whole study, with the robustness seeds and the
+GPT-5.6 Sol arm, billed $71.09.
 
 ## 1. Install
 
@@ -50,7 +51,10 @@ bash run_all.sh --skip_runs   # build tables, figures and report.docx from whate
 ```
 
 Operator overrides without a restart go in `logs/pipeline_control.json` with an increasing `"version"`
-(`max_branches`, `budget_pause`, `budget_limit`, `deadline`, `pause`, `unpause`, `release_held`).
+(`max_branches`, `budget_pause`, `budget_limit`, `deadline`, `pause`, `unpause`, `release_held`, `early_fallbacks`,
+`add_track_f_seeds`, `add_frontier_newcomer`). The reported extensions came from
+`"add_track_f_seeds": [5, 6, 7, 8, 9]` (version 4) and `"add_frontier_newcomer": true, "budget_pause": 95,
+"budget_limit": 100` (version 5); every control version applied is listed in `NOTES.md`.
 
 ## Re-analyze the published data (no key, no spend)
 
@@ -80,6 +84,7 @@ uv run python src/analyze.py --results_dir /tmp/mock/results --logs_dir /tmp/moc
 | `src/analyze.py` | Analysis: tables, figures, captions, `out/numbers.json` (every reported number and its source). |
 | `src/status.py`, `src/stop.py`, `src/run_all.py`, `src/collect.py`, `src/export_docx.py` | Progress view, safe stop, one-command runner, results copy, Word export. |
 | `src/notice.py` | Optional classifier: does the incumbent's reasoning notice the swap? |
+| `src/build_viewer.py`, `viewer/` | Static interactive viewer of every branch (open `viewer/index.html`). |
 | `src/dev/mock_llm.py` | Offline mock model, for testing only. |
 | `NOTES.md` | Lab notebook: pre-registration, decisions, deviations, spend. |
 | `data/results.zip` | Harness outputs: base runs (`jsonl/`), branches (`branches/`), branch-point snapshots, `pipeline_state.json`. Unzip to `results/`. |
