@@ -2,6 +2,10 @@
 
     uv run python src/analyze.py                                   # reads results/ (or the vendor results dir)
     uv run python src/analyze.py --results_dir <dir> --out <dir>   # e.g. the offline mock test
+    uv run python src/analyze.py --extended                        # + markets added after the analysis (out/extended)
+
+By default the analysis uses the pre-registered sample. Track F seeds 5-9 were run after the Track F branches of
+seeds 0-4 had been analysed (NOTES.md, deviations); they enter only with --extended, as a robustness check.
 
 Outputs in out/:
     branch_metrics.csv      one row per branch (every quantity below is computed from these rows)
@@ -57,11 +61,14 @@ ARM_TITLE = {
 }
 SINGLE = ("R1", "R2", "R3", "R4", "RP", "RN", "RNf")
 TRACK_TITLE = {"O": "Track O (qwen3-14b, P0)", "OPI": "Track O-PI (qwen3-14b, PI)", "F": "Track F"}
+TRACK_SHORT = {"O": "O", "OPI": "O-PI", "F": "F"}
 # Okabe-Ito colour-blind-safe palette
 COL = {"O": "#0072B2", "OPI": "#56B4E9", "F": "#D55E00"}
 BRANCH_RE = re.compile(r"^(?P<run>.+)__r(?P<b>\d+)__(?P<arm>[A-Za-z0-9]+)_s(?P<seed>\d+)(?:_win\d+)?$")
 BOOT = 2000
 BOOT_SEED = 12345
+MIN_CI_N = 3  # fewest markets for which a bootstrap interval is reported
+EXTENSION = {"F": range(5, 10)}  # base-run seeds added after the pre-registered sample was analysed
 CEILING = 2.89  # "No customer would pay more than $2.89" in every prompt
 
 
@@ -77,6 +84,9 @@ class Numbers:
             value = value.item()
         if isinstance(value, float):
             value = round(value, 4) if np.isfinite(value) else None
+        if isinstance(value, dict):
+            value = {k: ([round(float(x), 4) for x in v] if isinstance(v, (list, tuple)) else round(float(v), 4))
+                     for k, v in value.items()}
         self.items[key] = {"value": value, "source": source, "method": method}
         return value
 
@@ -99,8 +109,8 @@ def boot_ci(values, seed=BOOT_SEED):
     v = np.asarray([x for x in values if x is not None and np.isfinite(x)], dtype=float)
     if len(v) == 0:
         return None, None, None
-    if len(v) == 1:
-        return float(v[0]), None, None
+    if len(v) < MIN_CI_N:  # a percentile interval over 1-2 clusters only restates the values; report them instead
+        return float(v.mean()), None, None
     rng = np.random.default_rng(seed)
     idx = rng.integers(0, len(v), size=(BOOT, len(v)))
     means = v[idx].mean(axis=1)
@@ -114,6 +124,15 @@ def fmt_ci(m, lo, hi, d=2):
     if lo is None:
         return _num(m, d)
     return f"{_num(m, d)} [{_num(lo, d)}, {_num(hi, d)}]"
+
+
+def fmt_delta(r):
+    """Change vs C0 for the tables: mean [95% CI], or with fewer than MIN_CI_N markets mean (per-market values)."""
+    if r["arm"] == "C0":
+        return "(reference)"
+    if r["delta_lo"] is None and len(r["delta_vals"]) > 1:
+        return f"{_num(r['delta'])} ({'; '.join(_num(v) for v in r['delta_vals'])})"
+    return fmt_ci(r["delta"], r["delta_lo"], r["delta_hi"])
 
 
 def first_k(series, pred, start=5, w=5):
@@ -206,8 +225,10 @@ def main() -> None:
     ap = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
     ap.add_argument("--results_dir", default=None, help="default: results/ if it has runs, else the vendor dir")
     ap.add_argument("--logs_dir", default=str(LOGS))
-    ap.add_argument("--out", default=str(OUT))
+    ap.add_argument("--out", default=None, help="default: out/ (out/extended with --extended)")
+    ap.add_argument("--extended", action="store_true", help="include the markets added after the analysis")
     a = ap.parse_args()
+    a.out = a.out or str(OUT / "extended" if a.extended else OUT)
     try:
         sys.stdout.reconfigure(encoding="utf-8")
     except AttributeError:
@@ -223,17 +244,24 @@ def main() -> None:
     tracks_state = state.get("tracks", {})
     for tid, t in tracks_state.items():  # legend names from the pre-registered track definitions
         TRACK_TITLE[tid] = (f"Track {'O-PI' if tid == 'OPI' else tid}: {t['model'].split('/')[-1]}"
-                            f"{', nudged prompt' if t['prefix'] != 'P0' else ''}"
+                            f"{', cooperation prompt' if t['prefix'] != 'P0' else ''}"
                             f"{', reasoning on' if t.get('think') else ''}")
     N = Numbers(REPO)
     print(f"results: {results}\nout: {out}")
 
-    runs = load_runs(results)
+    def in_sample(run: str) -> bool:
+        m = re.search(r"_s(\d+)$", run)
+        return a.extended or not (m and int(m.group(1)) in EXTENSION.get(track_of(run), ()))
+
+    runs = {k: v for k, v in load_runs(results).items() if in_sample(k)}
+    print(f"sample: {'extended (all markets)' if a.extended else 'pre-registered'}")
     horizon = {tid: t.get("horizon", 50) for tid, t in tracks_state.items()}
 
     # ---------------- branches
     rows = []
     for p in sorted((results / "branches").glob("*.jsonl")):
+        if not in_sample(p.stem.split("__", 1)[0]):
+            continue
         tr = track_of(p.stem.split("__", 1)[0])
         r = branch_metrics(p, horizon.get(tr, 50))
         if r:
@@ -265,6 +293,7 @@ def main() -> None:
 
     # ---------------- table
     table = []
+    nash_p, mono_p = (complete[0]["nash"], complete[0]["mono"]) if complete else (np.nan, np.nan)
     for t in tracks:
         H = horizon.get(t, 50)
         for arm in ARM_ORDER:
@@ -288,7 +317,7 @@ def main() -> None:
                 "track": t, "arm": arm, "horizon": H, "n_base_runs": len(base_runs), "n_branches": len(br),
                 "mean_Y": float(np.mean([avg[(t, run, arm)]["Y"] for run in base_runs])),
                 "mean_pre": float(np.mean([avg[(t, run, arm)]["pre_pidx"] for run in base_runs])),
-                "delta": m, "delta_lo": lo, "delta_hi": hi, "n_paired": len(rs),
+                "delta": m, "delta_lo": lo, "delta_hi": hi, "n_paired": len(rs), "delta_vals": d,
                 "delta_gain": mg, "delta_gain_lo": glo, "delta_gain_hi": ghi,
                 "survive_branches": f"{surv_b}/{len(br)}", "survive_runs": f"{surv_r}/{len(base_runs)}",
                 "median_recover": (">" + str(H)) if med_rec is None and rec else med_rec,
@@ -306,11 +335,23 @@ def main() -> None:
             N.add(pre + "survive_branches", row["survive_branches"], src, "branches with Y >= 0.5")
             N.add(pre + "survive_runs", row["survive_runs"], src, "base runs with seed-averaged Y >= 0.5")
             N.add(pre + "median_recover", row["median_recover"], src, "median k (5-round mean >= 0.9 pre)")
+            N.add(pre + "mean_pre", row["mean_pre"], src, "mean pidx over the 20 rounds before the swap")
+            N.add(pre + "Y_per_market", {r: avg[(t, r, arm)]["Y"] for r in base_runs}, src, "seeds averaged")
+            N.add(pre + "mean_price", row["mean_Y"] * (mono_p - nash_p) + nash_p, src,
+                  "mean of both firms' prices over post-swap rounds 31-50 (from mean_Y)")
+            N.add(pre + "mean_gain", float(np.mean([avg[(t, run, arm)]["Y_gain"] for run in base_runs])), src,
+                  "harness profit gain over post-swap rounds 31-50 (0 = Nash profit, 1 = monopoly), seeds averaged")
+            N.add(pre + "pre_per_market", {r: avg[(t, r, arm)]["pre_pidx"] for r in base_runs}, src,
+                  "mean pidx over the 20 rounds before the swap")
+            N.add(pre + "newcomer_first_price", float(np.mean([r["traj1_after"][0] for r in br])), src,
+                  "mean price of firm 1 in post-swap round 1 (the newcomer's opening price)")
             if arm in SINGLE + ("C0",):
                 N.add(pre + "mean_gap", row["mean_gap"], src, "mean p1 - p0 over the scoring window")
             if arm != "C0":
                 N.add(pre + "delta", m, src, "mean over base runs of Y(arm) - Y(C0)")
-                N.add(pre + "delta_ci", [lo, hi], src, f"95% cluster bootstrap over base runs, {BOOT} resamples")
+                N.add(pre + "delta_ci", [lo, hi], src, f"95% cluster bootstrap over base runs, {BOOT} resamples "
+                      f"(none with fewer than {MIN_CI_N} base runs)")
+                N.add(pre + "delta_per_market", dict(zip(rs, d)), src, "Y(arm) - Y(C0) per base run, seeds averaged")
                 N.add(pre + "delta_gain", mg, src)
                 N.add(pre + "delta_gain_ci", [glo, ghi], src)
                 if arm in SINGLE:
@@ -350,6 +391,7 @@ def main() -> None:
         roll = rolling_mean(list(pidx))
         gains = np.array([np.mean(r["gains"]) for r in R["recs"]]) if R["recs"] else np.array([])
         n = len(pidx)
+        acts = [r["actions"] for r in R["recs"]]
         row = {
             "run": name, "track": R["track"], "role": role, "rounds": n, "failed_lines": R["lines"] - n,
             "models": "|".join(R["cfg"].get("models", [])), "prefixes": "|".join(R["cfg"].get("prefixes", [])),
@@ -362,6 +404,10 @@ def main() -> None:
             "median_round_s": float(np.median([round_seconds(r) or 0 for r in R["recs"]])) if n else None,
             "n_below_cost": int(sum(p < 1.0 for r in R["recs"] for p in r["actions"])),
             "n_above_ceiling": int(sum(p > CEILING for r in R["recs"] for p in r["actions"])),
+            # how sticky prices are: share of firm-rounds (round >= 1) that repeat the firm's previous price
+            "repeat_share": (float(np.mean([a[i] == b[i] for a, b in zip(acts, acts[1:]) for i in range(len(a))]))
+                             if n > 1 else None),
+            "first_prices": [float(np.mean(a)) for a in acts[:10]],  # mean of the two prices, rounds 0-9
         }
         run_rows.append(row)
     for t in ("O", "OPI", "F"):
@@ -378,6 +424,16 @@ def main() -> None:
             N.add(f"{t}.base.crossing_median", float(np.median(cr)), src)
             N.add(f"{t}.base.crossing_range", [min(cr), max(cr)], src)
         N.add(f"{t}.base.models", sorted({r["models"] for r in base}), src)
+        rep = [r["repeat_share"] for r in base if r["repeat_share"] is not None]
+        if rep:
+            N.add(f"{t}.base.repeat_share_median", float(np.median(rep)), src,
+                  "median over base runs of the share of firm-rounds that repeat the firm's previous price")
+            N.add(f"{t}.base.repeat_share_range", [min(rep), max(rep)], src)
+        N.add(f"{t}.base.max_R20", {r["run"]: r["max_R20"] for r in base if r["max_R20"] is not None}, src,
+              "highest 20-round rolling mean of pidx in each base run")
+        N.add(f"{t}.base.rounds", {r["run"]: r["rounds"] for r in base}, src, "complete rounds on disk")
+        N.add(f"{t}.base.first_prices", {r["run"]: r["first_prices"] for r in base}, src,
+              "mean of the two firms' prices in rounds 0-9 (round 0 = first played round)")
     for t in ("B-O", "B-F", "B-N"):
         all_b = [r for r in run_rows if r["track"] == t]
         bb = [r for r in all_b if r["pidx_30_49"] is not None]  # only complete 50-round baselines count
@@ -387,6 +443,8 @@ def main() -> None:
         N.add(f"{t}.n", len(bb), src, "complete (50-round) baseline runs")
         N.add(f"{t}.n_incomplete", len(all_b) - len(bb), src)
         N.add(f"{t}.n_colluding_Y", sum(r["pidx_30_49"] >= 0.5 for r in bb), src, "pidx rounds 30-49 >= 0.5")
+        N.add(f"{t}.n_crossed", sum(r["crossing"] is not None for r in bb), src,
+              "20-round rolling mean of pidx above 0.5 at some round (the base-run criterion)")
         if bb:
             N.add(f"{t}.mean_Y", float(np.mean([r["pidx_30_49"] for r in bb])), src)
         N.add(f"{t}.models", sorted({r["models"] for r in bb}), src)
@@ -434,7 +492,9 @@ def main() -> None:
             w = csv.DictWriter(f, fieldnames=fields, extrasaction="ignore")
             w.writeheader()
             for x in rows_:
-                w.writerow({k: (round(v, 4) if isinstance(v, float) else v) for k, v in x.items() if k in fields})
+                w.writerow({k: (round(v, 4) if isinstance(v, float) else
+                                ";".join(f"{e:.4f}" for e in v) if isinstance(v, list) else v)
+                            for k, v in x.items() if k in fields})
 
     bm_fields = ["file", "track", "run", "branch_round", "arm", "seed", "horizon", "after_rounds", "complete",
                  "failed_lines", "models", "prefixes", "replacement_window", "pre_pidx", "pre_gain", "Y", "Y_gain",
@@ -446,18 +506,52 @@ def main() -> None:
     write_csv(out / "contrasts.csv", contrasts)
     write_csv(out / "reaction.csv", reaction)
 
-    md = ["| Track | Arm | Markets | Branches | Mean post-swap price index | Change vs no swap [95% CI] | "
-          "Survive (branches) | Survive (markets) | Median rounds to recover | Newcomer − incumbent price | "
-          "Incumbent response, rounds 1–10 [95% CI] |",
-          "|---|---|---|---|---|---|---|---|---|---|---|"]
+    md = ["| Track | Arm | Markets | Branches | Post-swap price index | Change vs no swap [95% CI] | "
+          "Survive (branches) | Survive (markets) | Newcomer − incumbent price ($) | "
+          "Incumbent response, rounds 1-10 ($) |",
+          "|---|---|---|---|---|---|---|---|---|---|"]
     for r in table:
-        md.append(f"| {TRACK_TITLE.get(r['track'], r['track'])} | {arm_long(r['arm'])} | {r['n_base_runs']} | "
-                  f"{r['n_branches']} | {r['mean_Y']:.2f} | "
-                  f"{fmt_ci(r['delta'], r['delta_lo'], r['delta_hi']) if r['arm'] != 'C0' else '(reference)'} | "
-                  f"{r['survive_branches']} | {r['survive_runs']} | {r['median_recover']} | "
-                  f"{(_num(r['mean_gap']) if r['arm'] in SINGLE + ('C0',) else '-')} | "
-                  f"{fmt_ci(r['inc_resp'], r['inc_resp_lo'], r['inc_resp_hi']) if r['arm'] in SINGLE else '-'} |")
+        inc = (fmt_ci(r["inc_resp"], r["inc_resp_lo"], r["inc_resp_hi"]) if r["arm"] in SINGLE else "-")
+        md.append(f"| {TRACK_SHORT.get(r['track'], r['track'])} | {arm_long(r['arm'])} | {r['n_base_runs']} | "
+                  f"{r['n_branches']} | {r['mean_Y']:.2f} | {fmt_delta(r)} | "
+                  f"{r['survive_branches']} | {r['survive_runs']} | "
+                  f"{(_num(r['mean_gap']) if r['arm'] in SINGLE + ('C0',) else '-')} | {inc} |")
     (out / "table_main.md").write_text("\n".join(md) + "\n", encoding="utf-8")
+    # compact version for the report's main text (the full table goes in the appendix)
+    md = ["| Track | Arm | Markets | Post-swap price index | Change vs no swap [95% CI] | Cartel survives "
+          "(markets) | Newcomer − incumbent price ($) |",
+          "|---|---|---|---|---|---|---|"]
+    for r in table:
+        md.append(f"| {TRACK_SHORT.get(r['track'], r['track'])} | {arm_long(r['arm'])} | {r['n_base_runs']} | "
+                  f"{r['mean_Y']:.2f} | "
+                  f"{fmt_delta(r)} | "
+                  f"{r['survive_runs']} | {(_num(r['mean_gap']) if r['arm'] in SINGLE + ('C0',) else '-')} |")
+    (out / "table_compact.md").write_text("\n".join(md) + "\n", encoding="utf-8")
+    # report's Table 1: one row per arm, tracks side by side (change vs C0, markets still colluding)
+    by = {(r["track"], r["arm"]): r for r in table}
+    tr = [t for t in ("F", "OPI", "O") if any(k[0] == t for k in by)]
+    head = "| Arm |"
+    rule = "|:----------------------|"
+    for t in tr:
+        n = by[(t, "C0")]["n_base_runs"] if (t, "C0") in by else 0
+        head += f" Track {TRACK_SHORT[t]} ({n} markets): change vs no swap | index ≥ 0.5 |"
+        rule += ":----------------|:-----|"
+    md = [head, rule]
+    for arm in ARM_ORDER:
+        if not any((t, arm) in by for t in tr):
+            continue
+        m, d = ARM_PARTS.get(arm, (arm, ""))
+        line = f"| {arm} {TABLE1_LABEL.get(arm, arm)} |"
+        for t in tr:
+            r = by.get((t, arm))
+            if r is None:
+                line += " not run | |"
+            elif arm == "C0":
+                line += f" {r['mean_Y']:.2f} | {r['survive_runs']} |"
+            else:
+                line += f" {fmt_delta(r)} | {r['survive_runs']} |"
+        md.append(line)
+    (out / "table_report.md").write_text("\n".join(md) + "\n", encoding="utf-8")
 
     # ---------------- figures
     figures(out, complete, avg, tracks, horizon, runs, run_rows)
@@ -488,6 +582,26 @@ def main() -> None:
             f"Branches complete: {len(complete)}; incomplete: {len(incomplete)}",
             f"Failed (unparsed) lines in complete branch files: {sum(r['failed_lines'] for r in complete)}"]
     (out / "checks.md").write_text("\n".join(chk) + "\n", encoding="utf-8")
+    # exploratory: share of incumbent reasoning that notices the swap (labels written by src/notice.py, if run;
+    # shares are recomputed here so they cover exactly the markets in this sample)
+    nd = out if (out / "notice_raw.csv").exists() else OUT
+    raw, val = nd / "notice_raw.csv", nd / "notice_validation.csv"
+    if raw.exists():
+        labels = [r for r in csv.DictReader(open(raw, encoding="utf-8")) if in_sample(r["run"])]
+        summ = defaultdict(lambda: [0, 0])
+        for r in labels:
+            summ[(r["track"], r["arm"])][0] += r["label"] == "YES"
+            summ[(r["track"], r["arm"])][1] += r["label"] in ("YES", "NO")
+        for (tr_, arm), (y_, n_) in sorted(summ.items()):
+            N.add(f"{tr_}.{arm}.notice_share", y_ / n_ if n_ else None,
+                  f"{rel(raw)} (src/notice.py classify; gpt-4.1-mini, fixed prompt)",
+                  f"{y_}/{n_} incumbent texts in post-swap rounds 1-10 classified YES")
+        if val.exists():
+            auto = {(r["file"], r["k"]): r["label"] for r in csv.DictReader(open(raw, encoding="utf-8"))}
+            pairs = [(v["hand_label"].strip().upper(), auto.get((v["file"], v["k"])))
+                     for v in csv.DictReader(open(val, encoding="utf-8")) if v["hand_label"].strip()]
+            N.add("notice.validation_agreement", f"{sum(h == m for h, m in pairs)}/{len(pairs)}",
+                  f"{rel(val)} (hand labels) vs {rel(raw)} (classifier)")
     N.add("checks.branches_complete", len(complete), "out/checks.md")
     N.add("checks.branches_incomplete", len(incomplete), "out/checks.md")
     N.add("checks.implausible_prices_post_swap", bad, "out/branch_metrics.csv n_below_cost + n_above_ceiling")
@@ -527,6 +641,8 @@ LS = ["-", (0, (4, 1.6)), (0, (1, 1.2))]  # line style per track (in addition to
 REF = dict(color="0.72", lw=0.7, zorder=1)  # competitive / monopoly reference lines
 MAX_PX = 2200  # 7.3 in at 300 dpi; anything wider shrinks below ~7 pt at page width
 PANEL_TITLE = 8  # one size for every small-multiple title
+Y_TOP = 1.4  # fig1/figS1 price-index axis cap; off-scale panels are annotated
+X_CAP = 1.0  # fig2: effects beyond +-1 are drawn as arrows at the edge (their value is in the number column)
 
 
 def arm_long(a):
@@ -534,6 +650,10 @@ def arm_long(a):
     return f"{a} · {m}, {d}" if d else f"{a} · {m}"
 
 
+TABLE1_LABEL = {"C0": "control: price index", "R1": "same family", "R2": "other provider",
+                "R3": "other provider, no history", "R4": "own model, told not to collude",
+                "R5": "both replaced", "R5f": "both replaced, no history", "RP": "own model, neutral prompt",
+                "RN": "newest model", "RNf": "newest model, no history"}  # short rows for the report's Table 1
 ARM_SHORT = {"C0": "No swap", "R1": "Same family", "R2": "Other provider", "R3": "Other provider", "R4": "Own model",
              "R5": "Both replaced", "R5f": "Both replaced", "RP": "Own model", "RN": "Newest model",
              "RNf": "Newest model"}  # narrow small-multiple titles
@@ -546,8 +666,11 @@ def arm_panel(a, short=False):
 
 
 def _num(v, d=2):
-    v = round(float(v), d) + 0.0  # no negative zero
-    return f"{v:+.{d}f}".replace("-", "−")
+    """Signed, rounded number; a negative value that rounds to zero keeps its sign (−0.00), so an interval that
+    lies wholly below 0 never reads as reaching it."""
+    v = float(v)
+    sign = "−" if v < 0 else "+"
+    return f"{sign}{abs(round(v, d)) + 0.0:.{d}f}"
 
 
 def _style(plt):
@@ -598,8 +721,8 @@ def _scored_text(horizon, tracks):
     hs = {t: horizon.get(t, 50) for t in tracks}
     if len(set(hs.values())) == 1:
         H = next(iter(hs.values()))
-        return f"rounds {H - 19}–{H}"
-    return ", ".join(f"{t}: rounds {H - 19}–{H}" for t, H in hs.items())
+        return f"rounds {H - 19}-{H}"
+    return ", ".join(f"{t}: rounds {H - 19}-{H}" for t, H in hs.items())
 
 
 def fig0_design(out, plt, arms=None):
@@ -636,10 +759,9 @@ def fig0_design(out, plt, arms=None):
                                     lw=1.1 if code == "C0" else 0.6))
         ax.text(5.3, y, code, fontsize=8.2, fontweight="bold", va="center")
         ax.text(5.85, y, FIG0_TEXT.get(code, code), fontsize=8.2, va="center")
-    ax.text(5.0, -1.1, "Every arm continues for 50 rounds, twice (two random seeds), in every track (model setup). "
-            "Outcome: average price index in post-swap\nrounds 31–50 minus that of the no-swap control (C0) from "
-            "the same market. Price index: 0 = competitive price, 1 = monopoly price.", ha="center", va="bottom",
-            fontsize=7.6, color="0.25")
+    ax.text(5.0, -1.1, "Each arm continues the market for 50 rounds with two sampling seeds. Outcome: mean price index "
+            "over post-swap rounds 31-50\nminus that of the no-swap control (C0) from the same market "
+            "(0 = competitive price, 1 = monopoly price).", ha="center", va="bottom", fontsize=7.6, color="0.25")
     _save(fig, out / "fig0_design.png")
     plt.close(fig)
 
@@ -661,7 +783,7 @@ def captions(out, complete, avg, tracks, horizon, state):
 **Figure 1 (fig0_design.png). Design.** Two LLM firms set prices every round in a repeated Bertrand market;
 each prompt shows the last 100 rounds of prices and profits. Once the 20-round average of the price index first
 exceeds 0.5 the market runs 20 more rounds and is then copied at that swap point. Each copy continues for
-{'/'.join(map(str, H))} rounds under one condition (C0 no swap; R1–R5f replace firm 1 or both firms; RN/RNf,
+{'/'.join(map(str, H))} rounds under one condition (C0 no swap; R1-R5f replace firm 1 or both firms; RN/RNf,
 Track F only and exploratory, bring in a current-generation model, Claude Haiku 5.5), with
 {len(seeds)} sampling seeds per condition. The outcome is the mean price index in post-swap {sc} minus that of
 C0 from the same market.
@@ -707,15 +829,16 @@ def figures(out, complete, avg, tracks, horizon, runs, run_rows):
     scored = _scored_text(horizon, tracks)
 
     # ---------------- fig1: price index around the swap, one panel per arm
-    ncol = 3
+    ncol = 4 if len(arms) > 6 else 3  # four columns keep the figure short enough for a page with text
     nrow = int(np.ceil((len(arms) + 1) / ncol))
-    fig, axes = plt.subplots(nrow, ncol, figsize=(7.2, 1.85 * nrow + 0.55), sharex=True, sharey=True)
+    fig, axes = plt.subplots(nrow, ncol, figsize=(7.2, 1.7 * nrow + 0.55), sharex=True, sharey=True)
     axes = np.atleast_2d(axes)
     means = [0.0, 1.0]
     n_c0 = {t: len({k[1] for k in avg if k[0] == t and k[2] == "C0"}) for t in tracks}
     for i, arm in enumerate(arms):
         ax = axes[i // ncol, i % ncol]
         odd = []
+        n_off = 0  # stack the off-scale notes when more than one track leaves the axis
         for t in tracks:
             H = horizon.get(t, 50)
             M = _traj(complete, t, arm, H, nash=nash, mono=mono)
@@ -724,17 +847,22 @@ def figures(out, complete, avg, tracks, horizon, runs, run_rows):
             x = np.arange(-29, H + 1)
             ax.plot(x, M.T, color=COL[t], lw=0.5, alpha=0.3, ls="-", zorder=2)
             ax.plot(x, M.mean(axis=0), color=COL[t], lw=lw[t], ls=style[t], zorder=3,
-                    label=textwrap.fill(f"{TRACK_TITLE.get(t, t)} ({n_c0[t]} markets)", 30))
+                    label=textwrap.fill(f"{TRACK_TITLE.get(t, t)} ({n_c0[t]} markets)", 34 if ncol == 4 else 30))
             means += list(M.mean(axis=0))
+            if M.mean(axis=0).max() > Y_TOP:  # e.g. blind newcomers anchoring on the stated $2.89 ceiling
+                ax.text(0.97, 0.97 - 0.11 * n_off, f"▲ mean peaks at {M.mean(axis=0).max():.1f}",
+                        transform=ax.transAxes, ha="right", va="top", fontsize=7, color=COL[t], zorder=8,
+                        bbox=dict(fc="white", ec="none", pad=0.5))
+                n_off += 1
             if len(M) != n_c0[t]:  # say so only where an arm has fewer markets than the track
-                odd.append(f"{t}: {len(M)} mkts")
+                odd.append(f"{TRACK_SHORT.get(t, t)}: {len(M)} market{'' if len(M) == 1 else 's'}")
         _scored(ax, [horizon.get(t, 50) for t in tracks])
         _index_axis(ax)  # shared y: inner panels hide their tick labels by themselves
         ax.axvline(0.5, color="k", ls=":", lw=0.9, zorder=1)
         ax.set_title(arm_panel(arm, short=True) + (f"  [{', '.join(odd)}]" if odd else ""), loc="left")
         ax.set_xticks([-30, 0, 30, 50])
         ax.tick_params(labelbottom=True)
-    axes[0, 0].set_ylim(min(-0.12, min(means) - 0.05), max(1.18, max(means) + 0.08))
+    axes[0, 0].set_ylim(max(min(-0.12, min(means) - 0.05), -0.4), min(max(1.18, max(means) + 0.08), Y_TOP))
     for j in range(len(arms), nrow * ncol):
         axes[j // ncol, j % ncol].axis("off")
     handles = []
@@ -748,9 +876,8 @@ def figures(out, complete, avg, tracks, horizon, runs, run_rows):
         key = axes[len(arms) // ncol, len(arms) % ncol]
         key.legend([h for h, _ in handles], [lab for _, lab in handles], loc="upper left", frameon=False,
                    fontsize=8, borderaxespad=0, borderpad=0, handlelength=2.4,
-                   title="thick line = mean over markets\nthin lines = single markets", title_fontsize=7.8,
-                   alignment="left")
-        key.text(0.0, 0.0, note.replace("; ", "\n"), transform=key.transAxes, fontsize=7.8, color="0.3", va="bottom")
+                   title="thick line = mean over markets\nthin lines = single markets\n" + note.replace("; ", "\n"),
+                   title_fontsize=7.8, alignment="left", labelspacing=0.8)
     else:  # grid nearly full: key under the figure
         labs = [lab.replace("\n", " ") for _, lab in handles]
         fig.legend([h for h, _ in handles], labs, loc="lower center", bbox_to_anchor=(0.5, 0.0), ncol=2,
@@ -761,8 +888,8 @@ def figures(out, complete, avg, tracks, horizon, runs, run_rows):
     fig.supxlabel("round relative to the swap (0 = last round before it)", fontsize=9,
                   y=0.075 if bottom > 0.1 else 0.01)
     fig.supylabel("price index (mean of the two firms)", fontsize=9, x=0.01)
-    fig.subplots_adjust(left=0.17, right=0.985, top=0.93, bottom=bottom + 0.035 if bottom > 0.1 else bottom,
-                        wspace=0.14, hspace=0.62)
+    fig.subplots_adjust(left=0.15 if ncol == 4 else 0.17, right=0.985, top=0.92,
+                        bottom=bottom + 0.035 if bottom > 0.1 else bottom, wspace=0.14, hspace=0.62)
     _save(fig, out / "fig1_trajectories.png")
     plt.close(fig)
 
@@ -785,27 +912,34 @@ def figures(out, complete, avg, tracks, horizon, runs, run_rows):
         c0y[t] = float(np.mean(c0)) if c0 else None
     h_in = 0.24 * len(ypos) + 0.2 * len(yt) + 1.65
     fig, ax = plt.subplots(figsize=(6.5, h_in))
-    fig.subplots_adjust(left=0.27, right=0.77, top=1 - 0.25 / h_in, bottom=1.15 / h_in)
+    fig.subplots_adjust(left=0.31, right=0.77, top=1 - 0.25 / h_in, bottom=1.15 / h_in)
     xs_all = [0.0]
+    rows_data = []
     for (a, t), yy in ypos.items():
         runs_ = sorted({k[1] for k in avg if k[0] == t and k[2] == a and (t, k[1], "C0") in avg})
         d = [avg[(t, r, a)]["Y"] - avg[(t, r, "C0")]["Y"] for r in runs_]
-        xs_all += d
         m, lo, hi = boot_ci(d)
-        if c0y.get(t) is not None:  # where this track would be exactly back at the competitive price
-            ax.plot([-c0y[t]] * 2, [yy - 0.2, yy + 0.2], color="0.45", lw=1.1, zorder=7)
-            xs_all.append(-c0y[t])
-        if lo is not None:
-            ax.plot([lo, hi], [yy, yy], color=COL[t], lw=1.6, solid_capstyle="butt", zorder=4)
-            xs_all += [lo, hi]
-        ax.scatter(d, np.full(len(d), yy - 0.12), s=12, facecolor="none", edgecolor=COL[t], lw=0.7, zorder=5)
-        ax.scatter([m], [yy], marker="D", s=30, color=COL[t], edgecolor="k", lw=0.6, zorder=6)
-        txt = f"{_num(m)} [{_num(lo)}, {_num(hi)}]" if lo is not None else f"{_num(m)} (n={len(d)}, no CI)"
-        ax.text(1.02, yy, txt, transform=ax.get_yaxis_transform(), va="center", fontsize=7.5, color="0.15",
-                fontfamily="DejaVu Sans Mono")
+        rows_data.append((a, t, yy, d, m, lo, hi))
+        xs_all += [v for v in d + [lo, hi, -(c0y.get(t) or 0)] if v is not None and abs(v) <= X_CAP]
     lo_x, hi_x = min(min(xs_all), 0.0), max(max(xs_all), 0.0)
     pad = 0.08 * (hi_x - lo_x) + 0.05
-    ax.set_xlim(lo_x - pad, hi_x + pad)
+    xmin, xmax = lo_x - pad, hi_x + pad
+    clip = lambda v: min(max(v, xmin), xmax)
+    for a, t, yy, d, m, lo, hi in rows_data:
+        if c0y.get(t) is not None:  # where this track would be exactly back at the competitive price
+            ax.plot([-c0y[t]] * 2, [yy - 0.2, yy + 0.2], color="0.45", lw=1.1, zorder=7)
+        if lo is not None:
+            ax.plot([clip(lo), clip(hi)], [yy, yy], color=COL[t], lw=1.6, solid_capstyle="butt", zorder=4)
+        ax.scatter([clip(v) for v in d], np.full(len(d), yy - 0.12), s=12, facecolor="none", edgecolor=COL[t],
+                   lw=0.7, zorder=5)
+        off = m > xmax or m < xmin  # off-scale estimate: arrow at the edge; the number column has the value
+        ax.scatter([clip(m)], [yy], marker=(">" if m > xmax else "<") if off else "D", s=40 if off else 30,
+                   color=COL[t], edgecolor="k", lw=0.6, zorder=6)
+        txt = (f"{_num(m)} [{_num(lo)}, {_num(hi)}]" if lo is not None
+               else f"{_num(m)} ({len(d)} market{'' if len(d) == 1 else 's'})")
+        ax.text(1.02, yy, txt + (" ▶" if off else ""), transform=ax.get_yaxis_transform(), va="center",
+                fontsize=7.5, color="0.15", fontfamily="DejaVu Sans Mono")
+    ax.set_xlim(xmin, xmax)
     ax.set_ylim(y + 0.25, 0.62)  # headroom for the direction cues
     ax.axvline(0, color="0.3", lw=0.9)
     ax.set_yticks(yt)
@@ -824,7 +958,7 @@ def figures(out, complete, avg, tracks, horizon, runs, run_rows):
         ax.scatter([], [], marker="D", s=30, color=COL[t], edgecolor="k", lw=0.6,
                    label=f"{TRACK_TITLE.get(t, t)} ({n} markets)")
     ax.scatter([], [], s=12, facecolor="none", edgecolor="0.3", lw=0.7, label="ring = one market")
-    ax.plot([], [], color="0.3", lw=1.6, label="bar = 95% bootstrap interval")
+    ax.plot([], [], color="0.3", lw=1.6, label=f"bar = 95% bootstrap interval (≥ {MIN_CI_N} markets)")
     ax.plot([], [], ls="none", marker="|", ms=9, mew=1.2, color="0.45", label="grey tick = fully back at competitive price")
     h_, l_ = ax.get_legend_handles_labels()
     fig.legend(h_, l_, frameon=False, loc="lower center", bbox_to_anchor=(0.5, 0.0), ncol=2, fontsize=7.6,
@@ -835,51 +969,68 @@ def figures(out, complete, avg, tracks, horizon, runs, run_rows):
     _save(fig, out / "fig2_effects.png")
     plt.close(fig)
 
-    # ---------------- figS1: incumbent vs replaced firm (colour = track, line style = firm)
+    from matplotlib.colors import to_rgb
+
+    # ---------------- figS1: incumbent vs replaced firm; one row per arm, one column per track
     arms3 = [a for a in arms if a in SINGLE]
     if arms3:
-        fig, axes = plt.subplots(len(tracks), len(arms3), figsize=(7.2, 1.75 * len(tracks) + 0.9), sharex=True,
+        fig, axes = plt.subplots(len(arms3), len(tracks), figsize=(7.2, 1.08 * len(arms3) + 1.3), sharex=True,
                                  sharey=True, squeeze=False)
-        for ti, t in enumerate(tracks):
-            H = horizon.get(t, 50)
-            for ai, arm in enumerate(arms3):
-                ax = axes[ti, ai]
-                drew = False
+        for ai, arm in enumerate(arms3):
+            for ti, t in enumerate(tracks):
+                H = horizon.get(t, 50)
+                ax = axes[ai, ti]
+                drew, n_off = False, 0
                 # incumbent: thin dark line; replaced firm: wide light line (dashes mean "Track F" in fig1)
-                for who, k0, kw in (("inc", "0", dict(lw=1.2, alpha=1.0, zorder=4)),
-                                    ("new", "1", dict(lw=3.2, alpha=0.45, zorder=3))):
+                for who, k0, kw in (("incumbent", "0", dict(lw=1.2, alpha=1.0, zorder=4)),
+                                    ("newcomer", "1", dict(lw=3.2, alpha=0.45, zorder=3))):
                     M = _traj(complete, t, arm, H, f"traj{k0}_before", f"traj{k0}_after", nash, mono)
                     if M is None:
                         continue
                     drew = True
-                    ax.plot(np.arange(-29, H + 1), M.mean(axis=0), color=COL[t], solid_capstyle="butt", **kw)
+                    m = M.mean(axis=0)
+                    col = COL[t] if who == "newcomer" else tuple(0.55 * c for c in to_rgb(COL[t]))  # darker shade
+                    ax.plot(np.arange(-29, H + 1), np.minimum(m, Y_TOP + 0.05), color=col,
+                            solid_capstyle="butt", **kw)
+                    if m.max() > Y_TOP:
+                        ax.text(0.97, 0.95 - 0.2 * n_off, f"▲ {who} peaks at {m.max():.1f}", transform=ax.transAxes,
+                                ha="right", va="top", fontsize=6.8, color="0.25", zorder=8,
+                                bbox=dict(fc="white", ec="none", pad=0.4))
+                        n_off += 1
                 if not drew:
-                    ax.axis("off")
+                    ax.set_axis_off()
+                    ax.text(0.5, 0.5, f"{arm}: not run in this track", transform=ax.transAxes, ha="center",
+                            va="center", fontsize=7.5, color="0.5")
                     continue
                 _scored(ax, [H])
-                _index_axis(ax)
+                _index_axis(ax)  # shared y: inner panels hide their tick labels by themselves
                 ax.axvline(0.5, color="k", ls=":", lw=0.8)
                 ax.set_xticks([-30, 0, 30, 50])
-                if ti == 0:
-                    title = arm_panel(arm, short=True)
-                    if len(arms3) > 4:  # narrow panels: wrap every line
-                        title = "\n".join(textwrap.fill(part, 13) for part in title.split("\n"))
-                    ax.set_title(title, loc="left", fontsize=PANEL_TITLE)
-            head, _, rest = TRACK_TITLE.get(t, t).partition(": ")
-            axes[ti, 0].set_ylabel(f"{head}\n{rest.split(',')[0]}", fontsize=8.5, fontweight="bold", color=COL[t])
-        for ai in range(len(arms3)):  # x tick labels under the lowest visible panel of every column
-            vis = [a for a in axes[:, ai] if a.axison]
+                ax.set_ylim(-0.3, Y_TOP)
+                ax.set_title(arm_long(arm), loc="left", fontsize=8, pad=3)
+        for ti, t in enumerate(tracks):  # column headers
+            n = len({k[1] for k in avg if k[0] == t and k[2] == "C0"})
+            axes[0, ti].annotate(textwrap.fill(f"{TRACK_TITLE.get(t, t)} ({n} markets)", 34), xy=(0.5, 1.0),
+                                 xycoords="axes fraction", xytext=(0, 16), textcoords="offset points", ha="center",
+                                 va="bottom", fontsize=8.5, fontweight="bold", color=COL[t])
+        for ai in range(len(arms3)):  # y tick labels on the leftmost visible panel of every row
+            vis = [a for a in axes[ai, :] if a.axison]
+            if vis:
+                vis[0].tick_params(labelleft=True)
+        for ti in range(len(tracks)):  # x tick labels under the lowest visible panel of every column
+            vis = [a for a in axes[:, ti] if a.axison]
             if vis:
                 vis[-1].tick_params(labelbottom=True)
         from matplotlib.lines import Line2D
 
         fig.legend([Line2D([], [], color="0.25", lw=1.2), Line2D([], [], color="0.25", lw=3.2, alpha=0.45)],
                    ["incumbent firm (thin dark line)", "replaced firm: the newcomer after the swap (wide light line)"],
-                   loc="upper center", ncol=2, frameon=False, bbox_to_anchor=(0.5, 1.0))
-        fig.supxlabel("round relative to the swap", fontsize=9)
-        fig.supylabel("price index of each firm", fontsize=9, x=0.005)
-        fig.subplots_adjust(left=0.19, right=0.99, top=0.74 if len(arms3) > 4 else 0.83, bottom=0.12,
-                            wspace=0.12 if len(arms3) <= 4 else 0.25, hspace=0.3)
+                   loc="upper center", ncol=2, frameon=False, bbox_to_anchor=(0.5, 1.0), fontsize=8)
+        fig.supxlabel("round relative to the swap (0 = last round before it); grey: scored rounds", fontsize=8.5)
+        fig.supylabel("price index of each firm (mean over markets)", fontsize=8.5, x=0.005)
+        h_in = 1.08 * len(arms3) + 1.3
+        fig.subplots_adjust(left=0.16, right=0.985, top=1 - 1.0 / h_in, bottom=0.42 / h_in, wspace=0.08,
+                            hspace=0.55)
         _save(fig, out / "figS1_firm_prices.png")
         plt.close(fig)
 
@@ -892,9 +1043,9 @@ def figures(out, complete, avg, tracks, horizon, runs, run_rows):
         model_of = {}
         for r in run_rows:
             model_of.setdefault(r["track"], r["models"].split("|")[0].split(":")[-1].split("/")[-1])
-        o_tag = "Tracks O/O-PI" if "OPI" in tracks else "Track O"
+        o_tag = "Track O-PI" if "OPI" in tracks else "Track O"
         titles = {"S": "Model screen (60 rounds)",
-                  "B-O": f"{model_of.get('B-O', '')} vs itself,\nfrom scratch\n(newcomer of {o_tag})",
+                  "B-O": f"{model_of.get('B-O', '')}, no reasoning,\nvs itself from scratch\n(newcomer of {o_tag})",
                   "B-F": f"{model_of.get('B-F', '')} vs itself,\nfrom scratch\n(newcomer of Track F)",
                   "B-N": f"{model_of.get('B-N', '')} vs itself,\nfrom scratch\n(newest-model newcomer, F)"}
         screen_cols = ["#009E73", "#CC79A7", "#E69F00", "#000000"]
@@ -915,13 +1066,13 @@ def figures(out, complete, avg, tracks, horizon, runs, run_rows):
             ax.axhline(0.5, color="k", ls=":", lw=0.8)
             _index_axis(ax)
             head, _, rest = TRACK_TITLE.get(g, g).partition(": ")
-            title = titles.get(g, f"{head} base runs" + (f"\n({rest})" if rest else ""))
+            title = titles.get(g, f"{head} base runs" + ("\n" + "\n".join(textwrap.wrap(f"({rest})", 26)) if rest else ""))
             if g in ("O", "OPI", "F") and g not in tracks:
-                title = f"{head} base runs\n(none reached 0.5; no swaps)"
+                title = f"{head} base runs\n(qwen3-14b, neutral prompt;\nnone reached 0.5)"
             ax.set_title(title, loc="left", fontsize=PANEL_TITLE)
             ax.set_xlabel("round", fontsize=8)
             if g == "S":
-                ax.legend(frameon=False, fontsize=7.4, loc="lower right", bbox_to_anchor=(1.0, 0.1), labelspacing=0.25,
+                ax.legend(frameon=False, fontsize=7.0, loc="center right", bbox_to_anchor=(1.0, 0.675), labelspacing=0.15,
                           handlelength=1.4, borderpad=0.2)
         axes[0, 0].text(0.98, 0.53, "collusion threshold", transform=axes[0, 0].get_yaxis_transform(), fontsize=7.6,
                         color="0.3", va="bottom", ha="right", bbox=dict(fc="white", ec="none", pad=0.5))
