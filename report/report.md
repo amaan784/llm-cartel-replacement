@@ -118,6 +118,14 @@ condition. Every condition is run with two API sampling seeds (101 and 102). Fir
 | R5 both replaced | both firms → X | full |
 | R5f both replaced, fresh | both firms → X | only post-swap rounds (should look like play from scratch) |
 | B baseline | X vs X from scratch (`run_game.py`, 50 rounds, seeds 10–13) | (new market) |
+| RN (exploratory, Track F) | firm 1 → a current-generation model, `anthropic/claude-haiku-5.5` | full |
+| RNf (exploratory, Track F) | firm 1 → `anthropic/claude-haiku-5.5` | only post-swap rounds |
+| B-N (exploratory) | `anthropic/claude-haiku-5.5` vs itself from scratch (50 rounds, seeds 10–13) | (new market) |
+
+The core models were chosen to match the harness and prior work (Riemer et al. 2026; Keppo et al. 2026 pair 14B
+and 32B Qwen models). Because those models are about a year old, we added the RN arms, before any branch result was
+analysed, to check whether the finding carries over to a current model from a third provider. They are reported as
+exploratory, not as tests of H1–H4.
 
 Because the agents are stateless, replacing a firm with a fresh copy of the same model and prompt is identical to
 the control, so only these manipulations can change anything: a different model (R1, R2, R5), a different prompt

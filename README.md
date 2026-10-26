@@ -49,7 +49,7 @@ uv sync
 
 # 3. everything in one command: experiments (run in the background and resumable),
 #    then collect results/, analysis into out/, and report/report.docx
-bash run_all.sh               # or: uv run python src/run_all.py
+bash run_all.sh               # Git Bash; in Command Prompt / PowerShell: run_all.cmd
 python src/status.py          # progress, ETA, spend (from another terminal, any time)
 ```
 
