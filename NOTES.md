@@ -222,6 +222,23 @@ Market gain_t = mean of both firms' `gains` at round t.
   "adding Track O-PI" is the sequential fallback rule firing at the end; Track O-PI had run since 00:33 (control
   v3) and nothing new was started.
 
+- 2026-10-26 06:07 Last review round (outside reviews the author pasted in, from Codex and Grok). Abstract
+  restructured (question, design, result, exception, implication); Section 4 headings now say whether each
+  hypothesis was supported; Section 4.1 notes that every market crossed at round 19, the earliest round the
+  criterion allows; the lowest branch index is given for both samples and for the rounds 31-50 average; the H3
+  baseline rule (B's index below 0.5 in most seeds) is stated; the reasoning-monitor sentence was dropped from the
+  Discussion; the commands appendix now comes before the figures appendix (B and C swapped). Added to numbers.json
+  (exploratory, not pre-registered): `*.delta_leave_one_out` and `*.markets_below_control`.
+
+- 2026-10-26 06:24 Structural pass on the report (author's request after the outside reviews). Contributions
+  rewritten, one purpose each; Section 3.4 now has a conditions table (Table 1; the results table is now Table 2);
+  the Conclusion states two findings and one bounded implication; Limitations note that the two current models
+  differ from gpt-4.1 in more than release date; Future Work folded into Limitations; the reasoning-classifier
+  numbers moved to Appendix A. The LLM Usage Statement now lists the author's decisions and every task the coding
+  assistant did, including the classifier's reference labels and the draft and reference checks, plus the Codex
+  and Grok reviews. Viewer: labels for the both-firm swaps (R5, R5f) and the control fixed, Effects tab readable on
+  phones. README restructured.
+
 ## Spend log
 
 Billed spend (OpenRouter account delta, from the Pipeline log progress lines): $17.34 at 00:33, $38.40 at 03:05,
