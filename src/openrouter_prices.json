@@ -44,6 +44,12 @@
       "completion": 4e-07,
       "context_length": 1047576,
       "name": "OpenAI: GPT-4.1 Nano"
+    },
+    "anthropic/claude-haiku-5.5": {
+      "prompt": 1e-07,
+      "completion": 5e-07,
+      "context_length": 1000000,
+      "name": "Anthropic: Claude Haiku 5.5"
     }
   }
 }

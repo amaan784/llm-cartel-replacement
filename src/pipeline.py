@@ -82,6 +82,7 @@ SHORT = {
     "openai/gpt-4.1-nano": "gpt41nano",
     "google/gemini-2.5-flash": "gem25flash",
     "google/gemini-2.5-flash-lite": "gem25flashlite",
+    "anthropic/claude-haiku-5.5": "claudehaiku55",
 }
 BRANCH_SEEDS = [101, 102]
 B_SEEDS = [10, 11, 12, 13]
@@ -89,7 +90,11 @@ B_ROUNDS = 50
 SCREEN_ROUNDS = 60
 BASE_ROUNDS = 150
 MAX_RERUNS = 3
-ARM_ORDER = ["C0", "R1", "R2", "R3", "R4", "R5", "R5f", "RP"]
+ARM_ORDER = ["C0", "R1", "R2", "R3", "R4", "R5", "R5f", "RP", "RN", "RNf"]
+NEW_MODEL = "anthropic/claude-haiku-5.5"  # exploratory current-generation newcomer (Track F only)
+# qwen3-14b reasoning reaches the harness's 4096-token cap (median 2,948, p90 3,802, max 4,064 output tokens in the
+# first 132 calls; 23% of calls re-sampled, two runs aborted after 9 cut-offs in a row): qwen runs get 8192.
+LONG_TOKENS = 8192
 TRACK_PRIORITY = {"O": 0, "OPI": 0, "F": 1}  # slow (qwen) tracks first: they are the critical path
 
 # Output tokens per call used for cost projections until real usage is observed.
@@ -227,7 +232,8 @@ class Pipeline:
                 continue
             b["not_before"] = time.time() + 60 * (b["spawns"] + 1)
             pid = spawn_run(name, self.mid(b["model"]), b["prefix"], b["rounds"], b["seed"], b["think"],
-                            self.results, self.logs, self.base_url)
+                            self.results, self.logs, self.base_url,
+                            max_tokens=LONG_TOKENS if b["model"].startswith("qwen/") else None)
             b.update(pid=pid, pid_start=proc_start(pid), status="running", spawns=b["spawns"] + 1)
             self.note(f"launched {name} ({b['model']}, {b['prefix']}{', think' if b['think'] else ''}, "
                       f"seed {b['seed']}, to {b['rounds']} rounds) pid {pid}", also_event=False)
@@ -353,7 +359,27 @@ class Pipeline:
         ]
         if t["prefix"] != "P0":
             out.append(("RP", {1: m}, None, "P0"))
+        if t["id"] == "F":  # exploratory (added 00:15 on 26 Oct, before any branch result): current-generation newcomer
+            out += [("RN", {1: NEW_MODEL}, None, np_), ("RNf", {1: NEW_MODEL}, 100, np_)]
         return out
+
+    def ensure_extras(self) -> None:
+        """Exploratory additions for markets queued before they existed: missing arms and the B-N baseline."""
+        if self.s["screen_decision"] is None:
+            return
+        for seed in B_SEEDS:
+            self.add_base("B-N", NEW_MODEL, "P0", True, seed, B_ROUNDS, B_ROUNDS - 1, role="B")
+        for name, b in self.s["bases"].items():
+            if b["role"] != "base" or not b["enqueued"]:
+                continue
+            t = self.s["tracks"][b["track"]]
+            snap = self.results / "snapshots" / f"{name}.jsonl"
+            before = len(self.s["branches"])
+            for arm, rep, win, pfx in self.arms(t):
+                for seed in BRANCH_SEEDS:
+                    self.add_branch(name, t, b["branch_round"], snap, arm, rep, win, pfx, seed)
+            if len(self.s["branches"]) > before:
+                self.note(f"queued {len(self.s['branches']) - before} added exploratory branches for {name}")
 
     def snapshot(self, name: str, b: int, recs: list) -> Path:
         """Rounds 0..b of a base run (+ its config) as branch_game input, from records already read."""
@@ -418,7 +444,10 @@ class Pipeline:
             self.s["branches"][jid]["state"] = "dropped"  # pre-authorized time fallback already in force
 
     def branch_cmd(self, j: dict) -> list:
-        cmd = [str(HARNESS_PY), "branch_game.py", j["snapshot"], "--at_round", str(j["branch_round"]),
+        # slow (qwen3) tracks: raise the agents' output cap through src/branch_long.py (see LONG_TOKENS)
+        game = ([str(REPO / "src" / "branch_long.py"), "--max_tokens", str(LONG_TOKENS)]
+                if TRACK_PRIORITY.get(j["track"]) == 0 else ["branch_game.py"])
+        cmd = [str(HARNESS_PY), *game, j["snapshot"], "--at_round", str(j["branch_round"]),
                "--rounds", str(j["horizon"]), "--label", j["label"], "--seed", str(j["seed"]),
                "--out_dir", str(self.results / "branches"), "--max_retries", "8", "-y"]
         if j["replace"]:
@@ -578,7 +607,9 @@ class Pipeline:
                 actual = u - self.s["usage_at_start"]
             else:
                 self.usage_misses += 1
-        return {"estimated": est, "actual": actual, "used": max(est, actual or 0.0)}
+        # The account delta is what OpenRouter billed (re-samples and lost branch attempts included); the token
+        # estimate ran ~60% high because providers discount cached prompts, so it is only the fallback.
+        return {"estimated": est, "actual": actual, "used": actual if actual is not None else est}
 
     def token_model(self) -> dict:
         """Observed token usage from finished base/screen/baseline rounds (refreshed every 10 min).
@@ -612,6 +643,8 @@ class Pipeline:
             return 900 if think else 600
         if model == "google/gemini-2.5-flash-lite":
             return 300
+        if model.startswith("anthropic/"):
+            return 1700  # measured: claude-haiku-5.5 wrote 1,652 tokens in the format check
         return 150 if think else 12
 
     def call_cost(self, model: str, hist: int, think: bool = False) -> float:
@@ -691,6 +724,16 @@ class Pipeline:
             for b in self.s["bases"].values():
                 if b["status"] == "held":
                     b["status"] = "pending"
+        if c.get("early_fallbacks") and "O" in self.s["tracks"]:
+            # Start the pre-authorized Track O fallback runs now instead of after round 150 (time only; which runs
+            # are used is still decided by the pre-registered rule in fallbacks()).
+            for seed in range(6, 10):
+                self.add_base("O", TRACK_O_MODEL, "P0", False, seed, 200, 179, role="base")
+            self.add_track("OPI", TRACK_O_MODEL, "PI", False, range(6), BASE_ROUNDS, 149, TRACK_O_SIBLING,
+                           self.s["tracks"]["O"]["X"])
+            self.deviation("started the pre-authorized Track O fallback runs early (seeds 6-9 at P0 to 200 rounds, "
+                           "and Track O-PI seeds 0-5) because all 6 Track O runs sat at the competitive price from "
+                           "round 2 and the sequential fallback would end after the deadline")
         if c.get("pause"):  # operator stop: no new launches or relaunches; running jobs finish
             self.s["paused"] = now()
             (self.logs / "PAUSE").write_text(now(), encoding="utf-8")
@@ -810,6 +853,7 @@ class Pipeline:
         self.budget_check()
         self.ensure_bases()
         self.decide_screen()
+        self.ensure_extras()
         self.scan_bases()
         self.fallbacks()
         self.time_check()
@@ -882,7 +926,9 @@ def main() -> None:
         argv = [a for a in sys.argv[1:] if a != "start"]
         log = Path(args.logs_dir) / "pipeline.log"
         cmd = [sys.executable, str(Path(__file__).resolve()), "run", *argv, "--log", str(log.resolve())]
-        pid = spawn_outside_app(cmd, REPO)  # survives the shell / app that started it
+        # Plain detached launch (tested end to end). WMI launch is opt-in only: on this machine WMI-started
+        # processes could not start the harness venv ("No Python at ...") and were killed after a while.
+        pid = spawn_outside_app(cmd, REPO) if os.environ.get("PIPELINE_WMI") == "1" else None
         how = "outside the app (WMI)"
         if pid is None:
             pid = spawn_detached(cmd, Path(args.logs_dir) / "spawn.log", cwd=REPO, env=child_env())
