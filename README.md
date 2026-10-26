@@ -109,3 +109,5 @@ The game harness is the organizer-provided `llm-cartel` folder of
 (commit `e6fb130`), adapted from [mattriemer/LLMCartel](https://github.com/mattriemer/LLMCartel); it was used
 unmodified. Everything in `src/` and `viewer/` was written during the sprint with an AI coding assistant (Claude), as
 the report's LLM Usage Statement describes. Released under the [MIT License](LICENSE).
+
+Thanks to CAIAC (Columbia AI Alignment Club) for sharing the sprint.
