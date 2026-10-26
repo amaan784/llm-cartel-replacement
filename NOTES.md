@@ -168,6 +168,28 @@ Market gain_t = mean of both firms' `gains` at round t.
   cost reaches $50; at $50 everything running is stopped.
 - 03:15 Keeping the PC awake (powercfg) is left to the user: the assistant does not change OS power settings.
 
+- 2026-10-26 02:47 DEVIATION (user decision, after the Track F branches of seeds 0-4 and all Track O-PI branches
+  had been analysed): Track F extended by seeds 5-9 (same model, prompt and arms; pipeline control v4). Seed 5 was
+  in the pre-registered plan (seeds 0-5) and had been dropped before it started for budget; seeds 6-9 are new.
+  Reason: Track F had only 4 colluding markets, so its bootstrap intervals were wide and approximate. To keep the
+  pre-registered analysis intact, `src/analyze.py` reports the pre-registered sample (Track F seeds 0-4) by default
+  and all seeds only with `--extended` (out/extended/), as a robustness check; the report gives both.
+- 2026-10-26 02:40 Analysis changes before writing the O-PI results: no bootstrap interval with fewer than 3 markets
+  (an interval over 2 clusters only restates the 2 values; per-market values are reported instead); price
+  stickiness (share of firm-rounds repeating the previous price), first-round prices, per-market values and
+  post-swap profit gain added to numbers.json; Figure S1 redrawn (arms x tracks); the notice classifier now reuses
+  earlier labels (so the hand validation stays valid) and analyze.py computes notice shares per sample.
+
+- 2026-10-26 03:30 Independent audit of the report draft (4 auditors + a skeptic per auditor; 65 issues confirmed).
+  Fixed: negative values that round to zero were printed as "+0.00", which made three intervals that lie wholly below
+  0 look as if they reached 0 (Track F R5; extended R2 and R5); `_num` now keeps the sign ("−0.00"). Wording fixed
+  where the text overstated the data: Claude Haiku 5.5 is the only newcomer that cut prices substantially (gpt-4.1
+  also lowered them by a few hundredths), the Haiku arms are labelled exploratory everywhere, the R3 incumbent rose
+  by $0.03, H2 in O-PI is inconclusive rather than not supported, the R5f firms opened near the ceiling and stayed
+  far above the monopoly price (not at the ceiling), the from-scratch comparison of Haiku and gpt-4.1 names its
+  measure, the PI prompt is described as an explicit cooperation instruction, and the post-hoc analysis changes are
+  listed in the report's Appendix A. Raw logs are published as data/results.zip in the repository.
+
 ## Spend log
 
 | time | item | est. USD | cumulative |
@@ -265,3 +287,37 @@ Market gain_t = mean of both firms' `gains` at round t.
 - 2026-10-26 00:33 [pipeline] launched OPI_qwen3-14b_PI_s5 (qwen/qwen3-14b, PI, seed 5, to 150 rounds) pid 61080
 - 2026-10-26 00:34 [pipeline] pipeline started (pid 39696, mock=False, max_branches=24, budget_pause=$47.0, deadline=2026-10-26 05:30)
 - 2026-10-26 00:35 Budget accounting now uses the OpenRouter account delta (billed spend, $17.35 at 00:34) instead of max(token estimate, account delta): the token estimate ($27.88) ran ~60% high because providers discount cached prompts, and would have paused the run at about $30 of real spend. The token estimate remains the fallback if the usage check fails.
+- 2026-10-26 00:47 [pipeline] OPI_qwen3-14b_PI_s1 crossed pidx 0.5 (20-round mean) at round 19; branch round 39
+- 2026-10-26 00:50 [pipeline] OPI_qwen3-14b_PI_s3 crossed pidx 0.5 (20-round mean) at round 19; branch round 39
+- 2026-10-26 01:00 [pipeline] queued 16 branches for OPI_qwen3-14b_PI_s1 at round 39 (pre-swap pidx 0.549)
+- 2026-10-26 01:04 [pipeline] progress: unfinished base runs [O_qwen3-14b_P0_s0:35/150, O_qwen3-14b_P0_s1:43/150, O_qwen3-14b_P0_s2:65/150, O_qwen3-14b_P0_s3:44/150, O_qwen3-14b_P0_s4:59/150, O_qwen3-14b_P0_s5:46/150, O_qwen3-14b_P0_s6:29/200, O_qwen3-14b_P0_s7:28/200, O_qwen3-14b_P0_s8:28/200, O_qwen3-14b_P0_s9:27/200, OPI_qwen3-14b_PI_s0:37/150, OPI_qwen3-14b_PI_s1:44/150, OPI_qwen3-14b_PI_s2:50/150, OPI_qwen3-14b_PI_s3:32/150, OPI_qwen3-14b_PI_s4:29/150, OPI_qwen3-14b_PI_s5:32/150]; branches {'done': 76, 'running': 12}; spend $18.37 (est $29.12, account delta 18.37236797)
+- 2026-10-26 01:10 [pipeline] queued 16 branches for OPI_qwen3-14b_PI_s3 at round 39 (pre-swap pidx 0.859)
+- 2026-10-26 01:34 [pipeline] progress: unfinished base runs [O_qwen3-14b_P0_s0:56/150, O_qwen3-14b_P0_s1:66/150, O_qwen3-14b_P0_s2:98/150, O_qwen3-14b_P0_s3:64/150, O_qwen3-14b_P0_s4:88/150, O_qwen3-14b_P0_s5:72/150, O_qwen3-14b_P0_s6:51/200, O_qwen3-14b_P0_s7:56/200, O_qwen3-14b_P0_s8:52/200, O_qwen3-14b_P0_s9:51/200, OPI_qwen3-14b_PI_s0:68/150, OPI_qwen3-14b_PI_s1:79/150, OPI_qwen3-14b_PI_s2:95/150, OPI_qwen3-14b_PI_s3:68/150, OPI_qwen3-14b_PI_s4:53/150, OPI_qwen3-14b_PI_s5:58/150]; branches {'done': 80, 'running': 24}; spend $20.23 (est $31.46, account delta 20.22887018)
+- 2026-10-26 02:04 [pipeline] progress: unfinished base runs [O_qwen3-14b_P0_s0:77/150, O_qwen3-14b_P0_s1:87/150, O_qwen3-14b_P0_s2:140/150, O_qwen3-14b_P0_s3:86/150, O_qwen3-14b_P0_s4:117/150, O_qwen3-14b_P0_s5:104/150, O_qwen3-14b_P0_s6:74/200, O_qwen3-14b_P0_s7:80/200, O_qwen3-14b_P0_s8:76/200, O_qwen3-14b_P0_s9:70/200, OPI_qwen3-14b_PI_s0:94/150, OPI_qwen3-14b_PI_s1:110/150, OPI_qwen3-14b_PI_s2:124/150, OPI_qwen3-14b_PI_s3:102/150, OPI_qwen3-14b_PI_s4:77/150, OPI_qwen3-14b_PI_s5:83/150]; branches {'done': 99, 'running': 5}; spend $22.01 (est $33.40, account delta 22.00782955)
+- 2026-10-26 02:34 [pipeline] progress: unfinished base runs [O_qwen3-14b_P0_s0:104/150, O_qwen3-14b_P0_s1:119/150, O_qwen3-14b_P0_s3:108/150, O_qwen3-14b_P0_s6:98/200, O_qwen3-14b_P0_s7:113/200, O_qwen3-14b_P0_s8:103/200, O_qwen3-14b_P0_s9:97/200, OPI_qwen3-14b_PI_s0:124/150, OPI_qwen3-14b_PI_s1:143/150, OPI_qwen3-14b_PI_s3:138/150, OPI_qwen3-14b_PI_s4:105/150, OPI_qwen3-14b_PI_s5:114/150]; branches {'done': 104}; spend $23.16 (est $34.61, account delta 23.16417838)
+- 2026-10-26 02:48 [pipeline] pipeline started (pid 28640, mock=False, max_branches=24, budget_pause=$47.0, deadline=2026-10-26 05:30)
+- 2026-10-26 02:48 [pipeline] DEVIATION: Track F extended by seeds [5, 6, 7, 8, 9] (user decision after the Track F branches of seeds 0-4 were analysed): seed 5 was in the pre-registered plan and had been dropped for budget; the primary analysis stays seeds 0-4 and all seeds are a robustness check
+- 2026-10-26 02:48 [pipeline] control v4 applied: {"version": 4, "add_track_f_seeds": [5, 6, 7, 8, 9], "max_branches": 24, "deadline": "2026-10-26 05:30"}
+- 2026-10-26 02:48 [pipeline] launched F_gem25flash_P0think_s5 (google/gemini-2.5-flash, P0, think, seed 5, to 150 rounds) pid 39804
+- 2026-10-26 02:48 [pipeline] launched F_gem25flash_P0think_s6 (google/gemini-2.5-flash, P0, think, seed 6, to 150 rounds) pid 22484
+- 2026-10-26 02:48 [pipeline] launched F_gem25flash_P0think_s7 (google/gemini-2.5-flash, P0, think, seed 7, to 150 rounds) pid 51468
+- 2026-10-26 02:48 [pipeline] launched F_gem25flash_P0think_s8 (google/gemini-2.5-flash, P0, think, seed 8, to 150 rounds) pid 27972
+- 2026-10-26 02:48 [pipeline] launched F_gem25flash_P0think_s9 (google/gemini-2.5-flash, P0, think, seed 9, to 150 rounds) pid 45424
+- 2026-10-26 02:48 [pipeline] F_gem25flash_P0think_s6 crossed pidx 0.5 (20-round mean) at round 19; branch round 39
+- 2026-10-26 02:48 [pipeline] F_gem25flash_P0think_s7 crossed pidx 0.5 (20-round mean) at round 20; branch round 40
+- 2026-10-26 02:48 [pipeline] F_gem25flash_P0think_s8 crossed pidx 0.5 (20-round mean) at round 19; branch round 39
+- 2026-10-26 02:48 [pipeline] F_gem25flash_P0think_s9 crossed pidx 0.5 (20-round mean) at round 19; branch round 39
+- 2026-10-26 02:49 [pipeline] queued 18 branches for F_gem25flash_P0think_s6 at round 39 (pre-swap pidx 1.000)
+- 2026-10-26 02:49 [pipeline] queued 18 branches for F_gem25flash_P0think_s7 at round 40 (pre-swap pidx 0.506)
+- 2026-10-26 02:49 [pipeline] queued 18 branches for F_gem25flash_P0think_s8 at round 39 (pre-swap pidx 0.824)
+- 2026-10-26 02:49 [pipeline] queued 18 branches for F_gem25flash_P0think_s9 at round 39 (pre-swap pidx 0.916)
+- 2026-10-26 03:05 [pipeline] progress: unfinished base runs [O_qwen3-14b_P0_s0:129/150, O_qwen3-14b_P0_s3:138/150, O_qwen3-14b_P0_s6:127/200, O_qwen3-14b_P0_s7:145/200, O_qwen3-14b_P0_s8:137/200, O_qwen3-14b_P0_s9:129/200, OPI_qwen3-14b_PI_s4:139/150]; branches {'done': 176}; spend $38.40 (est $59.30, account delta 38.39776669)
+- 2026-10-26 03:35 [pipeline] progress: unfinished base runs [O_qwen3-14b_P0_s6:162/200, O_qwen3-14b_P0_s7:183/200, O_qwen3-14b_P0_s8:178/200, O_qwen3-14b_P0_s9:178/200]; branches {'done': 176}; spend $38.86 (est $59.80, account delta 38.86160753)
+- 2026-10-26 04:05 [pipeline] progress: unfinished base runs [O_qwen3-14b_P0_s6:196/200]; branches {'done': 176}; spend $39.08 (est $60.03, account delta 39.07727227)
+- 2026-10-26 04:09 [pipeline] DEVIATION: only 0/6 Track O runs colluded by round 149: extending non-colluding Track O runs to 200 rounds (crossing allowed up to round 179) and adding seeds 6-9 (pre-authorized)
+- 2026-10-26 04:10 [pipeline] launched O_qwen3-14b_P0_s0 (qwen/qwen3-14b, P0, seed 0, to 200 rounds) pid 23060
+- 2026-10-26 04:10 [pipeline] launched O_qwen3-14b_P0_s1 (qwen/qwen3-14b, P0, seed 1, to 200 rounds) pid 25376
+- 2026-10-26 04:10 [pipeline] launched O_qwen3-14b_P0_s2 (qwen/qwen3-14b, P0, seed 2, to 200 rounds) pid 57940
+- 2026-10-26 04:10 [pipeline] launched O_qwen3-14b_P0_s3 (qwen/qwen3-14b, P0, seed 3, to 200 rounds) pid 52324
+- 2026-10-26 04:10 [pipeline] launched O_qwen3-14b_P0_s4 (qwen/qwen3-14b, P0, seed 4, to 200 rounds) pid 53032
+- 2026-10-26 04:10 [pipeline] launched O_qwen3-14b_P0_s5 (qwen/qwen3-14b, P0, seed 5, to 200 rounds) pid 17284
