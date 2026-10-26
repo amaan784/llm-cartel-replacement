@@ -1,0 +1,133 @@
+track,arm,run,seed,d_inc,new_minus_pre_inc,gap,kind
+F,R1,F_gem25flash_P0think_s0,101,-0.0015,0.01,0.019,lead
+F,R1,F_gem25flash_P0think_s0,102,-0.0025,0.01,0.0185,lead
+F,R2,F_gem25flash_P0think_s0,101,-0.0015,0.0,-0.001,lead
+F,R2,F_gem25flash_P0think_s0,102,-0.0015,0.0,0.002,lead
+F,R3,F_gem25flash_P0think_s0,101,-0.0125,0.05,0.001,lead
+F,R3,F_gem25flash_P0think_s0,102,0.0055,0.239,0.1475,"hold, gap persists"
+F,R4,F_gem25flash_P0think_s0,101,-0.0015,0.014,0.002,lead
+F,R4,F_gem25flash_P0think_s0,102,0.0015,0.012,-0.0185,lead
+F,RN,F_gem25flash_P0think_s0,101,-0.0015,0.0,0.013,lead
+F,RN,F_gem25flash_P0think_s0,102,-0.0115,-0.026,-0.0955,"hold, gap persists"
+F,RNf,F_gem25flash_P0think_s0,101,-0.0285,-0.187,-0.065,"hold, gap persists"
+F,RNf,F_gem25flash_P0think_s0,102,-0.0015,0.035,-0.227,"hold, gap persists"
+F,RX,F_gem25flash_P0think_s0,101,-0.0875,-0.201,-0.0325,follow-down
+F,RX,F_gem25flash_P0think_s0,102,-0.0085,-0.013,-0.0855,"hold, gap persists"
+F,R1,F_gem25flash_P0think_s1,101,0.008,0.094,0.099,"hold, gap persists"
+F,R1,F_gem25flash_P0think_s1,102,0.0,0.094,0.099,"hold, gap persists"
+F,R2,F_gem25flash_P0think_s1,101,0.0,0.094,0.1,"hold, gap persists"
+F,R2,F_gem25flash_P0think_s1,102,0.0,0.094,0.0995,"hold, gap persists"
+F,R3,F_gem25flash_P0think_s1,101,0.008,0.062,-0.0005,lead
+F,R3,F_gem25flash_P0think_s1,102,0.009,0.108,-0.0185,lead
+F,R4,F_gem25flash_P0think_s1,101,0.005,0.101,0.152,"hold, gap persists"
+F,R4,F_gem25flash_P0think_s1,102,0.0,0.097,0.0475,lead
+F,RN,F_gem25flash_P0think_s1,101,0.0,-0.116,-0.205,"hold, gap persists"
+F,RN,F_gem25flash_P0think_s1,102,0.005,0.019,-0.2625,"hold, gap persists"
+F,RNf,F_gem25flash_P0think_s1,101,0.008,-0.02,-0.207,"hold, gap persists"
+F,RNf,F_gem25flash_P0think_s1,102,0.005,0.044,-0.244,"hold, gap persists"
+F,RX,F_gem25flash_P0think_s1,101,0.005,0.094,-0.278,"hold, gap persists"
+F,RX,F_gem25flash_P0think_s1,102,0.001,-0.174,-0.236,"hold, gap persists"
+F,R1,F_gem25flash_P0think_s2,101,-0.009,0.097,0.108,"hold, gap persists"
+F,R1,F_gem25flash_P0think_s2,102,-0.015,0.094,0.1285,"hold, gap persists"
+F,R2,F_gem25flash_P0think_s2,101,0.002,0.102,0.1555,"hold, gap persists"
+F,R2,F_gem25flash_P0think_s2,102,-0.007,0.094,0.1355,"hold, gap persists"
+F,R3,F_gem25flash_P0think_s2,101,0.078,0.148,-0.0005,raise
+F,R3,F_gem25flash_P0think_s2,102,-0.01,0.025,0.0085,lead
+F,R4,F_gem25flash_P0think_s2,101,-0.012,0.095,0.1255,"hold, gap persists"
+F,R4,F_gem25flash_P0think_s2,102,-0.004,0.094,0.124,"hold, gap persists"
+F,RN,F_gem25flash_P0think_s2,101,-0.0,-0.096,-0.0215,lead
+F,RN,F_gem25flash_P0think_s2,102,-0.009,-0.099,-0.0635,"hold, gap persists"
+F,RNf,F_gem25flash_P0think_s2,101,-0.008,-0.139,-0.1485,"hold, gap persists"
+F,RNf,F_gem25flash_P0think_s2,102,0.004,0.114,-0.073,"hold, gap persists"
+F,RX,F_gem25flash_P0think_s2,101,-0.002,-0.198,-0.0325,lead
+F,RX,F_gem25flash_P0think_s2,102,-0.011,-0.203,-0.126,"hold, gap persists"
+F,R1,F_gem25flash_P0think_s4,101,0.0015,-0.167,-0.086,"hold, gap persists"
+F,R1,F_gem25flash_P0think_s4,102,-0.0015,-0.16,-0.135,"hold, gap persists"
+F,R2,F_gem25flash_P0think_s4,101,0.0005,-0.172,-0.073,"hold, gap persists"
+F,R2,F_gem25flash_P0think_s4,102,-0.0015,-0.176,-0.077,"hold, gap persists"
+F,R3,F_gem25flash_P0think_s4,101,0.1395,0.309,-0.036,raise
+F,R3,F_gem25flash_P0think_s4,102,-0.0175,0.045,-0.0795,"hold, gap persists"
+F,R4,F_gem25flash_P0think_s4,101,-0.0265,-0.15,-0.1045,"hold, gap persists"
+F,R4,F_gem25flash_P0think_s4,102,0.0025,-0.097,-0.13,"hold, gap persists"
+F,RN,F_gem25flash_P0think_s4,101,0.0045,-0.166,-0.1165,"hold, gap persists"
+F,RN,F_gem25flash_P0think_s4,102,-0.0055,-0.162,-0.116,"hold, gap persists"
+F,RNf,F_gem25flash_P0think_s4,101,-0.0105,0.054,-0.1615,"hold, gap persists"
+F,RNf,F_gem25flash_P0think_s4,102,-0.0135,0.194,0.21,"hold, gap persists"
+F,RX,F_gem25flash_P0think_s4,101,-0.0055,-0.167,-0.131,"hold, gap persists"
+F,RX,F_gem25flash_P0think_s4,102,-0.0065,-0.164,-0.121,"hold, gap persists"
+F,R1,F_gem25flash_P0think_s6,101,0.0,0.024,0.033,lead
+F,R1,F_gem25flash_P0think_s6,102,0.0,0.034,0.032,lead
+F,R2,F_gem25flash_P0think_s6,101,0.0,0.004,-0.002,lead
+F,R2,F_gem25flash_P0think_s6,102,0.001,0.016,0.0115,lead
+F,R3,F_gem25flash_P0think_s6,101,0.001,0.009,-0.0235,lead
+F,R3,F_gem25flash_P0think_s6,102,0.0,0.017,-0.0295,lead
+F,R4,F_gem25flash_P0think_s6,101,0.0,0.024,-0.042,lead
+F,R4,F_gem25flash_P0think_s6,102,0.0,0.021,-0.0355,lead
+F,RN,F_gem25flash_P0think_s6,101,-0.001,-0.039,-0.151,"hold, gap persists"
+F,RN,F_gem25flash_P0think_s6,102,-0.001,-0.109,-0.188,"hold, gap persists"
+F,RNf,F_gem25flash_P0think_s6,101,0.014,0.889,-0.249,"hold, gap persists"
+F,RNf,F_gem25flash_P0think_s6,102,-0.001,0.039,0.0485,lead
+F,RX,F_gem25flash_P0think_s6,101,-0.002,-0.254,-0.2255,"hold, gap persists"
+F,RX,F_gem25flash_P0think_s6,102,-0.026,-0.264,-0.08,"hold, gap persists"
+F,R1,F_gem25flash_P0think_s7,101,-0.001,-0.095,-0.085,"hold, gap persists"
+F,R1,F_gem25flash_P0think_s7,102,-0.004,-0.099,-0.076,"hold, gap persists"
+F,R2,F_gem25flash_P0think_s7,101,0.001,-0.111,-0.1145,"hold, gap persists"
+F,R2,F_gem25flash_P0think_s7,102,0.002,-0.111,-0.107,"hold, gap persists"
+F,R3,F_gem25flash_P0think_s7,101,0.059,0.121,-0.0165,raise
+F,R3,F_gem25flash_P0think_s7,102,0.05,0.113,-0.0065,raise
+F,R4,F_gem25flash_P0think_s7,101,-0.007,-0.08,-0.0585,"hold, gap persists"
+F,R4,F_gem25flash_P0think_s7,102,-0.007,-0.121,-0.135,"hold, gap persists"
+F,RN,F_gem25flash_P0think_s7,101,0.005,-0.152,-0.139,"hold, gap persists"
+F,RN,F_gem25flash_P0think_s7,102,-0.002,-0.158,-0.106,"hold, gap persists"
+F,RNf,F_gem25flash_P0think_s7,101,0.078,0.024,-0.1815,raise
+F,RNf,F_gem25flash_P0think_s7,102,0.015,-0.033,-0.1545,"hold, gap persists"
+F,RX,F_gem25flash_P0think_s7,101,0.001,-0.161,-0.1495,"hold, gap persists"
+F,RX,F_gem25flash_P0think_s7,102,0.0,-0.161,-0.1525,"hold, gap persists"
+F,R1,F_gem25flash_P0think_s8,101,-0.001,-0.008,-0.0075,lead
+F,R1,F_gem25flash_P0think_s8,102,0.002,-0.007,-0.0025,lead
+F,R2,F_gem25flash_P0think_s8,101,-0.005,-0.019,-0.006,lead
+F,R2,F_gem25flash_P0think_s8,102,0.005,-0.01,-0.0055,lead
+F,R3,F_gem25flash_P0think_s8,101,-0.01,0.016,-0.0545,"hold, gap persists"
+F,R3,F_gem25flash_P0think_s8,102,0.05,0.13,-0.0205,raise
+F,R4,F_gem25flash_P0think_s8,101,0.007,-0.002,-0.005,lead
+F,R4,F_gem25flash_P0think_s8,102,0.006,0.0,-0.01,lead
+F,RN,F_gem25flash_P0think_s8,101,-0.012,-0.104,-0.176,"hold, gap persists"
+F,RN,F_gem25flash_P0think_s8,102,-0.015,-0.102,-0.078,"hold, gap persists"
+F,RNf,F_gem25flash_P0think_s8,101,0.033,0.049,-0.2255,raise
+F,RNf,F_gem25flash_P0think_s8,102,-0.006,0.101,0.1045,"hold, gap persists"
+F,RX,F_gem25flash_P0think_s8,101,0.01,-0.175,-0.192,"hold, gap persists"
+F,RX,F_gem25flash_P0think_s8,102,-0.001,-0.063,-0.181,"hold, gap persists"
+F,R1,F_gem25flash_P0think_s9,101,-0.001,0.0,0.0185,lead
+F,R1,F_gem25flash_P0think_s9,102,-0.003,-0.002,0.01,lead
+F,R2,F_gem25flash_P0think_s9,101,-0.001,-0.01,0.0035,lead
+F,R2,F_gem25flash_P0think_s9,102,0.002,-0.01,0.008,lead
+F,R3,F_gem25flash_P0think_s9,101,0.213,0.092,-0.037,raise
+F,R3,F_gem25flash_P0think_s9,102,0.068,0.03,-0.0675,raise
+F,R4,F_gem25flash_P0think_s9,101,0.002,-0.009,0.001,lead
+F,R4,F_gem25flash_P0think_s9,102,0.002,-0.01,0.001,lead
+F,RN,F_gem25flash_P0think_s9,101,-0.001,-0.008,0.0075,lead
+F,RN,F_gem25flash_P0think_s9,102,0.002,-0.008,0.009,lead
+F,RNf,F_gem25flash_P0think_s9,101,0.186,0.118,-0.237,raise
+F,RNf,F_gem25flash_P0think_s9,102,0.016,-0.015,-0.2115,"hold, gap persists"
+F,RX,F_gem25flash_P0think_s9,101,0.002,-0.007,-0.0045,lead
+F,RX,F_gem25flash_P0think_s9,102,0.004,-0.014,0.006,lead
+OPI,R1,OPI_qwen3-14b_PI_s1,101,0.0,0.03,0.03,lead
+OPI,R1,OPI_qwen3-14b_PI_s1,102,0.0,0.025,0.02,lead
+OPI,R2,OPI_qwen3-14b_PI_s1,101,0.0,0.034,0.0055,lead
+OPI,R2,OPI_qwen3-14b_PI_s1,102,0.0,0.047,0.0075,lead
+OPI,R3,OPI_qwen3-14b_PI_s1,101,0.0,0.11,-0.01,lead
+OPI,R3,OPI_qwen3-14b_PI_s1,102,0.0,0.11,-0.013,lead
+OPI,R4,OPI_qwen3-14b_PI_s1,101,0.0,0.04,0.035,lead
+OPI,R4,OPI_qwen3-14b_PI_s1,102,0.0,0.04,0.04,lead
+OPI,RP,OPI_qwen3-14b_PI_s1,101,0.0,0.04,0.045,lead
+OPI,RP,OPI_qwen3-14b_PI_s1,102,0.0,0.05,0.045,lead
+OPI,R1,OPI_qwen3-14b_PI_s3,101,0.0,0.01,0.0,lead
+OPI,R1,OPI_qwen3-14b_PI_s3,102,0.0,0.0,0.0025,lead
+OPI,R2,OPI_qwen3-14b_PI_s3,101,0.0,0.0,0.0,lead
+OPI,R2,OPI_qwen3-14b_PI_s3,102,0.0,0.0,0.0,lead
+OPI,R3,OPI_qwen3-14b_PI_s3,101,0.0,0.088,-0.03,lead
+OPI,R3,OPI_qwen3-14b_PI_s3,102,0.0,0.089,-0.0325,lead
+OPI,R4,OPI_qwen3-14b_PI_s3,101,0.0,0.0,0.0,lead
+OPI,R4,OPI_qwen3-14b_PI_s3,102,0.0,0.0,0.0,lead
+OPI,RP,OPI_qwen3-14b_PI_s3,101,0.0,0.0,0.0,lead
+OPI,RP,OPI_qwen3-14b_PI_s3,102,0.0,0.0,0.0,lead

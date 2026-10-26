@@ -1,0 +1,14 @@
+track,contrast,n,mean,lo,hi,per_run
+OPI,H2 R3-R2,2,-0.0314,,,OPI_qwen3-14b_PI_s1:-0.023;OPI_qwen3-14b_PI_s3:-0.040
+OPI,H3 R5-R5f,2,-1.8947,,,OPI_qwen3-14b_PI_s1:-1.946;OPI_qwen3-14b_PI_s3:-1.844
+OPI,H4 R4-C0,2,-0.0028,,,OPI_qwen3-14b_PI_s1:-0.004;OPI_qwen3-14b_PI_s3:-0.001
+OPI,R2-R1,2,-0.0095,,,OPI_qwen3-14b_PI_s1:-0.018;OPI_qwen3-14b_PI_s3:-0.001
+OPI,RP-C0,2,0.0,,,OPI_qwen3-14b_PI_s1:+0.001;OPI_qwen3-14b_PI_s3:-0.001
+F,H2 R3-R2,8,0.0147,-0.0526,0.0933,F_gem25flash_P0think_s0:+0.070;F_gem25flash_P0think_s1:-0.109;F_gem25flash_P0think_s2:-0.080;F_gem25flash_P0think_s4:+0.223;F_gem25flash_P0think_s6:-0.020;F_gem25flash_P0think_s7:+0.129;F_gem25flash_P0think_s8:-0.031;F_gem25flash_P0think_s9:-0.064
+F,H3 R5-R5f,8,-1.1077,-1.3898,-0.8273,F_gem25flash_P0think_s0:-1.623;F_gem25flash_P0think_s1:-1.479;F_gem25flash_P0think_s2:-1.257;F_gem25flash_P0think_s4:-0.639;F_gem25flash_P0think_s6:-0.495;F_gem25flash_P0think_s7:-1.524;F_gem25flash_P0think_s8:-1.028;F_gem25flash_P0think_s9:-0.815
+F,H4 R4-C0,8,-0.002,-0.0249,0.0197,F_gem25flash_P0think_s0:-0.040;F_gem25flash_P0think_s1:-0.045;F_gem25flash_P0think_s2:+0.020;F_gem25flash_P0think_s4:+0.040;F_gem25flash_P0think_s6:-0.038;F_gem25flash_P0think_s7:+0.033;F_gem25flash_P0think_s8:+0.010;F_gem25flash_P0think_s9:+0.004
+F,R2-R1,8,-0.0487,-0.0805,-0.0221,F_gem25flash_P0think_s0:-0.092;F_gem25flash_P0think_s1:-0.001;F_gem25flash_P0think_s2:-0.030;F_gem25flash_P0think_s4:-0.135;F_gem25flash_P0think_s6:-0.044;F_gem25flash_P0think_s7:-0.061;F_gem25flash_P0think_s8:-0.022;F_gem25flash_P0think_s9:-0.004
+F,RNf-RN,8,0.0692,-0.0529,0.193,F_gem25flash_P0think_s0:-0.170;F_gem25flash_P0think_s1:-0.009;F_gem25flash_P0think_s2:+0.074;F_gem25flash_P0think_s4:+0.249;F_gem25flash_P0think_s6:+0.243;F_gem25flash_P0think_s7:+0.086;F_gem25flash_P0think_s8:+0.298;F_gem25flash_P0think_s9:-0.217
+F,RN-R2,8,-0.2242,-0.3532,-0.0966,F_gem25flash_P0think_s0:-0.182;F_gem25flash_P0think_s1:-0.405;F_gem25flash_P0think_s2:-0.473;F_gem25flash_P0think_s4:+0.058;F_gem25flash_P0think_s6:-0.372;F_gem25flash_P0think_s7:-0.095;F_gem25flash_P0think_s8:-0.323;F_gem25flash_P0think_s9:-0.002
+F,RX-R2,8,-0.3137,-0.4538,-0.1651,F_gem25flash_P0think_s0:-0.555;F_gem25flash_P0think_s1:-0.365;F_gem25flash_P0think_s2:-0.530;F_gem25flash_P0think_s4:+0.032;F_gem25flash_P0think_s6:-0.531;F_gem25flash_P0think_s7:-0.068;F_gem25flash_P0think_s8:-0.301;F_gem25flash_P0think_s9:-0.191
+F,RX-RN,8,-0.0895,-0.1906,-0.0053,F_gem25flash_P0think_s0:-0.374;F_gem25flash_P0think_s1:+0.040;F_gem25flash_P0think_s2:-0.057;F_gem25flash_P0think_s4:-0.027;F_gem25flash_P0think_s6:-0.159;F_gem25flash_P0think_s7:+0.027;F_gem25flash_P0think_s8:+0.022;F_gem25flash_P0think_s9:-0.189

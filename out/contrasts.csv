@@ -1,0 +1,14 @@
+track,contrast,n,mean,lo,hi,per_run
+OPI,H2 R3-R2,2,-0.0314,,,OPI_qwen3-14b_PI_s1:-0.023;OPI_qwen3-14b_PI_s3:-0.040
+OPI,H3 R5-R5f,2,-1.8947,,,OPI_qwen3-14b_PI_s1:-1.946;OPI_qwen3-14b_PI_s3:-1.844
+OPI,H4 R4-C0,2,-0.0028,,,OPI_qwen3-14b_PI_s1:-0.004;OPI_qwen3-14b_PI_s3:-0.001
+OPI,R2-R1,2,-0.0095,,,OPI_qwen3-14b_PI_s1:-0.018;OPI_qwen3-14b_PI_s3:-0.001
+OPI,RP-C0,2,0.0,,,OPI_qwen3-14b_PI_s1:+0.001;OPI_qwen3-14b_PI_s3:-0.001
+F,H2 R3-R2,4,0.0259,-0.0944,0.1469,F_gem25flash_P0think_s0:+0.070;F_gem25flash_P0think_s1:-0.109;F_gem25flash_P0think_s2:-0.080;F_gem25flash_P0think_s4:+0.223
+F,H3 R5-R5f,4,-1.2497,-1.5511,-0.8492,F_gem25flash_P0think_s0:-1.623;F_gem25flash_P0think_s1:-1.479;F_gem25flash_P0think_s2:-1.257;F_gem25flash_P0think_s4:-0.639
+F,H4 R4-C0,4,-0.0061,-0.0423,0.0301,F_gem25flash_P0think_s0:-0.040;F_gem25flash_P0think_s1:-0.045;F_gem25flash_P0think_s2:+0.020;F_gem25flash_P0think_s4:+0.040
+F,R2-R1,4,-0.0646,-0.1138,-0.0155,F_gem25flash_P0think_s0:-0.092;F_gem25flash_P0think_s1:-0.001;F_gem25flash_P0think_s2:-0.030;F_gem25flash_P0think_s4:-0.135
+F,RNf-RN,4,0.0362,-0.1085,0.1844,F_gem25flash_P0think_s0:-0.170;F_gem25flash_P0think_s1:-0.009;F_gem25flash_P0think_s2:+0.074;F_gem25flash_P0think_s4:+0.249
+F,RN-R2,4,-0.2504,-0.4391,-0.0576,F_gem25flash_P0think_s0:-0.182;F_gem25flash_P0think_s1:-0.405;F_gem25flash_P0think_s2:-0.473;F_gem25flash_P0think_s4:+0.058
+F,RX-R2,4,-0.3548,-0.5427,-0.1089,F_gem25flash_P0think_s0:-0.555;F_gem25flash_P0think_s1:-0.365;F_gem25flash_P0think_s2:-0.530;F_gem25flash_P0think_s4:+0.032
+F,RX-RN,4,-0.1044,-0.2869,0.0158,F_gem25flash_P0think_s0:-0.374;F_gem25flash_P0think_s1:+0.040;F_gem25flash_P0think_s2:-0.057;F_gem25flash_P0think_s4:-0.027

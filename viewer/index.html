@@ -1,0 +1,271 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>LLM Cartel Replacement Viewer</title>
+<script src="https://cdn.plot.ly/plotly-2.35.2.min.js"></script>
+<script src="data.js"></script>
+<style>
+  :root { --bg:#f7f6f2; --card:#ffffff; --ink:#1d1d1b; --muted:#5f5e5a; --line:#dedcd5; --accent:#c4501a;
+          --inc:#2b2b2b; --new:#d55e00; --opi:#3a9ad9; --chip:#efede6; }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) { --bg:#171716; --card:#22221f; --ink:#ecebe6; --muted:#a8a69f; --line:#3a3935;
+      --inc:#e6e4dc; --chip:#2e2d29; }
+  }
+  * { box-sizing:border-box; }
+  body { margin:0; background:var(--bg); color:var(--ink); font:15px/1.55 Georgia, "Times New Roman", serif; }
+  header { max-width:1100px; margin:0 auto; padding:28px 16px 8px; }
+  h1 { font-size:26px; margin:0 0 6px; }
+  .sub { color:var(--muted); margin:0 0 12px; max-width:880px; }
+  .links a { color:var(--accent); margin-right:14px; }
+  nav { max-width:1100px; margin:8px auto 0; padding:0 16px; display:flex; gap:6px; flex-wrap:wrap; }
+  nav button { font:inherit; border:1px solid var(--line); background:var(--card); color:var(--ink); padding:7px 14px;
+               border-radius:999px; cursor:pointer; }
+  nav button.on { background:var(--ink); color:var(--bg); border-color:var(--ink); }
+  main { max-width:1100px; margin:0 auto; padding:12px 16px 40px; }
+  .card { background:var(--card); border:1px solid var(--line); border-radius:12px; padding:16px; margin-top:12px; }
+  .row { display:flex; gap:12px; flex-wrap:wrap; align-items:flex-end; }
+  label { font-size:13px; color:var(--muted); display:flex; flex-direction:column; gap:4px; }
+  select { font:inherit; font-size:14px; padding:6px 8px; border-radius:8px; border:1px solid var(--line);
+           background:var(--card); color:var(--ink); min-width:160px; max-width:100%; }
+  .desc { margin-top:10px; color:var(--muted); font-size:14px; }
+  .chart { width:100%; height:420px; }
+  .think-head { display:flex; justify-content:space-between; align-items:center; gap:8px; flex-wrap:wrap; }
+  .think-head button { font:inherit; font-size:13px; border:1px solid var(--line); background:var(--chip);
+                       color:var(--ink); border-radius:8px; padding:4px 10px; cursor:pointer; }
+  .thinks { display:grid; grid-template-columns:1fr 1fr; gap:12px; margin-top:8px; }
+  .think { background:var(--chip); border-radius:10px; padding:12px; font-size:13.5px; white-space:pre-wrap;
+           max-height:320px; overflow:auto; }
+  .think b { display:block; margin-bottom:4px; font-size:13px; }
+  .hint { font-size:13px; color:var(--muted); }
+  .pill { display:inline-block; padding:1px 8px; border-radius:999px; background:var(--chip); font-size:12.5px; margin-right:6px; }
+  @media (max-width:720px) { .thinks { grid-template-columns:1fr; } .chart { height:340px; } h1 { font-size:21px; } }
+  .hidden { display:none; }
+</style>
+</head>
+<body>
+<header>
+  <h1>Replacing an LLM Pricing Agent Does Not Restore Competitive Prices</h1>
+  <p class="sub">Two LLM firms price a repeated Bertrand market. Once they settle above the competitive price, the market
+    is copied and continued with one or both firms replaced, next to a no-swap control from the same state. Pick any
+    branch to see both firms' prices and read what each agent wrote before choosing its price.</p>
+  <div class="links"><a href="../report/report.pdf">Report (PDF)</a><a href="../report/report.md">Report (Markdown)</a><a href="../docs/RESULTS.md">Results summary</a><a href="../out/numbers.json">numbers.json</a></div>
+</header>
+<nav>
+  <button data-tab="explore" class="on">Explore a swap</button>
+  <button data-tab="effects">Effects</button>
+  <button data-tab="bases">Base markets</button>
+</nav>
+<main>
+  <section id="explore">
+    <div class="card">
+      <div class="row">
+        <label>Track<select id="selTrack"></select></label>
+        <label>Market<select id="selMarket"></select></label>
+        <label>Condition<select id="selArm"></select></label>
+        <label>Sampling seed<select id="selSeed"></select></label>
+      </div>
+      <div class="desc" id="armDesc"></div>
+      <div id="priceChart" class="chart"></div>
+      <div class="hint">Solid: the condition (orange = firm 1, the replaced firm; the other line = firm 0, the incumbent). Faint dotted:
+        the no-swap control from the same market and seed. Grey band: the scored rounds 31-50. Click a point near the swap
+        to read the agents' reasoning in that round.</div>
+    </div>
+    <div class="card">
+      <div class="think-head">
+        <strong id="thinkTitle">Reasoning</strong>
+        <span><button id="prevR">◀ earlier round</button> <button id="nextR">later round ▶</button></span>
+      </div>
+      <div class="thinks">
+        <div class="think"><b id="t0h">Firm 0 (incumbent)</b><span id="t0"></span></div>
+        <div class="think"><b id="t1h">Firm 1</b><span id="t1"></span></div>
+      </div>
+      <div class="hint">Reasoning is kept for chart rounds -2 to 15, trimmed to its last 900 characters
+        (where the price is chosen). Full logs are in data/results.zip.</div>
+    </div>
+  </section>
+
+  <section id="effects" class="hidden">
+    <div class="card">
+      <div class="row">
+        <label>Sample<select id="selSample"></select></label>
+        <label style="flex-direction:row;align-items:center;gap:6px"><input type="checkbox" id="showR5f"> show R5f (two blind
+          newcomers anchoring on the $2.89 ceiling; not collusion)</label>
+      </div>
+      <div id="effectChart" class="chart" style="height:560px"></div>
+      <div class="hint">Change in the mean price index over post-swap rounds 31-50 relative to the no-swap control from the same
+        market (0 = competitive price, 1 = monopoly price). Diamond: mean over markets; bar: 95% cluster-bootstrap interval
+        (only with 3 or more markets); dots: single markets. RN, RNf and RX are exploratory; the "all markets" sample adds
+        the Track F markets run after the analysis.</div>
+    </div>
+  </section>
+
+  <section id="bases" class="hidden">
+    <div class="card">
+      <div class="row"><label>Group<select id="selGroup"></select></label></div>
+      <div id="baseChart" class="chart"></div>
+      <div class="hint">20-round rolling mean of the price index for every run in the group. Dotted line: the 0.5 collusion
+        threshold used to pick the swap point.</div>
+    </div>
+  </section>
+</main>
+<script>
+const D = window.DATA;
+const css = n => getComputedStyle(document.documentElement).getPropertyValue(n).trim();
+const armLabel = a => { const x = D.arms[a] || {main: a, detail: ""}; return `${a} · ${x.main}${x.detail ? ", " + x.detail : ""}`; };
+const ROUNDS = Array.from({length: D.pre + D.post}, (_, i) => i - (D.pre - 1));
+let current = null, thinkRound = 1;
+
+// ---------- tabs
+document.querySelectorAll("nav button").forEach(b => b.onclick = () => {
+  document.querySelectorAll("nav button").forEach(x => x.classList.toggle("on", x === b));
+  ["explore", "effects", "bases"].forEach(id => document.getElementById(id).classList.toggle("hidden", id !== b.dataset.tab));
+  if (b.dataset.tab === "effects") drawEffects();
+  if (b.dataset.tab === "bases") drawBases();
+  window.dispatchEvent(new Event("resize"));
+});
+
+function fill(sel, items, keep) {
+  const old = keep && sel.value;
+  sel.innerHTML = items.map(([v, t]) => `<option value="${v}">${t}</option>`).join("");
+  if (old && items.some(([v]) => String(v) === old)) sel.value = old;
+}
+const selTrack = document.getElementById("selTrack"), selMarket = document.getElementById("selMarket"),
+      selArm = document.getElementById("selArm"), selSeed = document.getElementById("selSeed");
+const layoutBase = () => ({
+  paper_bgcolor: "rgba(0,0,0,0)", plot_bgcolor: "rgba(0,0,0,0)", font: {family: "Georgia, serif", color: css("--ink"), size: 13},
+  margin: {l: 60, r: 20, t: 20, b: 50}, legend: {orientation: "h", y: -0.18},
+  xaxis: {gridcolor: css("--line"), zeroline: false}, yaxis: {gridcolor: css("--line"), zeroline: false}
+});
+
+// ---------- explore
+fill(selTrack, [...new Set(D.markets.map(m => m.track))].map(t => [t, D.trackName[t] || t]));
+if (D.featured) { selTrack.value = D.featured.track; }
+function onTrack() {
+  const ms = D.markets.filter(m => m.track === selTrack.value);
+  fill(selMarket, ms.map(m => [m.run, `seed ${m.seed}${m.extension ? " (robustness)" : ""}, swap at round ${m.branch_round}`]), true);
+  if (!selArm.dataset.init && D.featured && ms.some(m => m.run === D.featured.run)) selMarket.value = D.featured.run;
+  onMarket();
+}
+function onMarket() {
+  const arms = D.armOrder.filter(a => D.branches.some(b => b.run === selMarket.value && b.arm === a));
+  fill(selArm, arms.map(a => [a, armLabel(a)]), true);
+  if (!selArm.dataset.init && D.featured && selMarket.value === D.featured.run) { selArm.value = D.featured.arm; }
+  onArm();
+}
+function onArm() {
+  const seeds = D.branches.filter(b => b.run === selMarket.value && b.arm === selArm.value).map(b => b.seed);
+  fill(selSeed, seeds.map(s => [s, s]), true);
+  if (!selArm.dataset.init && D.featured && selArm.value === D.featured.arm) { selSeed.value = String(D.featured.seed); selArm.dataset.init = 1; }
+  draw();
+}
+[selTrack, selMarket, selArm, selSeed].forEach((s, i) => s.onchange = [onTrack, onMarket, onArm, draw][i]);
+
+function draw() {
+  const pick = (arm) => D.branches.find(b => b.run === selMarket.value && b.arm === arm && String(b.seed) === selSeed.value);
+  current = pick(selArm.value);
+  const ctl = pick("C0");
+  const m = D.markets.find(x => x.run === selMarket.value);
+  if (!current) return;
+  const traces = [];
+  if (ctl && selArm.value !== "C0") {
+    traces.push({x: ROUNDS, y: ctl.p0, name: "control: firm 0", mode: "lines", line: {color: css("--inc"), width: 1, dash: "dot"}, opacity: 0.45});
+    traces.push({x: ROUNDS, y: ctl.p1, name: "control: firm 1", mode: "lines", line: {color: css("--new"), width: 1, dash: "dot"}, opacity: 0.45});
+  }
+  traces.push({x: ROUNDS, y: current.p0, name: `firm 0 (incumbent): ${current.models[0] || ""}`, mode: "lines+markers",
+               marker: {size: 4}, line: {color: css("--inc"), width: 2}});
+  traces.push({x: ROUNDS, y: current.p1, name: `firm 1: ${current.models[1] || ""} after the swap`, mode: "lines+markers",
+               marker: {size: 4}, line: {color: css("--new"), width: 2.4}});
+  const L = layoutBase();
+  L.xaxis.title = "round relative to the swap (0 = last round before it)";
+  L.yaxis.title = "price ($)";
+  L.shapes = [
+    {type: "rect", xref: "x", yref: "paper", x0: 30.5, x1: 50.5, y0: 0, y1: 1, fillcolor: "rgba(128,128,128,0.12)", line: {width: 0}},
+    {type: "line", xref: "x", yref: "paper", x0: 0.5, x1: 0.5, y0: 0, y1: 1, line: {dash: "dot", color: css("--muted")}},
+    {type: "line", xref: "paper", x0: 0, x1: 1, y0: m.nash, y1: m.nash, line: {color: css("--muted"), width: 1, dash: "dash"}},
+    {type: "line", xref: "paper", x0: 0, x1: 1, y0: m.mono, y1: m.mono, line: {color: css("--muted"), width: 1, dash: "dash"}},
+  ];
+  L.annotations = [
+    {xref: "paper", x: 1, y: m.nash, text: "competitive", showarrow: false, xanchor: "right", yanchor: "bottom", font: {size: 11, color: css("--muted")}},
+    {xref: "paper", x: 1, y: m.mono, text: "monopoly", showarrow: false, xanchor: "right", yanchor: "bottom", font: {size: 11, color: css("--muted")}},
+  ];
+  Plotly.react("priceChart", traces, L, {responsive: true, displaylogo: false});
+  const el = document.getElementById("priceChart");
+  el.removeAllListeners && el.removeAllListeners("plotly_click");
+  el.on("plotly_click", ev => { if (ev.points.length) { thinkRound = ev.points[0].x; showThink(); } });
+  const x = D.arms[selArm.value] || {};
+  document.getElementById("armDesc").innerHTML =
+    `<span class="pill">${armLabel(selArm.value)}</span> models: ${current.models.join(" vs ")} · prompts: ${current.prefixes.join(" / ")}`;
+  thinkRound = Object.keys(current.thoughts).includes("1") ? 1 : 0;
+  showThink();
+}
+function showThink() {
+  if (!current) return;
+  const ks = Object.keys(current.thoughts).map(Number).sort((a, b) => a - b);
+  if (!ks.includes(thinkRound)) thinkRound = ks.reduce((a, b) => Math.abs(b - thinkRound) < Math.abs(a - thinkRound) ? b : a, ks[0]);
+  const i = thinkRound + D.pre - 1, t = current.thoughts[String(thinkRound)] || ["", ""];
+  document.getElementById("thinkTitle").textContent =
+    `Reasoning in round ${thinkRound > 0 ? "+" + thinkRound : thinkRound} (${thinkRound <= 0 ? "before" : "after"} the swap)`;
+  document.getElementById("t0h").textContent = `Firm 0 (incumbent) chose $${current.p0[i].toFixed(2)}`;
+  document.getElementById("t1h").textContent = `Firm 1 (${thinkRound <= 0 ? "original agent" : current.models[1]}) chose $${current.p1[i].toFixed(2)}`;
+  document.getElementById("t0").textContent = t[0] || "(no reasoning recorded)";
+  document.getElementById("t1").textContent = t[1] || "(no reasoning recorded)";
+}
+document.getElementById("prevR").onclick = () => { thinkRound -= 1; showThink(); };
+document.getElementById("nextR").onclick = () => { thinkRound += 1; showThink(); };
+onTrack();
+
+// ---------- effects
+const selSample = document.getElementById("selSample");
+fill(selSample, Object.keys(D.effects).map(k => [k, k === "pre-registered" ? "pre-registered (Track F: 4 markets)" : "all markets (Track F: 8 markets)"]));
+selSample.onchange = drawEffects;
+document.getElementById("showR5f").onchange = drawEffects;
+function drawEffects() {
+  const rows = (D.effects[selSample.value] || []).filter(r => r.arm !== "R5f" || document.getElementById("showR5f").checked);
+  const col = {F: css("--new"), OPI: css("--opi")};
+  const cats = rows.map(r => `${armLabel(r.arm)}  [${r.track === "OPI" ? "O-PI" : "F"}]`);
+  const traces = [];
+  ["F", "OPI"].forEach(t => {
+    const rs = rows.map((r, i) => [r, i]).filter(([r]) => r.track === t);
+    if (!rs.length) return;
+    traces.push({type: "scatter", mode: "markers", name: t === "F" ? "Track F: mean" : "Track O-PI: mean",
+      x: rs.map(([r]) => r.delta), y: rs.map(([, i]) => cats[i]),
+      marker: {symbol: "diamond", size: 11, color: col[t], line: {width: 1, color: "#000"}},
+      error_x: {type: "data", symmetric: false, visible: true, color: col[t],
+                array: rs.map(([r]) => r.ci && r.ci[1] != null ? r.ci[1] - r.delta : 0),
+                arrayminus: rs.map(([r]) => r.ci && r.ci[0] != null ? r.delta - r.ci[0] : 0)},
+      hovertemplate: "%{y}<br>change %{x:.3f}<extra></extra>"});
+    const px = [], py = [];
+    rs.forEach(([r, i]) => Object.values(r.per_market || {}).forEach(v => { px.push(v); py.push(cats[i]); }));
+    traces.push({type: "scatter", mode: "markers", name: t === "F" ? "Track F: single markets" : "Track O-PI: single markets",
+      x: px, y: py, marker: {size: 7, color: "rgba(0,0,0,0)", line: {width: 1.2, color: col[t]}},
+      hovertemplate: "one market: %{x:.3f}<extra></extra>"});
+  });
+  const L = layoutBase();
+  L.margin.l = 330; L.height = 560;
+  L.xaxis.title = "change in price index vs. no swap (rounds 31-50)";
+  L.yaxis.autorange = "reversed"; L.yaxis.type = "category";
+  L.shapes = [{type: "line", x0: 0, x1: 0, yref: "paper", y0: 0, y1: 1, line: {color: css("--muted"), width: 1}}];
+  Plotly.react("effectChart", traces, L, {responsive: true, displaylogo: false});
+}
+
+// ---------- base markets
+const GROUPS = {F: "Track F base markets", OPI: "Track O-PI base markets", O: "Track O base markets (neutral prompt)",
+  S: "Model screen", "B-O": "Baseline: gemini-2.5-flash vs itself", "B-F": "Baseline: gpt-4.1 vs itself",
+  "B-N": "Baseline: Claude Haiku 5.5 vs itself", "B-X": "Baseline: GPT-5.6 Sol vs itself"};
+const selGroup = document.getElementById("selGroup");
+fill(selGroup, Object.keys(GROUPS).filter(g => D.bases.some(b => b.group === g)).map(g => [g, GROUPS[g]]));
+selGroup.onchange = drawBases;
+function drawBases() {
+  const rs = D.bases.filter(b => b.group === selGroup.value);
+  const traces = rs.map(b => ({x: b.roll.map((_, i) => i), y: b.roll, mode: "lines", name: b.run.replace(/^.*_s/, "seed "),
+    hovertemplate: b.run + "<br>round %{x}: %{y:.2f}<extra></extra>"}));
+  const L = layoutBase();
+  L.xaxis.title = "round"; L.yaxis.title = "price index, 20-round mean";
+  L.shapes = [{type: "line", xref: "paper", x0: 0, x1: 1, y0: 0.5, y1: 0.5, line: {dash: "dot", color: css("--muted")}}];
+  Plotly.react("baseChart", traces, L, {responsive: true, displaylogo: false});
+}
+</script>
+</body>
+</html>
