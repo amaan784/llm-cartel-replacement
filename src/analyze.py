@@ -44,7 +44,7 @@ from common import (  # noqa: E402
     round_seconds,
 )
 
-ARM_ORDER = ["C0", "R1", "R2", "R3", "R4", "R5", "R5f", "RP"]
+ARM_ORDER = ["C0", "R1", "R2", "R3", "R4", "R5", "R5f", "RP", "RN", "RNf"]
 ARM_TITLE = {
     "C0": "C0 control (no swap)",
     "R1": "R1 same family",
@@ -55,7 +55,7 @@ ARM_TITLE = {
     "R5f": "R5f both replaced, fresh",
     "RP": "RP own model, prompt P0",
 }
-SINGLE = ("R1", "R2", "R3", "R4", "RP")
+SINGLE = ("R1", "R2", "R3", "R4", "RP", "RN", "RNf")
 TRACK_TITLE = {"O": "Track O (qwen3-14b, P0)", "OPI": "Track O-PI (qwen3-14b, PI)", "F": "Track F"}
 # Okabe-Ito colour-blind-safe palette
 COL = {"O": "#0072B2", "OPI": "#56B4E9", "F": "#D55E00"}
@@ -321,7 +321,8 @@ def main() -> None:
     contrasts = []
     for t in tracks:
         for name, arm, ref in (("H2 R3-R2", "R3", "R2"), ("H3 R5-R5f", "R5", "R5f"), ("H4 R4-C0", "R4", "C0"),
-                               ("R2-R1", "R2", "R1"), ("RP-C0", "RP", "C0")):
+                               ("R2-R1", "R2", "R1"), ("RP-C0", "RP", "C0"),
+                               ("RNf-RN", "RNf", "RN"), ("RN-R2", "RN", "R2")):  # last two: exploratory
             rs, d = paired(t, arm, ref)
             if not rs:
                 continue
@@ -377,7 +378,7 @@ def main() -> None:
             N.add(f"{t}.base.crossing_median", float(np.median(cr)), src)
             N.add(f"{t}.base.crossing_range", [min(cr), max(cr)], src)
         N.add(f"{t}.base.models", sorted({r["models"] for r in base}), src)
-    for t in ("B-O", "B-F"):
+    for t in ("B-O", "B-F", "B-N"):
         all_b = [r for r in run_rows if r["track"] == t]
         bb = [r for r in all_b if r["pidx_30_49"] is not None]  # only complete 50-round baselines count
         if not all_b:
@@ -506,6 +507,8 @@ ARM_PARTS = {  # (main, detail): one wording for every figure, table and the rep
     "R5": ("Both firms replaced", "full history"),
     "R5f": ("Both firms replaced", "no history"),
     "RP": ("Own model", "neutral prompt"),
+    "RN": ("Newest-generation model", "full history"),
+    "RNf": ("Newest-generation model", "no history"),
 }
 FIG0_TEXT = {
     "C0": "No swap (control)",
@@ -516,6 +519,8 @@ FIG0_TEXT = {
     "R5": "Both firms → other-provider model, full history",
     "R5f": "Both firms → other-provider model, no history",
     "RP": "Firm 1 → own model, neutral prompt",
+    "RN": "Firm 1 → newest-generation model, full history",
+    "RNf": "Firm 1 → newest-generation model, no history",
 }
 FIRM_COL = {"inc": "#0072B2", "new": "#D55E00"}  # Okabe-Ito blue / vermillion
 LS = ["-", (0, (4, 1.6)), (0, (1, 1.2))]  # line style per track (in addition to colour)
@@ -530,7 +535,8 @@ def arm_long(a):
 
 
 ARM_SHORT = {"C0": "No swap", "R1": "Same family", "R2": "Other provider", "R3": "Other provider", "R4": "Own model",
-             "R5": "Both replaced", "R5f": "Both replaced", "RP": "Own model"}  # narrow small-multiple titles
+             "R5": "Both replaced", "R5f": "Both replaced", "RP": "Own model", "RN": "Newest model",
+             "RNf": "Newest model"}  # narrow small-multiple titles
 
 
 def arm_panel(a, short=False):
@@ -655,7 +661,8 @@ def captions(out, complete, avg, tracks, horizon, state):
 **Figure 1 (fig0_design.png). Design.** Two LLM firms set prices every round in a repeated Bertrand market;
 each prompt shows the last 100 rounds of prices and profits. Once the 20-round average of the price index first
 exceeds 0.5 the market runs 20 more rounds and is then copied at that swap point. Each copy continues for
-{'/'.join(map(str, H))} rounds under one condition (C0 no swap; R1–R5f replace firm 1 or both firms), with
+{'/'.join(map(str, H))} rounds under one condition (C0 no swap; R1–R5f replace firm 1 or both firms; RN/RNf,
+Track F only and exploratory, bring in a current-generation model, Claude Haiku 5.5), with
 {len(seeds)} sampling seeds per condition. The outcome is the mean price index in post-swap {sc} minus that of
 C0 from the same market.
 
@@ -877,7 +884,7 @@ def figures(out, complete, avg, tracks, horizon, runs, run_rows):
         plt.close(fig)
 
     # ---------------- figS2: base runs, model screen and from-scratch baselines (rolling price index)
-    groups = [g for g in ("O", "OPI", "F", "S", "B-O", "B-F") if any(r["track"] == g for r in run_rows)]
+    groups = [g for g in ("O", "OPI", "F", "S", "B-O", "B-F", "B-N") if any(r["track"] == g for r in run_rows)]
     if groups:
         ncol = 3
         nrow = int(np.ceil(len(groups) / ncol))
@@ -888,7 +895,8 @@ def figures(out, complete, avg, tracks, horizon, runs, run_rows):
         o_tag = "Tracks O/O-PI" if "OPI" in tracks else "Track O"
         titles = {"S": "Model screen (60 rounds)",
                   "B-O": f"{model_of.get('B-O', '')} vs itself,\nfrom scratch\n(newcomer of {o_tag})",
-                  "B-F": f"{model_of.get('B-F', '')} vs itself,\nfrom scratch\n(newcomer of Track F)"}
+                  "B-F": f"{model_of.get('B-F', '')} vs itself,\nfrom scratch\n(newcomer of Track F)",
+                  "B-N": f"{model_of.get('B-N', '')} vs itself,\nfrom scratch\n(newest-model newcomer, F)"}
         screen_cols = ["#009E73", "#CC79A7", "#E69F00", "#000000"]
         for gi, g in enumerate(groups):
             ax = axes[gi // ncol, gi % ncol]
