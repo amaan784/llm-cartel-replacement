@@ -10,11 +10,16 @@ seeds 0-4 had been analysed (NOTES.md, deviations); they enter only with --exten
 Outputs in out/:
     branch_metrics.csv      one row per branch (every quantity below is computed from these rows)
     run_metrics.csv         one row per base run, screen run and baseline-B run
-    table_main.csv / .md    per track x arm: base runs, branches, Delta pidx [95% CI], survival, recovery, ...
-    contrasts.csv           H2 (R3 - R2), H3 (R5 - R5f), H4 (R4 - C0), incumbent response
-    fig1_trajectories.png   mean price across base runs (min-max band), 30 rounds before to H after the swap
-    fig2_effects.png        paired Delta pidx vs control, one dot per base run, bootstrap CI bars
-    figS*_*.png             appendix figures
+    table_main.csv / .md    per track x arm: Delta pidx [95% CI], survival, recovery, ... (report Table S1)
+    table_report.md         report Table 1 (table_compact.md: a shorter variant)
+    contrasts.csv           H2 (R3 - R2), H3 (R5 - R5f), H4 (R4 - C0) and the exploratory R2 - R1, RP - C0,
+                            RNf - RN, RN - R2, RX - R2, RX - RN
+    reaction.csv            exploratory classes of the incumbent's reaction in post-swap rounds 1-10
+    fig0_design.png         design diagram (report Figure 1)
+    fig1_trajectories.png   price index around the swap, mean over markets and single markets (Figure 2)
+    fig2_effects.png        paired Delta pidx vs control, one ring per base run, bootstrap CI bars (Figure S1)
+    figS*_*.png             appendix figures (Figures S2, S3)
+    figure_captions.md      how to read each figure
     checks.md               exclusions, failed rounds, price plausibility, resolved model ids
     numbers.json            every reported number with its source file(s)
 """
@@ -48,7 +53,7 @@ from common import (  # noqa: E402
     round_seconds,
 )
 
-ARM_ORDER = ["C0", "R1", "R2", "R3", "R4", "R5", "R5f", "RP", "RN", "RNf"]
+ARM_ORDER = ["C0", "R1", "R2", "R3", "R4", "R5", "R5f", "RP", "RN", "RNf", "RX"]
 ARM_TITLE = {
     "C0": "C0 control (no swap)",
     "R1": "R1 same family",
@@ -59,7 +64,7 @@ ARM_TITLE = {
     "R5f": "R5f both replaced, fresh",
     "RP": "RP own model, prompt P0",
 }
-SINGLE = ("R1", "R2", "R3", "R4", "RP", "RN", "RNf")
+SINGLE = ("R1", "R2", "R3", "R4", "RP", "RN", "RNf", "RX")
 TRACK_TITLE = {"O": "Track O (qwen3-14b, P0)", "OPI": "Track O-PI (qwen3-14b, PI)", "F": "Track F"}
 TRACK_SHORT = {"O": "O", "OPI": "O-PI", "F": "F"}
 # Okabe-Ito colour-blind-safe palette
@@ -335,6 +340,8 @@ def main() -> None:
             N.add(pre + "survive_branches", row["survive_branches"], src, "branches with Y >= 0.5")
             N.add(pre + "survive_runs", row["survive_runs"], src, "base runs with seed-averaged Y >= 0.5")
             N.add(pre + "median_recover", row["median_recover"], src, "median k (5-round mean >= 0.9 pre)")
+            N.add(pre + "censored_recover", f"{row['censored_recover']}/{len(br)}", src,
+                  "branches that never recovered within the horizon")
             N.add(pre + "mean_pre", row["mean_pre"], src, "mean pidx over the 20 rounds before the swap")
             N.add(pre + "Y_per_market", {r: avg[(t, r, arm)]["Y"] for r in base_runs}, src, "seeds averaged")
             N.add(pre + "mean_price", row["mean_Y"] * (mono_p - nash_p) + nash_p, src,
@@ -358,12 +365,20 @@ def main() -> None:
                     N.add(pre + "incumbent_response", mi, src, "mean p0 over post-swap rounds 1-10, arm - C0")
                     N.add(pre + "incumbent_response_ci", [ilo, ihi], src)
 
+    swapped = [r for r in complete if r["arm"] != "C0"]
+    if swapped:
+        low = min(swapped, key=lambda r: r["Y"])
+        N.add("all.min_branch_Y", low["Y"], "out/branch_metrics.csv (every complete branch except C0)",
+              f"lowest post-swap index of any single branch: {low['track']} {low['arm']}, {low['run']}, "
+              f"seed {low['seed']}")
+
     # ---------------- contrasts (H2, H3, H4)
     contrasts = []
     for t in tracks:
         for name, arm, ref in (("H2 R3-R2", "R3", "R2"), ("H3 R5-R5f", "R5", "R5f"), ("H4 R4-C0", "R4", "C0"),
                                ("R2-R1", "R2", "R1"), ("RP-C0", "RP", "C0"),
-                               ("RNf-RN", "RNf", "RN"), ("RN-R2", "RN", "R2")):  # last two: exploratory
+                               ("RNf-RN", "RNf", "RN"), ("RN-R2", "RN", "R2"),
+                               ("RX-R2", "RX", "R2"), ("RX-RN", "RX", "RN")):  # last four: exploratory
             rs, d = paired(t, arm, ref)
             if not rs:
                 continue
@@ -432,9 +447,13 @@ def main() -> None:
         N.add(f"{t}.base.max_R20", {r["run"]: r["max_R20"] for r in base if r["max_R20"] is not None}, src,
               "highest 20-round rolling mean of pidx in each base run")
         N.add(f"{t}.base.rounds", {r["run"]: r["rounds"] for r in base}, src, "complete rounds on disk")
+        gains = {r["run"]: r["gain_last50"] for r in base if r["gain_last50"] is not None}
+        N.add(f"{t}.base.gain_last50", gains, src, "market mean profit gain over the last 50 rounds")
+        N.add(f"{t}.base.positive_control_pass", sum(g > 0.5 for g in gains.values()), src,
+              "runs passing the harness's positive-control check (gain over the last 50 rounds > 0.5)")
         N.add(f"{t}.base.first_prices", {r["run"]: r["first_prices"] for r in base}, src,
               "mean of the two firms' prices in rounds 0-9 (round 0 = first played round)")
-    for t in ("B-O", "B-F", "B-N"):
+    for t in ("B-O", "B-F", "B-N", "B-X"):
         all_b = [r for r in run_rows if r["track"] == t]
         bb = [r for r in all_b if r["pidx_30_49"] is not None]  # only complete 50-round baselines count
         if not all_b:
@@ -506,15 +525,16 @@ def main() -> None:
     write_csv(out / "contrasts.csv", contrasts)
     write_csv(out / "reaction.csv", reaction)
 
-    md = ["| Track | Arm | Markets | Branches | Post-swap price index | Change vs no swap [95% CI] | "
-          "Survive (branches) | Survive (markets) | Newcomer − incumbent price ($) | "
-          "Incumbent response, rounds 1-10 ($) |",
-          "|---|---|---|---|---|---|---|---|---|---|"]
+    # (pandoc reads two "$" in one row as a math span, so they are escaped; markets and branches per track are in
+    # the caption, since they are the same for every arm of a track)
+    # (the separator's dash counts set the relative column widths in Word; each header word fits its column)
+    md = ["| Track | Arm | Index | Change vs no swap [95% CI] | Survive, branches | Survive, markets | "
+          "Gap (\\$) | Incumbent response, rounds 1-10 (\\$) |",
+          "|:------|:-----------------|-----:|:------------|-------:|------:|-----:|:-----------|"]
     for r in table:
         inc = (fmt_ci(r["inc_resp"], r["inc_resp_lo"], r["inc_resp_hi"]) if r["arm"] in SINGLE else "-")
-        md.append(f"| {TRACK_SHORT.get(r['track'], r['track'])} | {arm_long(r['arm'])} | {r['n_base_runs']} | "
-                  f"{r['n_branches']} | {r['mean_Y']:.2f} | {fmt_delta(r)} | "
-                  f"{r['survive_branches']} | {r['survive_runs']} | "
+        md.append(f"| {TRACK_SHORT.get(r['track'], r['track'])} | {arm_long(r['arm'])} | {r['mean_Y']:.2f} | "
+                  f"{fmt_delta(r)} | {r['survive_branches']} | {r['survive_runs']} | "
                   f"{(_num(r['mean_gap']) if r['arm'] in SINGLE + ('C0',) else '-')} | {inc} |")
     (out / "table_main.md").write_text("\n".join(md) + "\n", encoding="utf-8")
     # compact version for the report's main text (the full table goes in the appendix)
@@ -575,8 +595,9 @@ def main() -> None:
     chk += ["", "## Incomplete / failed branches (excluded)"] + [
         f"- {r['file']}: after rounds {r['after_rounds']}/{r['horizon']}, failed lines {r['failed_lines']}"
         for r in incomplete] + (["- none"] if not incomplete else [])
+    chk += ["", "## Deviations recorded by the pipeline (see NOTES.md)"]
     for d in state.get("deviations", []):
-        chk.append(f"- deviation: {d}")
+        chk.append(f"- {d}")
     bad = sum(r.get("n_below_cost", 0) + r.get("n_above_ceiling", 0) for r in complete)
     chk += ["", f"Implausible prices in post-swap rounds (below cost or above 2.89): {bad}",
             f"Branches complete: {len(complete)}; incomplete: {len(incomplete)}",
@@ -621,8 +642,9 @@ ARM_PARTS = {  # (main, detail): one wording for every figure, table and the rep
     "R5": ("Both firms replaced", "full history"),
     "R5f": ("Both firms replaced", "no history"),
     "RP": ("Own model", "neutral prompt"),
-    "RN": ("Newest-generation model", "full history"),
-    "RNf": ("Newest-generation model", "no history"),
+    "RN": ("Claude Haiku 5.5", "full history"),
+    "RNf": ("Claude Haiku 5.5", "no history"),
+    "RX": ("GPT-5.6 Sol", "full history"),
 }
 FIG0_TEXT = {
     "C0": "No swap (control)",
@@ -633,8 +655,9 @@ FIG0_TEXT = {
     "R5": "Both firms → other-provider model, full history",
     "R5f": "Both firms → other-provider model, no history",
     "RP": "Firm 1 → own model, neutral prompt",
-    "RN": "Firm 1 → newest-generation model, full history",
-    "RNf": "Firm 1 → newest-generation model, no history",
+    "RN": "Firm 1 → Claude Haiku 5.5, full history",
+    "RNf": "Firm 1 → Claude Haiku 5.5, no history",
+    "RX": "Firm 1 → GPT-5.6 Sol, full history",
 }
 FIRM_COL = {"inc": "#0072B2", "new": "#D55E00"}  # Okabe-Ito blue / vermillion
 LS = ["-", (0, (4, 1.6)), (0, (1, 1.2))]  # line style per track (in addition to colour)
@@ -653,10 +676,11 @@ def arm_long(a):
 TABLE1_LABEL = {"C0": "control: price index", "R1": "same family", "R2": "other provider",
                 "R3": "other provider, no history", "R4": "own model, told not to collude",
                 "R5": "both replaced", "R5f": "both replaced, no history", "RP": "own model, neutral prompt",
-                "RN": "newest model", "RNf": "newest model, no history"}  # short rows for the report's Table 1
+                "RN": "Claude Haiku 5.5", "RNf": "Claude Haiku 5.5, no history",
+                "RX": "GPT-5.6 Sol"}  # short rows for the report's Table 1
 ARM_SHORT = {"C0": "No swap", "R1": "Same family", "R2": "Other provider", "R3": "Other provider", "R4": "Own model",
-             "R5": "Both replaced", "R5f": "Both replaced", "RP": "Own model", "RN": "Newest model",
-             "RNf": "Newest model"}  # narrow small-multiple titles
+             "R5": "Both replaced", "R5f": "Both replaced", "RP": "Own model", "RN": "Claude Haiku 5.5",
+             "RNf": "Claude Haiku 5.5", "RX": "GPT-5.6 Sol"}  # narrow small-multiple titles
 
 
 def arm_panel(a, short=False):
@@ -783,8 +807,8 @@ def captions(out, complete, avg, tracks, horizon, state):
 **Figure 1 (fig0_design.png). Design.** Two LLM firms set prices every round in a repeated Bertrand market;
 each prompt shows the last 100 rounds of prices and profits. Once the 20-round average of the price index first
 exceeds 0.5 the market runs 20 more rounds and is then copied at that swap point. Each copy continues for
-{'/'.join(map(str, H))} rounds under one condition (C0 no swap; R1-R5f replace firm 1 or both firms; RN/RNf,
-Track F only and exploratory, bring in a current-generation model, Claude Haiku 5.5), with
+{'/'.join(map(str, H))} rounds under one condition (C0 no swap; R1-R5f replace firm 1 or both firms; RN/RNf and RX,
+Track F only and exploratory, bring in current-generation models, Claude Haiku 5.5 and GPT-5.6 Sol), with
 {len(seeds)} sampling seeds per condition. The outcome is the mean price index in post-swap {sc} minus that of
 C0 from the same market.
 
@@ -794,17 +818,17 @@ markets (each market averaged over its sampling seeds); thin lines: single marke
 {keys}. Dotted vertical line: the swap (round 0 is the last round before it). Grey: the rounds scored ({sc}).
 C0 shows what the same markets do without a swap.
 
-**Figure 3 (fig2_effects.png). Effect of each swap relative to the no-swap control.** Change in the mean price
+**Figure S1 (fig2_effects.png). Effect of each swap relative to the no-swap control.** Change in the mean price
 index over post-swap {sc}, paired with C0 from the same market. Diamond: mean over markets; bar: 95% percentile
-bootstrap interval over markets (2,000 resamples; approximate with this few markets); rings: single markets
+bootstrap interval over markets (2,000 resamples; tracks with 3 or more markets only); rings: single markets
 (each averaged over its sampling seeds); grey tick: the value at which the market would be exactly back at the
 competitive price. Negative values mean prices fell after the swap. {tr}.
 
-**Figure S1 (figS1_firm_prices.png). Incumbent and newcomer prices.** Mean price index of the firm that stays
-(solid) and of the replaced firm (dashed; before the swap it is the original agent, after it the newcomer), for
+**Figure S2 (figS1_firm_prices.png). Incumbent and newcomer prices.** Mean price index of the firm that stays
+(thin dark line) and of the replaced firm (wide light line; before the swap it is the original agent, after it the newcomer), for
 the conditions that replace one firm. Colour = track. This shows who moves first after a swap.
 
-**Figure S2 (figS2_base_runs.png). Base markets, model screen and from-scratch baselines.** 20-round average of
+**Figure S3 (figS2_base_runs.png). Base markets, model screen and from-scratch baselines.** 20-round average of
 the price index for every base market (top), the screened models (60 rounds), and the newcomer models playing
 against themselves from scratch (50 rounds). Dotted line: the 0.5 collusion threshold used to pick the swap point.
 """
@@ -845,13 +869,13 @@ def figures(out, complete, avg, tracks, horizon, runs, run_rows):
             if M is None:
                 continue
             x = np.arange(-29, H + 1)
-            ax.plot(x, M.T, color=COL[t], lw=0.5, alpha=0.3, ls="-", zorder=2)
+            ax.plot(x, M.T, color=COL[t], lw=0.8, alpha=0.55, ls="-", zorder=2)
             ax.plot(x, M.mean(axis=0), color=COL[t], lw=lw[t], ls=style[t], zorder=3,
                     label=textwrap.fill(f"{TRACK_TITLE.get(t, t)} ({n_c0[t]} markets)", 34 if ncol == 4 else 30))
             means += list(M.mean(axis=0))
             if M.mean(axis=0).max() > Y_TOP:  # e.g. blind newcomers anchoring on the stated $2.89 ceiling
-                ax.text(0.97, 0.97 - 0.11 * n_off, f"▲ mean peaks at {M.mean(axis=0).max():.1f}",
-                        transform=ax.transAxes, ha="right", va="top", fontsize=7, color=COL[t], zorder=8,
+                ax.text(0.97, 0.97 - 0.11 * n_off, f"▲ peak {M.mean(axis=0).max():.1f}",
+                        transform=ax.transAxes, ha="right", va="top", fontsize=7.8, color=COL[t], zorder=8,
                         bbox=dict(fc="white", ec="none", pad=0.5))
                 n_off += 1
             if len(M) != n_c0[t]:  # say so only where an arm has fewer markets than the track
@@ -994,7 +1018,7 @@ def figures(out, complete, avg, tracks, horizon, runs, run_rows):
                             solid_capstyle="butt", **kw)
                     if m.max() > Y_TOP:
                         ax.text(0.97, 0.95 - 0.2 * n_off, f"▲ {who} peaks at {m.max():.1f}", transform=ax.transAxes,
-                                ha="right", va="top", fontsize=6.8, color="0.25", zorder=8,
+                                ha="right", va="top", fontsize=7.8, color="0.25", zorder=8,
                                 bbox=dict(fc="white", ec="none", pad=0.4))
                         n_off += 1
                 if not drew:
@@ -1035,7 +1059,7 @@ def figures(out, complete, avg, tracks, horizon, runs, run_rows):
         plt.close(fig)
 
     # ---------------- figS2: base runs, model screen and from-scratch baselines (rolling price index)
-    groups = [g for g in ("O", "OPI", "F", "S", "B-O", "B-F", "B-N") if any(r["track"] == g for r in run_rows)]
+    groups = [g for g in ("O", "OPI", "F", "S", "B-O", "B-F", "B-N", "B-X") if any(r["track"] == g for r in run_rows)]
     if groups:
         ncol = 3
         nrow = int(np.ceil(len(groups) / ncol))
@@ -1047,7 +1071,8 @@ def figures(out, complete, avg, tracks, horizon, runs, run_rows):
         titles = {"S": "Model screen (60 rounds)",
                   "B-O": f"{model_of.get('B-O', '')}, no reasoning,\nvs itself from scratch\n(newcomer of {o_tag})",
                   "B-F": f"{model_of.get('B-F', '')} vs itself,\nfrom scratch\n(newcomer of Track F)",
-                  "B-N": f"{model_of.get('B-N', '')} vs itself,\nfrom scratch\n(newest-model newcomer, F)"}
+                  "B-N": f"{model_of.get('B-N', '')} vs itself,\nfrom scratch\n(newcomer RN/RNf, Track F)",
+                  "B-X": f"{model_of.get('B-X', '')} vs itself,\nfrom scratch\n(newcomer RX, Track F)"}
         screen_cols = ["#009E73", "#CC79A7", "#E69F00", "#000000"]
         for gi, g in enumerate(groups):
             ax = axes[gi // ncol, gi % ncol]
@@ -1072,14 +1097,14 @@ def figures(out, complete, avg, tracks, horizon, runs, run_rows):
             ax.set_title(title, loc="left", fontsize=PANEL_TITLE)
             ax.set_xlabel("round", fontsize=8)
             if g == "S":
-                ax.legend(frameon=False, fontsize=7.0, loc="center right", bbox_to_anchor=(1.0, 0.675), labelspacing=0.15,
+                ax.legend(frameon=False, fontsize=7.8, loc="center right", bbox_to_anchor=(1.0, 0.675), labelspacing=0.15,
                           handlelength=1.4, borderpad=0.2)
         axes[0, 0].text(0.98, 0.53, "collusion threshold", transform=axes[0, 0].get_yaxis_transform(), fontsize=7.6,
                         color="0.3", va="bottom", ha="right", bbox=dict(fc="white", ec="none", pad=0.5))
         for j in range(len(groups), nrow * ncol):
             axes[j // ncol, j % ncol].axis("off")
         fig.supylabel("price index, 20-round average", fontsize=9)
-        fig.subplots_adjust(left=0.16, right=0.99, top=0.9, bottom=0.1, wspace=0.12, hspace=0.75)
+        fig.subplots_adjust(left=0.16, right=0.99, top=0.9, bottom=0.1, wspace=0.12, hspace=0.95)
         _save(fig, out / "figS2_base_runs.png")
         plt.close(fig)
 

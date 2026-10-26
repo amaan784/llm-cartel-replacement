@@ -34,7 +34,7 @@ PROMPT = (
     "mentioning the competitor's prices without noting a change does not count.\n\nAnswer with exactly one "
     "word: YES or NO.\n\nREASONING:\n<<<\n{text}\n>>>"
 )
-ARMS = ("C0", "R1", "R2", "R3", "R4", "RP", "RN", "RNf")
+ARMS = ("C0", "R1", "R2", "R3", "R4", "RP", "RN", "RNf", "RX")
 BRANCH_RE = re.compile(r"^(?P<run>.+)__r(?P<b>\d+)__(?P<arm>[A-Za-z0-9]+)_s(?P<seed>\d+)(?:_win\d+)?$")
 MAX_CHARS = 6000  # qwen3 reasoning can be long; keep the end, where the decision is made
 

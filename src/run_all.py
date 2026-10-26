@@ -13,7 +13,8 @@ Steps:
  5. src/notice.py    -> (optional, --notice) does the incumbent's reasoning notice the swap?
  6. src/analyze.py   -> out/ tables, figures, checks.md, numbers.json (pre-registered sample), then
     src/analyze.py --extended -> out/extended/ (all markets, including those added after the analysis)
- 7. src/export_docx.py -> report/report.docx
+ 7. src/build_viewer.py -> viewer/ (static page: every branch's prices and the agents' reasoning)
+ 8. src/export_docx.py -> report/report.docx
 Safe to rerun at any point: the pipeline resumes from its state file and the later steps are idempotent.
 """
 
@@ -96,6 +97,7 @@ def main() -> None:
         step("reasoning classifier", [str(HARNESS_PY), "src/notice.py", "classify"])
     step("analysis (pre-registered sample)", [PY, "src/analyze.py"])
     step("analysis (all markets, robustness)", [PY, "src/analyze.py", "--extended"])
+    step("interactive viewer", [PY, "src/build_viewer.py"])
     step("Word export", [PY, "src/export_docx.py"])
     leftovers = placeholder_check()
     print(f"\n{now()} done: see out/ (figures, table_main.md, numbers.json, checks.md) and report/report.docx")

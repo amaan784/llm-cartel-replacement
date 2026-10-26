@@ -11,6 +11,7 @@ resolved relative to report/ and the repository root.
 
 from __future__ import annotations
 
+import os
 import re
 import sys
 from pathlib import Path
@@ -45,7 +46,11 @@ def to_pandoc_markdown(md: str) -> str:
     if any(a.strip() for a in abstract):
         head += ["abstract: |"] + ["  " + a for a in abstract]
     text = "\n".join(head + ["---", ""] + keep + [""] + body) + "\n"
-    return re.sub(r"\bp_([NM])\b", r"p~\1~", text)  # subscripts in the Word output
+    text = re.sub(r"\bp_([NM])\b", r"p~\1~", text)  # subscripts in the Word output
+    # clickable links: wrap bare URLs (outside code blocks) in <...> so pandoc turns them into hyperlinks
+    parts = re.split(r"(```.*?```)", text, flags=re.S)
+    url = re.compile(r"(?<![<(\w])(https?://[^\s<>()]+?)(?=[.,;:]?(?:\s|$|\)))")
+    return "".join(p if p.startswith("```") else url.sub(r"<\1>", p) for p in parts)
 
 
 def main() -> None:
@@ -55,12 +60,13 @@ def main() -> None:
     dst = REPO / "report" / "report.docx"
     tmp = REPO / "report" / "_export.md"  # next to report.md so relative image paths resolve the same way
     tmp.write_text(to_pandoc_markdown(src.read_text(encoding="utf-8")), encoding="utf-8")
-    args = ["--standalone", f"--resource-path={REPO / 'report'};{REPO}"]
+    args = ["--standalone", "--resource-path=" + os.pathsep.join([str(REPO / "report"), str(REPO)])]
     ref = REPO / "report" / "reference.docx"
     if ref.exists():
         args.append(f"--reference-doc={ref}")
     try:
-        pypandoc.convert_file(str(tmp), "docx", outputfile=str(dst), extra_args=args)
+        # no "smart" typography: it would turn "--think" into a dash and quotes into curly quotes
+        pypandoc.convert_file(str(tmp), "docx", format="markdown-smart", outputfile=str(dst), extra_args=args)
     finally:
         tmp.unlink(missing_ok=True)
     print(f"wrote {dst}")

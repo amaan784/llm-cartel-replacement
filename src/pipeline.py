@@ -83,6 +83,7 @@ SHORT = {
     "google/gemini-2.5-flash": "gem25flash",
     "google/gemini-2.5-flash-lite": "gem25flashlite",
     "anthropic/claude-haiku-5.5": "claudehaiku55",
+    "openai/gpt-5.6-sol": "gpt56sol",
 }
 BRANCH_SEEDS = [101, 102]
 B_SEEDS = [10, 11, 12, 13]
@@ -90,8 +91,9 @@ B_ROUNDS = 50
 SCREEN_ROUNDS = 60
 BASE_ROUNDS = 150
 MAX_RERUNS = 3
-ARM_ORDER = ["C0", "R1", "R2", "R3", "R4", "R5", "R5f", "RP", "RN", "RNf"]
+ARM_ORDER = ["C0", "R1", "R2", "R3", "R4", "R5", "R5f", "RP", "RN", "RNf", "RX"]
 NEW_MODEL = "anthropic/claude-haiku-5.5"  # exploratory current-generation newcomer (Track F only)
+FRONTIER_MODEL = "openai/gpt-5.6-sol"  # exploratory frontier newcomer (Track F only; control add_frontier_newcomer)
 # qwen3-14b reasoning reaches the harness's 4096-token cap (median 2,948, p90 3,802, max 4,064 output tokens in the
 # first 132 calls; 23% of calls re-sampled, two runs aborted after 9 cut-offs in a row): qwen runs get 8192.
 LONG_TOKENS = 8192
@@ -361,6 +363,8 @@ class Pipeline:
             out.append(("RP", {1: m}, None, "P0"))
         if t["id"] == "F":  # exploratory (added 00:15 on 26 Oct, before any branch result): current-generation newcomer
             out += [("RN", {1: NEW_MODEL}, None, np_), ("RNf", {1: NEW_MODEL}, 100, np_)]
+            if self.s.get("frontier_arm"):  # exploratory, added after the analysis (user decision, 26 Oct 04:40)
+                out.append(("RX", {1: self.s["frontier_arm"]}, None, np_))
         return out
 
     def ensure_extras(self) -> None:
@@ -369,6 +373,8 @@ class Pipeline:
             return
         for seed in B_SEEDS:
             self.add_base("B-N", NEW_MODEL, "P0", True, seed, B_ROUNDS, B_ROUNDS - 1, role="B")
+            if self.s.get("frontier_arm"):
+                self.add_base("B-X", self.s["frontier_arm"], "P0", True, seed, B_ROUNDS, B_ROUNDS - 1, role="B")
         for name, b in self.s["bases"].items():
             if b["role"] != "base" or not b["enqueued"]:
                 continue
@@ -746,6 +752,11 @@ class Pipeline:
                 self.deviation(f"Track F extended by seeds {new} (user decision after the Track F branches of seeds "
                                "0-4 were analysed): seed 5 was in the pre-registered plan and had been dropped for "
                                "budget; the primary analysis stays seeds 0-4 and all seeds are a robustness check")
+        if c.get("add_frontier_newcomer") and not self.s.get("frontier_arm"):
+            self.s["frontier_arm"] = FRONTIER_MODEL
+            self.deviation(f"exploratory frontier newcomer added after the analysis (user decision): arm RX replaces "
+                           f"firm 1 with {FRONTIER_MODEL} (full history) in every colluding Track F market, 2 sampling "
+                           f"seeds, plus its from-scratch baseline B-X (seeds {B_SEEDS})")
         if c.get("pause"):  # operator stop: no new launches or relaunches; running jobs finish
             self.s["paused"] = now()
             (self.logs / "PAUSE").write_text(now(), encoding="utf-8")
@@ -919,7 +930,7 @@ def build_parser() -> argparse.ArgumentParser:
     ap.add_argument("--horizon", type=int, default=50)
     ap.add_argument("--budget_pause", type=float, default=47.0, help="USD; no new launches at or above this")
     ap.add_argument("--budget_limit", type=float, default=50.0, help="USD; projected plan above this trims Track F")
-    ap.add_argument("--deadline", default="2026-10-25 17:30", help="local time by which slow-track branches should end")
+    ap.add_argument("--deadline", default=None, help="local time YYYY-MM-DD HH:MM by which slow-track branches should end (default: none)")
     ap.add_argument("--tick", type=float, default=30.0)
     ap.add_argument("--progress_every", type=float, default=1800.0)
     ap.add_argument("--mock", action="store_true", help="testing: route every model to src/dev/mock_llm.py")
