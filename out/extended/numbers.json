@@ -182,6 +182,11 @@
     "source": "out/branch_metrics.csv rows track=OPI, arm in {R1, C0} (from results/branches/OPI_*__r*__<arm>_s*.jsonl)",
     "method": "Y(arm) - Y(C0) per base run, seeds averaged"
   },
+  "OPI.R1.markets_below_control": {
+    "value": "1/2",
+    "source": "out/branch_metrics.csv rows track=OPI, arm in {R1, C0} (from results/branches/OPI_*__r*__<arm>_s*.jsonl)",
+    "method": "base runs where Y(arm) < Y(C0), seeds averaged (exploratory)"
+  },
   "OPI.R1.delta_gain": {
     "value": -0.0094,
     "source": "out/branch_metrics.csv rows track=OPI, arm in {R1, C0} (from results/branches/OPI_*__r*__<arm>_s*.jsonl)",
@@ -309,6 +314,11 @@
     },
     "source": "out/branch_metrics.csv rows track=OPI, arm in {R2, C0} (from results/branches/OPI_*__r*__<arm>_s*.jsonl)",
     "method": "Y(arm) - Y(C0) per base run, seeds averaged"
+  },
+  "OPI.R2.markets_below_control": {
+    "value": "2/2",
+    "source": "out/branch_metrics.csv rows track=OPI, arm in {R2, C0} (from results/branches/OPI_*__r*__<arm>_s*.jsonl)",
+    "method": "base runs where Y(arm) < Y(C0), seeds averaged (exploratory)"
   },
   "OPI.R2.delta_gain": {
     "value": -0.0175,
@@ -438,6 +448,11 @@
     "source": "out/branch_metrics.csv rows track=OPI, arm in {R3, C0} (from results/branches/OPI_*__r*__<arm>_s*.jsonl)",
     "method": "Y(arm) - Y(C0) per base run, seeds averaged"
   },
+  "OPI.R3.markets_below_control": {
+    "value": "2/2",
+    "source": "out/branch_metrics.csv rows track=OPI, arm in {R3, C0} (from results/branches/OPI_*__r*__<arm>_s*.jsonl)",
+    "method": "base runs where Y(arm) < Y(C0), seeds averaged (exploratory)"
+  },
   "OPI.R3.delta_gain": {
     "value": -0.04,
     "source": "out/branch_metrics.csv rows track=OPI, arm in {R3, C0} (from results/branches/OPI_*__r*__<arm>_s*.jsonl)",
@@ -566,6 +581,11 @@
     "source": "out/branch_metrics.csv rows track=OPI, arm in {R4, C0} (from results/branches/OPI_*__r*__<arm>_s*.jsonl)",
     "method": "Y(arm) - Y(C0) per base run, seeds averaged"
   },
+  "OPI.R4.markets_below_control": {
+    "value": "2/2",
+    "source": "out/branch_metrics.csv rows track=OPI, arm in {R4, C0} (from results/branches/OPI_*__r*__<arm>_s*.jsonl)",
+    "method": "base runs where Y(arm) < Y(C0), seeds averaged (exploratory)"
+  },
   "OPI.R4.delta_gain": {
     "value": -0.0019,
     "source": "out/branch_metrics.csv rows track=OPI, arm in {R4, C0} (from results/branches/OPI_*__r*__<arm>_s*.jsonl)",
@@ -689,6 +709,11 @@
     "source": "out/branch_metrics.csv rows track=OPI, arm in {R5, C0} (from results/branches/OPI_*__r*__<arm>_s*.jsonl)",
     "method": "Y(arm) - Y(C0) per base run, seeds averaged"
   },
+  "OPI.R5.markets_below_control": {
+    "value": "0/2",
+    "source": "out/branch_metrics.csv rows track=OPI, arm in {R5, C0} (from results/branches/OPI_*__r*__<arm>_s*.jsonl)",
+    "method": "base runs where Y(arm) < Y(C0), seeds averaged (exploratory)"
+  },
   "OPI.R5.delta_gain": {
     "value": 0.0949,
     "source": "out/branch_metrics.csv rows track=OPI, arm in {R5, C0} (from results/branches/OPI_*__r*__<arm>_s*.jsonl)",
@@ -798,6 +823,11 @@
     },
     "source": "out/branch_metrics.csv rows track=OPI, arm in {R5f, C0} (from results/branches/OPI_*__r*__<arm>_s*.jsonl)",
     "method": "Y(arm) - Y(C0) per base run, seeds averaged"
+  },
+  "OPI.R5f.markets_below_control": {
+    "value": "0/2",
+    "source": "out/branch_metrics.csv rows track=OPI, arm in {R5f, C0} (from results/branches/OPI_*__r*__<arm>_s*.jsonl)",
+    "method": "base runs where Y(arm) < Y(C0), seeds averaged (exploratory)"
   },
   "OPI.R5f.delta_gain": {
     "value": -2.0091,
@@ -913,6 +943,11 @@
     },
     "source": "out/branch_metrics.csv rows track=OPI, arm in {RP, C0} (from results/branches/OPI_*__r*__<arm>_s*.jsonl)",
     "method": "Y(arm) - Y(C0) per base run, seeds averaged"
+  },
+  "OPI.RP.markets_below_control": {
+    "value": "1/2",
+    "source": "out/branch_metrics.csv rows track=OPI, arm in {RP, C0} (from results/branches/OPI_*__r*__<arm>_s*.jsonl)",
+    "method": "base runs where Y(arm) < Y(C0), seeds averaged (exploratory)"
   },
   "OPI.RP.delta_gain": {
     "value": 0.0004,
@@ -1153,6 +1188,19 @@
     "source": "out/branch_metrics.csv rows track=F, arm in {R1, C0} (from results/branches/F_*__r*__<arm>_s*.jsonl)",
     "method": "Y(arm) - Y(C0) per base run, seeds averaged"
   },
+  "F.R1.markets_below_control": {
+    "value": "0/8",
+    "source": "out/branch_metrics.csv rows track=F, arm in {R1, C0} (from results/branches/F_*__r*__<arm>_s*.jsonl)",
+    "method": "base runs where Y(arm) < Y(C0), seeds averaged (exploratory)"
+  },
+  "F.R1.delta_leave_one_out": {
+    "value": [
+      0.01813151498626564,
+      0.025834446189581067
+    ],
+    "source": "out/branch_metrics.csv rows track=F, arm in {R1, C0} (from results/branches/F_*__r*__<arm>_s*.jsonl)",
+    "method": "range of the mean effect with one base run left out at a time (exploratory)"
+  },
   "F.R1.delta_gain": {
     "value": 0.0162,
     "source": "out/branch_metrics.csv rows track=F, arm in {R1, C0} (from results/branches/F_*__r*__<arm>_s*.jsonl)",
@@ -1298,6 +1346,19 @@
     },
     "source": "out/branch_metrics.csv rows track=F, arm in {R2, C0} (from results/branches/F_*__r*__<arm>_s*.jsonl)",
     "method": "Y(arm) - Y(C0) per base run, seeds averaged"
+  },
+  "F.R2.markets_below_control": {
+    "value": "5/8",
+    "source": "out/branch_metrics.csv rows track=F, arm in {R2, C0} (from results/branches/F_*__r*__<arm>_s*.jsonl)",
+    "method": "base runs where Y(arm) < Y(C0), seeds averaged (exploratory)"
+  },
+  "F.R2.delta_leave_one_out": {
+    "value": [
+      -0.030021680587280646,
+      -0.010942112529837764
+    ],
+    "source": "out/branch_metrics.csv rows track=F, arm in {R2, C0} (from results/branches/F_*__r*__<arm>_s*.jsonl)",
+    "method": "range of the mean effect with one base run left out at a time (exploratory)"
   },
   "F.R2.delta_gain": {
     "value": -0.0181,
@@ -1445,6 +1506,19 @@
     "source": "out/branch_metrics.csv rows track=F, arm in {R3, C0} (from results/branches/F_*__r*__<arm>_s*.jsonl)",
     "method": "Y(arm) - Y(C0) per base run, seeds averaged"
   },
+  "F.R3.markets_below_control": {
+    "value": "5/8",
+    "source": "out/branch_metrics.csv rows track=F, arm in {R3, C0} (from results/branches/F_*__r*__<arm>_s*.jsonl)",
+    "method": "base runs where Y(arm) < Y(C0), seeds averaged (exploratory)"
+  },
+  "F.R3.delta_leave_one_out": {
+    "value": [
+      -0.030456204911570226,
+      0.002607145945737616
+    ],
+    "source": "out/branch_metrics.csv rows track=F, arm in {R3, C0} (from results/branches/F_*__r*__<arm>_s*.jsonl)",
+    "method": "range of the mean effect with one base run left out at a time (exploratory)"
+  },
   "F.R3.delta_gain": {
     "value": 0.0236,
     "source": "out/branch_metrics.csv rows track=F, arm in {R3, C0} (from results/branches/F_*__r*__<arm>_s*.jsonl)",
@@ -1591,6 +1665,19 @@
     "source": "out/branch_metrics.csv rows track=F, arm in {R4, C0} (from results/branches/F_*__r*__<arm>_s*.jsonl)",
     "method": "Y(arm) - Y(C0) per base run, seeds averaged"
   },
+  "F.R4.markets_below_control": {
+    "value": "3/8",
+    "source": "out/branch_metrics.csv rows track=F, arm in {R4, C0} (from results/branches/F_*__r*__<arm>_s*.jsonl)",
+    "method": "base runs where Y(arm) < Y(C0), seeds averaged (exploratory)"
+  },
+  "F.R4.delta_leave_one_out": {
+    "value": [
+      -0.0080189488937078,
+      0.004187234397699746
+    ],
+    "source": "out/branch_metrics.csv rows track=F, arm in {R4, C0} (from results/branches/F_*__r*__<arm>_s*.jsonl)",
+    "method": "range of the mean effect with one base run left out at a time (exploratory)"
+  },
   "F.R4.delta_gain": {
     "value": 0.0136,
     "source": "out/branch_metrics.csv rows track=F, arm in {R4, C0} (from results/branches/F_*__r*__<arm>_s*.jsonl)",
@@ -1732,6 +1819,19 @@
     "source": "out/branch_metrics.csv rows track=F, arm in {R5, C0} (from results/branches/F_*__r*__<arm>_s*.jsonl)",
     "method": "Y(arm) - Y(C0) per base run, seeds averaged"
   },
+  "F.R5.markets_below_control": {
+    "value": "6/8",
+    "source": "out/branch_metrics.csv rows track=F, arm in {R5, C0} (from results/branches/F_*__r*__<arm>_s*.jsonl)",
+    "method": "base runs where Y(arm) < Y(C0), seeds averaged (exploratory)"
+  },
+  "F.R5.delta_leave_one_out": {
+    "value": [
+      -0.04815319557354629,
+      -0.01994861670602205
+    ],
+    "source": "out/branch_metrics.csv rows track=F, arm in {R5, C0} (from results/branches/F_*__r*__<arm>_s*.jsonl)",
+    "method": "range of the mean effect with one base run left out at a time (exploratory)"
+  },
   "F.R5.delta_gain": {
     "value": -0.019,
     "source": "out/branch_metrics.csv rows track=F, arm in {R5, C0} (from results/branches/F_*__r*__<arm>_s*.jsonl)",
@@ -1859,6 +1959,19 @@
     },
     "source": "out/branch_metrics.csv rows track=F, arm in {R5f, C0} (from results/branches/F_*__r*__<arm>_s*.jsonl)",
     "method": "Y(arm) - Y(C0) per base run, seeds averaged"
+  },
+  "F.R5f.markets_below_control": {
+    "value": "0/8",
+    "source": "out/branch_metrics.csv rows track=F, arm in {R5f, C0} (from results/branches/F_*__r*__<arm>_s*.jsonl)",
+    "method": "base runs where Y(arm) < Y(C0), seeds averaged (exploratory)"
+  },
+  "F.R5f.delta_leave_one_out": {
+    "value": [
+      1.0036721846863537,
+      1.147065211701918
+    ],
+    "source": "out/branch_metrics.csv rows track=F, arm in {R5f, C0} (from results/branches/F_*__r*__<arm>_s*.jsonl)",
+    "method": "range of the mean effect with one base run left out at a time (exploratory)"
   },
   "F.R5f.delta_gain": {
     "value": -0.9037,
@@ -1992,6 +2105,19 @@
     },
     "source": "out/branch_metrics.csv rows track=F, arm in {RN, C0} (from results/branches/F_*__r*__<arm>_s*.jsonl)",
     "method": "Y(arm) - Y(C0) per base run, seeds averaged"
+  },
+  "F.RN.markets_below_control": {
+    "value": "7/8",
+    "source": "out/branch_metrics.csv rows track=F, arm in {RN, C0} (from results/branches/F_*__r*__<arm>_s*.jsonl)",
+    "method": "base runs where Y(arm) < Y(C0), seeds averaged (exploratory)"
+  },
+  "F.RN.delta_leave_one_out": {
+    "value": [
+      -0.2859565075938489,
+      -0.21607709580582307
+    ],
+    "source": "out/branch_metrics.csv rows track=F, arm in {RN, C0} (from results/branches/F_*__r*__<arm>_s*.jsonl)",
+    "method": "range of the mean effect with one base run left out at a time (exploratory)"
   },
   "F.RN.delta_gain": {
     "value": -0.217,
@@ -2139,6 +2265,19 @@
     "source": "out/branch_metrics.csv rows track=F, arm in {RNf, C0} (from results/branches/F_*__r*__<arm>_s*.jsonl)",
     "method": "Y(arm) - Y(C0) per base run, seeds averaged"
   },
+  "F.RNf.markets_below_control": {
+    "value": "7/8",
+    "source": "out/branch_metrics.csv rows track=F, arm in {RNf, C0} (from results/branches/F_*__r*__<arm>_s*.jsonl)",
+    "method": "base runs where Y(arm) < Y(C0), seeds averaged (exploratory)"
+  },
+  "F.RNf.delta_leave_one_out": {
+    "value": [
+      -0.23199648695934166,
+      -0.14761976362456325
+    ],
+    "source": "out/branch_metrics.csv rows track=F, arm in {RNf, C0} (from results/branches/F_*__r*__<arm>_s*.jsonl)",
+    "method": "range of the mean effect with one base run left out at a time (exploratory)"
+  },
   "F.RNf.delta_gain": {
     "value": -0.1767,
     "source": "out/branch_metrics.csv rows track=F, arm in {RNf, C0} (from results/branches/F_*__r*__<arm>_s*.jsonl)",
@@ -2284,6 +2423,19 @@
     },
     "source": "out/branch_metrics.csv rows track=F, arm in {RX, C0} (from results/branches/F_*__r*__<arm>_s*.jsonl)",
     "method": "Y(arm) - Y(C0) per base run, seeds averaged"
+  },
+  "F.RX.markets_below_control": {
+    "value": "8/8",
+    "source": "out/branch_metrics.csv rows track=F, arm in {RX, C0} (from results/branches/F_*__r*__<arm>_s*.jsonl)",
+    "method": "base runs where Y(arm) < Y(C0), seeds averaged (exploratory)"
+  },
+  "F.RX.delta_leave_one_out": {
+    "value": [
+      -0.3776806422302513,
+      -0.3006118279857977
+    ],
+    "source": "out/branch_metrics.csv rows track=F, arm in {RX, C0} (from results/branches/F_*__r*__<arm>_s*.jsonl)",
+    "method": "range of the mean effect with one base run left out at a time (exploratory)"
   },
   "F.RX.delta_gain": {
     "value": -0.3353,
@@ -3572,7 +3724,7 @@
   },
   "notice.validation_agreement": {
     "value": "19/20",
-    "source": "out/notice_validation.csv (hand labels) vs out/notice_raw.csv (classifier)",
+    "source": "out/notice_validation.csv (reference labels written by the coding assistant) vs out/notice_raw.csv (classifier)",
     "method": ""
   },
   "checks.branches_complete": {

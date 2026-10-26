@@ -47,7 +47,7 @@
 <body>
 <header>
   <h1>Replacing an LLM Pricing Agent Does Not Restore Competitive Prices</h1>
-  <p class="sub">Two LLM firms price a repeated Bertrand market. Once they settle above the competitive price, the market
+  <p class="sub">Two LLM firms price a repeated Bertrand market. Once prices cross a pre-registered high-price threshold, the market
     is copied and continued with one or both firms replaced, next to a no-swap control from the same state. Pick any
     branch to see both firms' prices and read what each agent wrote before choosing its price.</p>
   <div class="links"><a href="../report/report.pdf">Report (PDF)</a><a href="../report/report.md">Report (Markdown)</a><a href="../docs/RESULTS.md">Results summary</a><a href="../out/numbers.json">numbers.json</a></div>
@@ -68,7 +68,7 @@
       </div>
       <div class="desc" id="armDesc"></div>
       <div id="priceChart" class="chart"></div>
-      <div class="hint">Solid: the condition (orange = firm 1, the replaced firm; the other line = firm 0, the incumbent). Faint dotted:
+      <div class="hint">Solid: the condition (orange = firm 1, the replaced firm; the other line = firm 0, the incumbent; in R5 and R5f both firms are replaced). Faint dotted:
         the no-swap control from the same market and seed. Grey band: the scored rounds 31-50. Click a point near the swap
         to read the agents' reasoning in that round.</div>
     </div>
@@ -173,9 +173,11 @@ function draw() {
     traces.push({x: ROUNDS, y: ctl.p0, name: "control: firm 0", mode: "lines", line: {color: css("--inc"), width: 1, dash: "dot"}, opacity: 0.45});
     traces.push({x: ROUNDS, y: ctl.p1, name: "control: firm 1", mode: "lines", line: {color: css("--new"), width: 1, dash: "dot"}, opacity: 0.45});
   }
-  traces.push({x: ROUNDS, y: current.p0, name: `firm 0 (incumbent): ${current.models[0] || ""}`, mode: "lines+markers",
+  const both = ["R5", "R5f"].includes(selArm.value), noSwap = selArm.value === "C0";
+  traces.push({x: ROUNDS, y: current.p0, name: both ? `firm 0: ${current.models[0] || ""} after the swap`
+                 : `firm 0 (incumbent): ${current.models[0] || ""}`, mode: "lines+markers",
                marker: {size: 4}, line: {color: css("--inc"), width: 2}});
-  traces.push({x: ROUNDS, y: current.p1, name: `firm 1: ${current.models[1] || ""} after the swap`, mode: "lines+markers",
+  traces.push({x: ROUNDS, y: current.p1, name: `firm 1: ${current.models[1] || ""}${noSwap ? "" : " after the swap"}`, mode: "lines+markers",
                marker: {size: 4}, line: {color: css("--new"), width: 2.4}});
   const L = layoutBase();
   L.xaxis.title = "round relative to the swap (0 = last round before it)";
@@ -207,8 +209,11 @@ function showThink() {
   const i = thinkRound + D.pre - 1, t = current.thoughts[String(thinkRound)] || ["", ""];
   document.getElementById("thinkTitle").textContent =
     `Reasoning in round ${thinkRound > 0 ? "+" + thinkRound : thinkRound} (${thinkRound <= 0 ? "before" : "after"} the swap)`;
-  document.getElementById("t0h").textContent = `Firm 0 (incumbent) chose $${current.p0[i].toFixed(2)}`;
-  document.getElementById("t1h").textContent = `Firm 1 (${thinkRound <= 0 ? "original agent" : current.models[1]}) chose $${current.p1[i].toFixed(2)}`;
+  const both = ["R5", "R5f"].includes(selArm.value), noSwap = selArm.value === "C0";
+  const who = (k) => (noSwap || (k === 0 && !both)) ? (k === 0 ? "incumbent" : current.models[1])
+                     : (thinkRound <= 0 ? "original agent" : current.models[k]);
+  document.getElementById("t0h").textContent = `Firm 0 (${who(0)}) chose $${current.p0[i].toFixed(2)}`;
+  document.getElementById("t1h").textContent = `Firm 1 (${who(1)}) chose $${current.p1[i].toFixed(2)}`;
   document.getElementById("t0").textContent = t[0] || "(no reasoning recorded)";
   document.getElementById("t1").textContent = t[1] || "(no reasoning recorded)";
 }
@@ -224,7 +229,8 @@ document.getElementById("showR5f").onchange = drawEffects;
 function drawEffects() {
   const rows = (D.effects[selSample.value] || []).filter(r => r.arm !== "R5f" || document.getElementById("showR5f").checked);
   const col = {F: css("--new"), OPI: css("--opi")};
-  const cats = rows.map(r => `${armLabel(r.arm)}  [${r.track === "OPI" ? "O-PI" : "F"}]`);
+  const narrow = document.getElementById("effectChart").clientWidth < 720;
+  const cats = rows.map(r => `${narrow ? r.arm : armLabel(r.arm)}  [${r.track === "OPI" ? "O-PI" : "F"}]`);
   const traces = [];
   ["F", "OPI"].forEach(t => {
     const rs = rows.map((r, i) => [r, i]).filter(([r]) => r.track === t);
@@ -243,7 +249,7 @@ function drawEffects() {
       hovertemplate: "one market: %{x:.3f}<extra></extra>"});
   });
   const L = layoutBase();
-  L.margin.l = 330; L.height = 560;
+  L.margin.l = narrow ? 80 : 330; L.height = 560;
   L.xaxis.title = "change in price index vs. no swap (rounds 31-50)";
   L.yaxis.autorange = "reversed"; L.yaxis.type = "category";
   L.shapes = [{type: "line", x0: 0, x1: 0, yref: "paper", y0: 0, y1: 1, line: {color: css("--muted"), width: 1}}];

@@ -359,6 +359,12 @@ def main() -> None:
                 N.add(pre + "delta_ci", [lo, hi], src, f"95% cluster bootstrap over base runs, {BOOT} resamples "
                       f"(none with fewer than {MIN_CI_N} base runs)")
                 N.add(pre + "delta_per_market", dict(zip(rs, d)), src, "Y(arm) - Y(C0) per base run, seeds averaged")
+                N.add(pre + "markets_below_control", f"{sum(v < 0 for v in d)}/{len(d)}", src,
+                      "base runs where Y(arm) < Y(C0), seeds averaged (exploratory)")
+                if len(d) >= MIN_CI_N:
+                    loo = [float(np.mean(d[:i] + d[i + 1:])) for i in range(len(d))]
+                    N.add(pre + "delta_leave_one_out", [min(loo), max(loo)], src,
+                          "range of the mean effect with one base run left out at a time (exploratory)")
                 N.add(pre + "delta_gain", mg, src)
                 N.add(pre + "delta_gain_ci", [glo, ghi], src)
                 if arm in SINGLE:
@@ -622,7 +628,7 @@ def main() -> None:
             pairs = [(v["hand_label"].strip().upper(), auto.get((v["file"], v["k"])))
                      for v in csv.DictReader(open(val, encoding="utf-8")) if v["hand_label"].strip()]
             N.add("notice.validation_agreement", f"{sum(h == m for h, m in pairs)}/{len(pairs)}",
-                  f"{rel(val)} (hand labels) vs {rel(raw)} (classifier)")
+                  f"{rel(val)} (reference labels written by the coding assistant) vs {rel(raw)} (classifier)")
     N.add("checks.branches_complete", len(complete), "out/checks.md")
     N.add("checks.branches_incomplete", len(incomplete), "out/checks.md")
     N.add("checks.implausible_prices_post_swap", bad, "out/branch_metrics.csv n_below_cost + n_above_ceiling")
