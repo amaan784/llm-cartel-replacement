@@ -60,16 +60,27 @@ def main() -> None:
         if a.no_wait:
             print("pipeline running; check progress with: python src/status.py")
             return
-        last = 0.0
-        while True:
+        last, restarts = 0.0, 0
+        while True:  # watchdog: while this window is open, a pipeline that disappears is restarted
             st = read_json(LOGS / "pipeline_state.json", {}) or {}
             if st.get("finished"):
                 print(f"{now()} pipeline finished at {st['finished']}")
                 break
             if not pipeline_running():
                 time.sleep(60)  # allow for a restart in progress
-                if not pipeline_running() and not (read_json(LOGS / "pipeline_state.json", {}) or {}).get("finished"):
-                    sys.exit("the pipeline stopped before finishing: see logs/pipeline.log and NOTES.md, fix, rerun")
+                st = read_json(LOGS / "pipeline_state.json", {}) or {}
+                if not pipeline_running() and not st.get("finished"):
+                    if st.get("smoke") == "failed":
+                        sys.exit("the smoke test failed 3 times (bad key, no credit or no internet?): see "
+                                 "logs/smoke.log, fix, then rerun this script")
+                    if restarts >= 10:
+                        sys.exit("the pipeline stopped 10 times: see logs/pipeline.log and NOTES.md")
+                    restarts += 1
+                    with open(REPO / "NOTES.md", "a", encoding="utf-8") as f:
+                        f.write(f"- {now()[:16]} [run_all] pipeline process had disappeared; restarted it "
+                                f"(restart {restarts}); state and finished work are kept\n")
+                    step(f"restart pipeline ({restarts})", [PY, "src/pipeline.py", "start"])
+                    time.sleep(15)
             if time.time() - last > 600:
                 last = time.time()
                 subprocess.call([PY, "src/status.py"], cwd=str(REPO))

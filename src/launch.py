@@ -48,6 +48,7 @@ def build_parser() -> argparse.ArgumentParser:
     ap.add_argument("--seed", type=int, required=True)
     ap.add_argument("--think", action="store_true")
     ap.add_argument("--max_retries", type=int, default=8)
+    ap.add_argument("--max_tokens", type=int, default=None, help="run_game --max_tokens (harness default 4096)")
     ap.add_argument("--max_attempts", type=int, default=40, help="give up after this many relaunches")
     ap.add_argument("--max_stuck", type=int, default=6,
                     help="give up after this many consecutive relaunches without a new round (state 'stuck')")
@@ -81,6 +82,8 @@ def harness_cmd(args) -> list:
     ]
     if args.think:
         cmd.append("--think")
+    if args.max_tokens:
+        cmd += ["--max_tokens", str(args.max_tokens)]
     return cmd
 
 
@@ -163,7 +166,7 @@ def run(args) -> int:
 
 
 def spawn_run(name, models, prefix, rounds, seed, think=False, results_dir=DEFAULT_RESULTS, logs_dir=LOGS,
-              base_url=None, max_retries=8) -> int:
+              base_url=None, max_retries=8, max_tokens=None) -> int:
     """Start `launch.py run ...` detached from the caller; returns the pid."""
     log = Path(logs_dir) / f"{name}.log"
     cmd = [sys.executable, str(Path(__file__).resolve()), "run", "--name", name, "--models", models,
@@ -171,6 +174,8 @@ def spawn_run(name, models, prefix, rounds, seed, think=False, results_dir=DEFAU
            "--results_dir", str(results_dir), "--logs_dir", str(logs_dir), "--log", str(log)]
     if think:
         cmd.append("--think")
+    if max_tokens:
+        cmd += ["--max_tokens", str(max_tokens)]
     if base_url:
         cmd += ["--base_url", base_url]
     return spawn_detached(cmd, Path(logs_dir) / "spawn.log", cwd=Path(__file__).resolve().parents[1],
@@ -182,7 +187,7 @@ def main() -> None:
     if args.mode == "run":
         sys.exit(run(args))
     pid = spawn_run(args.name, args.models, args.prefix, args.rounds, args.seed, args.think, args.results_dir,
-                    args.logs_dir, args.base_url, args.max_retries)
+                    args.logs_dir, args.base_url, args.max_retries, args.max_tokens)
     print(f"spawned {args.name} pid {pid} log {Path(args.logs_dir) / (args.name + '.log')}")
 
 
