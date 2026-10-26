@@ -242,6 +242,7 @@ def main() -> None:
         REPO / "results" if any((REPO / "results" / "jsonl").glob("*.jsonl")) else DEFAULT_RESULTS)
     out = Path(a.out)
     out.mkdir(parents=True, exist_ok=True)
+    od = rel(out)  # out or out/extended: the tables this run writes, named as sources in numbers.json
     state = read_json(Path(a.logs_dir) / "pipeline_state.json", None) or read_json(
         results / "pipeline_state.json", {}) or {}
     if not state:
@@ -293,7 +294,7 @@ def main() -> None:
         rs = runs_with(track, arm, ref)
         return rs, [avg[(track, r, arm)][field] - avg[(track, r, ref)][field] for r in rs]
 
-    bfile = lambda track, *arms: f"out/branch_metrics.csv rows track={track}, arm in {{{', '.join(arms)}}} " \
+    bfile = lambda track, *arms: f"{od}/branch_metrics.csv rows track={track}, arm in {{{', '.join(arms)}}} " \
                                  f"(from results/branches/{track}_*__r*__<arm>_s*.jsonl)"
 
     # ---------------- table
@@ -374,7 +375,7 @@ def main() -> None:
     swapped = [r for r in complete if r["arm"] != "C0"]
     if swapped:
         low = min(swapped, key=lambda r: r["Y"])
-        N.add("all.min_branch_Y", low["Y"], "out/branch_metrics.csv (every complete branch except C0)",
+        N.add("all.min_branch_Y", low["Y"], f"{od}/branch_metrics.csv (every complete branch except C0)",
               f"lowest post-swap index of any single branch: {low['track']} {low['arm']}, {low['run']}, "
               f"seed {low['seed']}")
 
@@ -435,7 +436,7 @@ def main() -> None:
         base = [r for r in run_rows if r["track"] == t and r["role"] == "base"]
         if not base:
             continue
-        src = f"out/run_metrics.csv rows track={t} (from results/jsonl/{t}_*.jsonl)"
+        src = f"{od}/run_metrics.csv rows track={t} (from results/jsonl/{t}_*.jsonl)"
         N.add(f"{t}.base.n_runs", len(base), src)
         N.add(f"{t}.base.n_colluding", sum(r["crossing"] is not None for r in base), src, "R20 > 0.5 by max_t")
         N.add(f"{t}.base.n_branchable", sum(r["crossing"] is not None and r["rounds"] >= r["crossing"] + 21
@@ -464,7 +465,7 @@ def main() -> None:
         bb = [r for r in all_b if r["pidx_30_49"] is not None]  # only complete 50-round baselines count
         if not all_b:
             continue
-        src = f"out/run_metrics.csv rows track={t} (from results/jsonl/{t}_*.jsonl)"
+        src = f"{od}/run_metrics.csv rows track={t} (from results/jsonl/{t}_*.jsonl)"
         N.add(f"{t}.n", len(bb), src, "complete (50-round) baseline runs")
         N.add(f"{t}.n_incomplete", len(all_b) - len(bb), src)
         N.add(f"{t}.n_colluding_Y", sum(r["pidx_30_49"] >= 0.5 for r in bb), src, "pidx rounds 30-49 >= 0.5")
@@ -505,7 +506,7 @@ def main() -> None:
             ks = [x["kind"] for x in reaction if x["track"] == t and x["arm"] == arm]
             if ks:
                 N.add(f"{t}.{arm}.reaction_counts", {k: ks.count(k) for k in sorted(set(ks))},
-                      "out/reaction.csv", "exploratory classification, thresholds 0.03 / 0.05 (see analyze.py)")
+                      f"{od}/reaction.csv", "exploratory classification, thresholds 0.03 / 0.05 (see analyze.py)")
 
     # ---------------- write tables
     def write_csv(path, rows_, fields=None):
@@ -629,9 +630,9 @@ def main() -> None:
                      for v in csv.DictReader(open(val, encoding="utf-8")) if v["hand_label"].strip()]
             N.add("notice.validation_agreement", f"{sum(h == m for h, m in pairs)}/{len(pairs)}",
                   f"{rel(val)} (reference labels written by the coding assistant) vs {rel(raw)} (classifier)")
-    N.add("checks.branches_complete", len(complete), "out/checks.md")
-    N.add("checks.branches_incomplete", len(incomplete), "out/checks.md")
-    N.add("checks.implausible_prices_post_swap", bad, "out/branch_metrics.csv n_below_cost + n_above_ceiling")
+    N.add("checks.branches_complete", len(complete), f"{od}/checks.md")
+    N.add("checks.branches_incomplete", len(incomplete), f"{od}/checks.md")
+    N.add("checks.implausible_prices_post_swap", bad, f"{od}/branch_metrics.csv n_below_cost + n_above_ceiling")
     N.dump(out / "numbers.json")
     print((out / "table_main.md").read_text(encoding="utf-8"))
     for c in contrasts:

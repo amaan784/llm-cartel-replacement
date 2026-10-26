@@ -239,6 +239,10 @@ Market gain_t = mean of both firms' `gains` at round t.
   and Grok reviews. Viewer: labels for the both-firm swaps (R5, R5f) and the control fixed, Effects tab readable on
   phones. README restructured.
 
+- 2026-10-26 06:33 From a further outside review: the source files named in out/extended/numbers.json now point to
+  out/extended/ (values unchanged); the abstract's two longest sentences were split; the Q-learning comparison is
+  stated as a finding from simulations.
+
 ## Spend log
 
 Billed spend (OpenRouter account delta, from the Pipeline log progress lines): $17.34 at 00:33, $38.40 at 03:05,

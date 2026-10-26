@@ -10,26 +10,26 @@ With Apart Research
 
 ## Abstract
 
-Replacing a flagged pricing algorithm is an obvious remedy for collusion, and it breaks Q-learning cartels, whose
-policies are fitted to their partners. The LLM agents studied here carry no learned state, only the price history in
-their prompt, so replacing one may not restore competition. From six markets in the sprint's repeated Bertrand
-duopoly that crossed a pre-registered high-price threshold (four gemini-2.5-flash markets and two qwen3-14b markets
-instructed to cooperate), we ran matched 50-round continuations with one or both firms replaced, compared each with
-a no-swap control from the same state, and scored the last 20 rounds. Replacing one firm with a same-family model,
+Replacing a flagged pricing algorithm is an obvious remedy for collusion, and in simulations it breaks Q-learning
+cartels, whose policies are fitted to their partners. The LLM agents here carry no learned state, only the price
+history in their prompt, so replacing one may not restore competition. We used six markets in the sprint's repeated
+Bertrand duopoly that crossed a pre-registered high-price threshold: four gemini-2.5-flash markets and two qwen3-14b
+markets instructed to cooperate. Each was continued for 50 rounds with one or both firms replaced and compared with
+a no-swap control from the same state, scoring the last 20 rounds. Replacing one firm with a same-family model,
 another provider's model, or the incumbent's own model told to avoid collusion changed the mean price index (0 =
 competitive, 1 = monopoly price) by about 0.05 or less. Replacing both gemini firms with gpt-4.1 kept prices high in
-6 of 8 continuations. In exploratory arms, two current models undercut the incumbent, lowering the index further:
-Claude Haiku 5.5 by 0.30 (95% CI 0.15 to 0.44) and GPT-5.6 Sol by 0.40 (0.21 to 0.58), although on the
-pre-registered from-scratch measure each kept high prices in 1 of 4 markets, as gpt-4.1 did. Four added markets gave
-the same conclusions, and no continuation's scored average returned to the competitive price. Replacing an agent
-cannot be assumed to end high prices, and evaluations should test how an incoming agent behaves in a market that
-already has them, as well as whether it colludes from scratch.
+6 of 8 continuations. In exploratory arms, two current models undercut the incumbent, lowering the index: Claude
+Haiku 5.5 by 0.30 (95% CI 0.15 to 0.44) and GPT-5.6 Sol by 0.40 (0.21 to 0.58). Yet on the pre-registered
+from-scratch measure each kept high prices in 1 of 4 markets, as gpt-4.1 did. Four added markets gave the same
+conclusions, and no continuation's scored average returned to the competitive price. Replacing an agent cannot be
+assumed to end high prices; evaluations should test how an incoming agent behaves in a market that already has them,
+as well as whether it colludes from scratch.
 
 ## 1. Introduction
 
 Pricing algorithms can learn to keep prices above the competitive level without communicating (Calvano et al.
 2020), and LLM pricing agents do too, sometimes without being told to (Fish et al. 2024; Riemer et al. 2026). One
-obvious remedy is to replace the algorithm, by regulatory order or a change of vendor. For reinforcement-learning
+obvious remedy is to replace the algorithm, by regulatory order or a change of vendor. In simulations of reinforcement-learning
 cartels this works, because each learned policy is fitted to the partner it trained with (Eschenbaum et al. 2022).
 
 In our setup the agents keep no state between calls. Every round, each agent is a fresh model call whose only memory is the
@@ -266,7 +266,7 @@ Leaving out one market at a time kept both current-model effects negative (Haiku
 
 ## 5. Discussion and Limitations
 
-**Persistence after replacement.** A swap breaks Q-learning collusion because each policy is fitted to its partner
+**Persistence after replacement.** In Q-learning simulations a swap breaks collusion because each policy is fitted to its partner
 (Eschenbaum et al. 2022). Here high prices persisted: a newcomer that read the record continued them (R1, R2), one
 that could not read it followed the incumbent (R3), and two newcomers that rarely collude from scratch kept them
 when they inherited the record (R5). This fits a high price carried by the shared record and the remaining
@@ -295,7 +295,7 @@ agents that keep notes.
 
 ## 6. Conclusion
 
-In this harness, replacing a pricing agent, the remedy that breaks Q-learning cartels, did not restore competitive
+In this harness, replacing a pricing agent, the remedy that breaks simulated Q-learning cartels, did not restore competitive
 prices: newcomers of either family, with or without the history, a re-instructed copy of the incumbent and even two
 new firms kept prices close to the collusive level. Two current models, in exploratory arms, undercut an inherited
 high price but did not bring it down to the competitive level. For agents like these, a replacement remedy needs

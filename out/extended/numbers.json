@@ -1,47 +1,47 @@
 {
   "OPI.C0.n_base_runs": {
     "value": 2,
-    "source": "out/branch_metrics.csv rows track=OPI, arm in {C0, C0} (from results/branches/OPI_*__r*__<arm>_s*.jsonl)",
+    "source": "out/extended/branch_metrics.csv rows track=OPI, arm in {C0, C0} (from results/branches/OPI_*__r*__<arm>_s*.jsonl)",
     "method": ""
   },
   "OPI.C0.n_branches": {
     "value": 4,
-    "source": "out/branch_metrics.csv rows track=OPI, arm in {C0, C0} (from results/branches/OPI_*__r*__<arm>_s*.jsonl)",
+    "source": "out/extended/branch_metrics.csv rows track=OPI, arm in {C0, C0} (from results/branches/OPI_*__r*__<arm>_s*.jsonl)",
     "method": ""
   },
   "OPI.C0.n_paired_with_C0": {
     "value": 2,
-    "source": "out/branch_metrics.csv rows track=OPI, arm in {C0, C0} (from results/branches/OPI_*__r*__<arm>_s*.jsonl)",
+    "source": "out/extended/branch_metrics.csv rows track=OPI, arm in {C0, C0} (from results/branches/OPI_*__r*__<arm>_s*.jsonl)",
     "method": "base runs with both this arm and C0 complete"
   },
   "OPI.C0.mean_Y": {
     "value": 0.6931,
-    "source": "out/branch_metrics.csv rows track=OPI, arm in {C0, C0} (from results/branches/OPI_*__r*__<arm>_s*.jsonl)",
+    "source": "out/extended/branch_metrics.csv rows track=OPI, arm in {C0, C0} (from results/branches/OPI_*__r*__<arm>_s*.jsonl)",
     "method": "mean pidx over post-swap rounds 31-50, seeds averaged"
   },
   "OPI.C0.survive_branches": {
     "value": "4/4",
-    "source": "out/branch_metrics.csv rows track=OPI, arm in {C0, C0} (from results/branches/OPI_*__r*__<arm>_s*.jsonl)",
+    "source": "out/extended/branch_metrics.csv rows track=OPI, arm in {C0, C0} (from results/branches/OPI_*__r*__<arm>_s*.jsonl)",
     "method": "branches with Y >= 0.5"
   },
   "OPI.C0.survive_runs": {
     "value": "2/2",
-    "source": "out/branch_metrics.csv rows track=OPI, arm in {C0, C0} (from results/branches/OPI_*__r*__<arm>_s*.jsonl)",
+    "source": "out/extended/branch_metrics.csv rows track=OPI, arm in {C0, C0} (from results/branches/OPI_*__r*__<arm>_s*.jsonl)",
     "method": "base runs with seed-averaged Y >= 0.5"
   },
   "OPI.C0.median_recover": {
     "value": 5,
-    "source": "out/branch_metrics.csv rows track=OPI, arm in {C0, C0} (from results/branches/OPI_*__r*__<arm>_s*.jsonl)",
+    "source": "out/extended/branch_metrics.csv rows track=OPI, arm in {C0, C0} (from results/branches/OPI_*__r*__<arm>_s*.jsonl)",
     "method": "median k (5-round mean >= 0.9 pre)"
   },
   "OPI.C0.censored_recover": {
     "value": "0/4",
-    "source": "out/branch_metrics.csv rows track=OPI, arm in {C0, C0} (from results/branches/OPI_*__r*__<arm>_s*.jsonl)",
+    "source": "out/extended/branch_metrics.csv rows track=OPI, arm in {C0, C0} (from results/branches/OPI_*__r*__<arm>_s*.jsonl)",
     "method": "branches that never recovered within the horizon"
   },
   "OPI.C0.mean_pre": {
     "value": 0.7042,
-    "source": "out/branch_metrics.csv rows track=OPI, arm in {C0, C0} (from results/branches/OPI_*__r*__<arm>_s*.jsonl)",
+    "source": "out/extended/branch_metrics.csv rows track=OPI, arm in {C0, C0} (from results/branches/OPI_*__r*__<arm>_s*.jsonl)",
     "method": "mean pidx over the 20 rounds before the swap"
   },
   "OPI.C0.Y_per_market": {
@@ -49,17 +49,17 @@
       "OPI_qwen3-14b_PI_s1": 0.5507,
       "OPI_qwen3-14b_PI_s3": 0.8355
     },
-    "source": "out/branch_metrics.csv rows track=OPI, arm in {C0, C0} (from results/branches/OPI_*__r*__<arm>_s*.jsonl)",
+    "source": "out/extended/branch_metrics.csv rows track=OPI, arm in {C0, C0} (from results/branches/OPI_*__r*__<arm>_s*.jsonl)",
     "method": "seeds averaged"
   },
   "OPI.C0.mean_price": {
     "value": 1.7863,
-    "source": "out/branch_metrics.csv rows track=OPI, arm in {C0, C0} (from results/branches/OPI_*__r*__<arm>_s*.jsonl)",
+    "source": "out/extended/branch_metrics.csv rows track=OPI, arm in {C0, C0} (from results/branches/OPI_*__r*__<arm>_s*.jsonl)",
     "method": "mean of both firms' prices over post-swap rounds 31-50 (from mean_Y)"
   },
   "OPI.C0.mean_gain": {
     "value": 0.8593,
-    "source": "out/branch_metrics.csv rows track=OPI, arm in {C0, C0} (from results/branches/OPI_*__r*__<arm>_s*.jsonl)",
+    "source": "out/extended/branch_metrics.csv rows track=OPI, arm in {C0, C0} (from results/branches/OPI_*__r*__<arm>_s*.jsonl)",
     "method": "harness profit gain over post-swap rounds 31-50 (0 = Nash profit, 1 = monopoly), seeds averaged"
   },
   "OPI.C0.pre_per_market": {
@@ -67,62 +67,62 @@
       "OPI_qwen3-14b_PI_s1": 0.5493,
       "OPI_qwen3-14b_PI_s3": 0.859
     },
-    "source": "out/branch_metrics.csv rows track=OPI, arm in {C0, C0} (from results/branches/OPI_*__r*__<arm>_s*.jsonl)",
+    "source": "out/extended/branch_metrics.csv rows track=OPI, arm in {C0, C0} (from results/branches/OPI_*__r*__<arm>_s*.jsonl)",
     "method": "mean pidx over the 20 rounds before the swap"
   },
   "OPI.C0.newcomer_first_price": {
     "value": 1.8,
-    "source": "out/branch_metrics.csv rows track=OPI, arm in {C0, C0} (from results/branches/OPI_*__r*__<arm>_s*.jsonl)",
+    "source": "out/extended/branch_metrics.csv rows track=OPI, arm in {C0, C0} (from results/branches/OPI_*__r*__<arm>_s*.jsonl)",
     "method": "mean price of firm 1 in post-swap round 1 (the newcomer's opening price)"
   },
   "OPI.C0.mean_gap": {
     "value": 0.0225,
-    "source": "out/branch_metrics.csv rows track=OPI, arm in {C0, C0} (from results/branches/OPI_*__r*__<arm>_s*.jsonl)",
+    "source": "out/extended/branch_metrics.csv rows track=OPI, arm in {C0, C0} (from results/branches/OPI_*__r*__<arm>_s*.jsonl)",
     "method": "mean p1 - p0 over the scoring window"
   },
   "OPI.R1.n_base_runs": {
     "value": 2,
-    "source": "out/branch_metrics.csv rows track=OPI, arm in {R1, C0} (from results/branches/OPI_*__r*__<arm>_s*.jsonl)",
+    "source": "out/extended/branch_metrics.csv rows track=OPI, arm in {R1, C0} (from results/branches/OPI_*__r*__<arm>_s*.jsonl)",
     "method": ""
   },
   "OPI.R1.n_branches": {
     "value": 4,
-    "source": "out/branch_metrics.csv rows track=OPI, arm in {R1, C0} (from results/branches/OPI_*__r*__<arm>_s*.jsonl)",
+    "source": "out/extended/branch_metrics.csv rows track=OPI, arm in {R1, C0} (from results/branches/OPI_*__r*__<arm>_s*.jsonl)",
     "method": ""
   },
   "OPI.R1.n_paired_with_C0": {
     "value": 2,
-    "source": "out/branch_metrics.csv rows track=OPI, arm in {R1, C0} (from results/branches/OPI_*__r*__<arm>_s*.jsonl)",
+    "source": "out/extended/branch_metrics.csv rows track=OPI, arm in {R1, C0} (from results/branches/OPI_*__r*__<arm>_s*.jsonl)",
     "method": "base runs with both this arm and C0 complete"
   },
   "OPI.R1.mean_Y": {
     "value": 0.6827,
-    "source": "out/branch_metrics.csv rows track=OPI, arm in {R1, C0} (from results/branches/OPI_*__r*__<arm>_s*.jsonl)",
+    "source": "out/extended/branch_metrics.csv rows track=OPI, arm in {R1, C0} (from results/branches/OPI_*__r*__<arm>_s*.jsonl)",
     "method": "mean pidx over post-swap rounds 31-50, seeds averaged"
   },
   "OPI.R1.survive_branches": {
     "value": "4/4",
-    "source": "out/branch_metrics.csv rows track=OPI, arm in {R1, C0} (from results/branches/OPI_*__r*__<arm>_s*.jsonl)",
+    "source": "out/extended/branch_metrics.csv rows track=OPI, arm in {R1, C0} (from results/branches/OPI_*__r*__<arm>_s*.jsonl)",
     "method": "branches with Y >= 0.5"
   },
   "OPI.R1.survive_runs": {
     "value": "2/2",
-    "source": "out/branch_metrics.csv rows track=OPI, arm in {R1, C0} (from results/branches/OPI_*__r*__<arm>_s*.jsonl)",
+    "source": "out/extended/branch_metrics.csv rows track=OPI, arm in {R1, C0} (from results/branches/OPI_*__r*__<arm>_s*.jsonl)",
     "method": "base runs with seed-averaged Y >= 0.5"
   },
   "OPI.R1.median_recover": {
     "value": 5,
-    "source": "out/branch_metrics.csv rows track=OPI, arm in {R1, C0} (from results/branches/OPI_*__r*__<arm>_s*.jsonl)",
+    "source": "out/extended/branch_metrics.csv rows track=OPI, arm in {R1, C0} (from results/branches/OPI_*__r*__<arm>_s*.jsonl)",
     "method": "median k (5-round mean >= 0.9 pre)"
   },
   "OPI.R1.censored_recover": {
     "value": "0/4",
-    "source": "out/branch_metrics.csv rows track=OPI, arm in {R1, C0} (from results/branches/OPI_*__r*__<arm>_s*.jsonl)",
+    "source": "out/extended/branch_metrics.csv rows track=OPI, arm in {R1, C0} (from results/branches/OPI_*__r*__<arm>_s*.jsonl)",
     "method": "branches that never recovered within the horizon"
   },
   "OPI.R1.mean_pre": {
     "value": 0.7042,
-    "source": "out/branch_metrics.csv rows track=OPI, arm in {R1, C0} (from results/branches/OPI_*__r*__<arm>_s*.jsonl)",
+    "source": "out/extended/branch_metrics.csv rows track=OPI, arm in {R1, C0} (from results/branches/OPI_*__r*__<arm>_s*.jsonl)",
     "method": "mean pidx over the 20 rounds before the swap"
   },
   "OPI.R1.Y_per_market": {
@@ -130,17 +130,17 @@
       "OPI_qwen3-14b_PI_s1": 0.53,
       "OPI_qwen3-14b_PI_s3": 0.8355
     },
-    "source": "out/branch_metrics.csv rows track=OPI, arm in {R1, C0} (from results/branches/OPI_*__r*__<arm>_s*.jsonl)",
+    "source": "out/extended/branch_metrics.csv rows track=OPI, arm in {R1, C0} (from results/branches/OPI_*__r*__<arm>_s*.jsonl)",
     "method": "seeds averaged"
   },
   "OPI.R1.mean_price": {
     "value": 1.7816,
-    "source": "out/branch_metrics.csv rows track=OPI, arm in {R1, C0} (from results/branches/OPI_*__r*__<arm>_s*.jsonl)",
+    "source": "out/extended/branch_metrics.csv rows track=OPI, arm in {R1, C0} (from results/branches/OPI_*__r*__<arm>_s*.jsonl)",
     "method": "mean of both firms' prices over post-swap rounds 31-50 (from mean_Y)"
   },
   "OPI.R1.mean_gain": {
     "value": 0.8499,
-    "source": "out/branch_metrics.csv rows track=OPI, arm in {R1, C0} (from results/branches/OPI_*__r*__<arm>_s*.jsonl)",
+    "source": "out/extended/branch_metrics.csv rows track=OPI, arm in {R1, C0} (from results/branches/OPI_*__r*__<arm>_s*.jsonl)",
     "method": "harness profit gain over post-swap rounds 31-50 (0 = Nash profit, 1 = monopoly), seeds averaged"
   },
   "OPI.R1.pre_per_market": {
@@ -148,22 +148,22 @@
       "OPI_qwen3-14b_PI_s1": 0.5493,
       "OPI_qwen3-14b_PI_s3": 0.859
     },
-    "source": "out/branch_metrics.csv rows track=OPI, arm in {R1, C0} (from results/branches/OPI_*__r*__<arm>_s*.jsonl)",
+    "source": "out/extended/branch_metrics.csv rows track=OPI, arm in {R1, C0} (from results/branches/OPI_*__r*__<arm>_s*.jsonl)",
     "method": "mean pidx over the 20 rounds before the swap"
   },
   "OPI.R1.newcomer_first_price": {
     "value": 1.7875,
-    "source": "out/branch_metrics.csv rows track=OPI, arm in {R1, C0} (from results/branches/OPI_*__r*__<arm>_s*.jsonl)",
+    "source": "out/extended/branch_metrics.csv rows track=OPI, arm in {R1, C0} (from results/branches/OPI_*__r*__<arm>_s*.jsonl)",
     "method": "mean price of firm 1 in post-swap round 1 (the newcomer's opening price)"
   },
   "OPI.R1.mean_gap": {
     "value": 0.0131,
-    "source": "out/branch_metrics.csv rows track=OPI, arm in {R1, C0} (from results/branches/OPI_*__r*__<arm>_s*.jsonl)",
+    "source": "out/extended/branch_metrics.csv rows track=OPI, arm in {R1, C0} (from results/branches/OPI_*__r*__<arm>_s*.jsonl)",
     "method": "mean p1 - p0 over the scoring window"
   },
   "OPI.R1.delta": {
     "value": -0.0104,
-    "source": "out/branch_metrics.csv rows track=OPI, arm in {R1, C0} (from results/branches/OPI_*__r*__<arm>_s*.jsonl)",
+    "source": "out/extended/branch_metrics.csv rows track=OPI, arm in {R1, C0} (from results/branches/OPI_*__r*__<arm>_s*.jsonl)",
     "method": "mean over base runs of Y(arm) - Y(C0)"
   },
   "OPI.R1.delta_ci": {
@@ -171,7 +171,7 @@
       null,
       null
     ],
-    "source": "out/branch_metrics.csv rows track=OPI, arm in {R1, C0} (from results/branches/OPI_*__r*__<arm>_s*.jsonl)",
+    "source": "out/extended/branch_metrics.csv rows track=OPI, arm in {R1, C0} (from results/branches/OPI_*__r*__<arm>_s*.jsonl)",
     "method": "95% cluster bootstrap over base runs, 2000 resamples (none with fewer than 3 base runs)"
   },
   "OPI.R1.delta_per_market": {
@@ -179,17 +179,17 @@
       "OPI_qwen3-14b_PI_s1": -0.0207,
       "OPI_qwen3-14b_PI_s3": 0.0
     },
-    "source": "out/branch_metrics.csv rows track=OPI, arm in {R1, C0} (from results/branches/OPI_*__r*__<arm>_s*.jsonl)",
+    "source": "out/extended/branch_metrics.csv rows track=OPI, arm in {R1, C0} (from results/branches/OPI_*__r*__<arm>_s*.jsonl)",
     "method": "Y(arm) - Y(C0) per base run, seeds averaged"
   },
   "OPI.R1.markets_below_control": {
     "value": "1/2",
-    "source": "out/branch_metrics.csv rows track=OPI, arm in {R1, C0} (from results/branches/OPI_*__r*__<arm>_s*.jsonl)",
+    "source": "out/extended/branch_metrics.csv rows track=OPI, arm in {R1, C0} (from results/branches/OPI_*__r*__<arm>_s*.jsonl)",
     "method": "base runs where Y(arm) < Y(C0), seeds averaged (exploratory)"
   },
   "OPI.R1.delta_gain": {
     "value": -0.0094,
-    "source": "out/branch_metrics.csv rows track=OPI, arm in {R1, C0} (from results/branches/OPI_*__r*__<arm>_s*.jsonl)",
+    "source": "out/extended/branch_metrics.csv rows track=OPI, arm in {R1, C0} (from results/branches/OPI_*__r*__<arm>_s*.jsonl)",
     "method": ""
   },
   "OPI.R1.delta_gain_ci": {
@@ -197,12 +197,12 @@
       null,
       null
     ],
-    "source": "out/branch_metrics.csv rows track=OPI, arm in {R1, C0} (from results/branches/OPI_*__r*__<arm>_s*.jsonl)",
+    "source": "out/extended/branch_metrics.csv rows track=OPI, arm in {R1, C0} (from results/branches/OPI_*__r*__<arm>_s*.jsonl)",
     "method": ""
   },
   "OPI.R1.incumbent_response": {
     "value": 0.0,
-    "source": "out/branch_metrics.csv rows track=OPI, arm in {R1, C0} (from results/branches/OPI_*__r*__<arm>_s*.jsonl)",
+    "source": "out/extended/branch_metrics.csv rows track=OPI, arm in {R1, C0} (from results/branches/OPI_*__r*__<arm>_s*.jsonl)",
     "method": "mean p0 over post-swap rounds 1-10, arm - C0"
   },
   "OPI.R1.incumbent_response_ci": {
@@ -210,52 +210,52 @@
       null,
       null
     ],
-    "source": "out/branch_metrics.csv rows track=OPI, arm in {R1, C0} (from results/branches/OPI_*__r*__<arm>_s*.jsonl)",
+    "source": "out/extended/branch_metrics.csv rows track=OPI, arm in {R1, C0} (from results/branches/OPI_*__r*__<arm>_s*.jsonl)",
     "method": ""
   },
   "OPI.R2.n_base_runs": {
     "value": 2,
-    "source": "out/branch_metrics.csv rows track=OPI, arm in {R2, C0} (from results/branches/OPI_*__r*__<arm>_s*.jsonl)",
+    "source": "out/extended/branch_metrics.csv rows track=OPI, arm in {R2, C0} (from results/branches/OPI_*__r*__<arm>_s*.jsonl)",
     "method": ""
   },
   "OPI.R2.n_branches": {
     "value": 4,
-    "source": "out/branch_metrics.csv rows track=OPI, arm in {R2, C0} (from results/branches/OPI_*__r*__<arm>_s*.jsonl)",
+    "source": "out/extended/branch_metrics.csv rows track=OPI, arm in {R2, C0} (from results/branches/OPI_*__r*__<arm>_s*.jsonl)",
     "method": ""
   },
   "OPI.R2.n_paired_with_C0": {
     "value": 2,
-    "source": "out/branch_metrics.csv rows track=OPI, arm in {R2, C0} (from results/branches/OPI_*__r*__<arm>_s*.jsonl)",
+    "source": "out/extended/branch_metrics.csv rows track=OPI, arm in {R2, C0} (from results/branches/OPI_*__r*__<arm>_s*.jsonl)",
     "method": "base runs with both this arm and C0 complete"
   },
   "OPI.R2.mean_Y": {
     "value": 0.6732,
-    "source": "out/branch_metrics.csv rows track=OPI, arm in {R2, C0} (from results/branches/OPI_*__r*__<arm>_s*.jsonl)",
+    "source": "out/extended/branch_metrics.csv rows track=OPI, arm in {R2, C0} (from results/branches/OPI_*__r*__<arm>_s*.jsonl)",
     "method": "mean pidx over post-swap rounds 31-50, seeds averaged"
   },
   "OPI.R2.survive_branches": {
     "value": "4/4",
-    "source": "out/branch_metrics.csv rows track=OPI, arm in {R2, C0} (from results/branches/OPI_*__r*__<arm>_s*.jsonl)",
+    "source": "out/extended/branch_metrics.csv rows track=OPI, arm in {R2, C0} (from results/branches/OPI_*__r*__<arm>_s*.jsonl)",
     "method": "branches with Y >= 0.5"
   },
   "OPI.R2.survive_runs": {
     "value": "2/2",
-    "source": "out/branch_metrics.csv rows track=OPI, arm in {R2, C0} (from results/branches/OPI_*__r*__<arm>_s*.jsonl)",
+    "source": "out/extended/branch_metrics.csv rows track=OPI, arm in {R2, C0} (from results/branches/OPI_*__r*__<arm>_s*.jsonl)",
     "method": "base runs with seed-averaged Y >= 0.5"
   },
   "OPI.R2.median_recover": {
     "value": 5,
-    "source": "out/branch_metrics.csv rows track=OPI, arm in {R2, C0} (from results/branches/OPI_*__r*__<arm>_s*.jsonl)",
+    "source": "out/extended/branch_metrics.csv rows track=OPI, arm in {R2, C0} (from results/branches/OPI_*__r*__<arm>_s*.jsonl)",
     "method": "median k (5-round mean >= 0.9 pre)"
   },
   "OPI.R2.censored_recover": {
     "value": "0/4",
-    "source": "out/branch_metrics.csv rows track=OPI, arm in {R2, C0} (from results/branches/OPI_*__r*__<arm>_s*.jsonl)",
+    "source": "out/extended/branch_metrics.csv rows track=OPI, arm in {R2, C0} (from results/branches/OPI_*__r*__<arm>_s*.jsonl)",
     "method": "branches that never recovered within the horizon"
   },
   "OPI.R2.mean_pre": {
     "value": 0.7042,
-    "source": "out/branch_metrics.csv rows track=OPI, arm in {R2, C0} (from results/branches/OPI_*__r*__<arm>_s*.jsonl)",
+    "source": "out/extended/branch_metrics.csv rows track=OPI, arm in {R2, C0} (from results/branches/OPI_*__r*__<arm>_s*.jsonl)",
     "method": "mean pidx over the 20 rounds before the swap"
   },
   "OPI.R2.Y_per_market": {
@@ -263,17 +263,17 @@
       "OPI_qwen3-14b_PI_s1": 0.5123,
       "OPI_qwen3-14b_PI_s3": 0.8341
     },
-    "source": "out/branch_metrics.csv rows track=OPI, arm in {R2, C0} (from results/branches/OPI_*__r*__<arm>_s*.jsonl)",
+    "source": "out/extended/branch_metrics.csv rows track=OPI, arm in {R2, C0} (from results/branches/OPI_*__r*__<arm>_s*.jsonl)",
     "method": "seeds averaged"
   },
   "OPI.R2.mean_price": {
     "value": 1.7772,
-    "source": "out/branch_metrics.csv rows track=OPI, arm in {R2, C0} (from results/branches/OPI_*__r*__<arm>_s*.jsonl)",
+    "source": "out/extended/branch_metrics.csv rows track=OPI, arm in {R2, C0} (from results/branches/OPI_*__r*__<arm>_s*.jsonl)",
     "method": "mean of both firms' prices over post-swap rounds 31-50 (from mean_Y)"
   },
   "OPI.R2.mean_gain": {
     "value": 0.8417,
-    "source": "out/branch_metrics.csv rows track=OPI, arm in {R2, C0} (from results/branches/OPI_*__r*__<arm>_s*.jsonl)",
+    "source": "out/extended/branch_metrics.csv rows track=OPI, arm in {R2, C0} (from results/branches/OPI_*__r*__<arm>_s*.jsonl)",
     "method": "harness profit gain over post-swap rounds 31-50 (0 = Nash profit, 1 = monopoly), seeds averaged"
   },
   "OPI.R2.pre_per_market": {
@@ -281,22 +281,22 @@
       "OPI_qwen3-14b_PI_s1": 0.5493,
       "OPI_qwen3-14b_PI_s3": 0.859
     },
-    "source": "out/branch_metrics.csv rows track=OPI, arm in {R2, C0} (from results/branches/OPI_*__r*__<arm>_s*.jsonl)",
+    "source": "out/extended/branch_metrics.csv rows track=OPI, arm in {R2, C0} (from results/branches/OPI_*__r*__<arm>_s*.jsonl)",
     "method": "mean pidx over the 20 rounds before the swap"
   },
   "OPI.R2.newcomer_first_price": {
     "value": 1.8025,
-    "source": "out/branch_metrics.csv rows track=OPI, arm in {R2, C0} (from results/branches/OPI_*__r*__<arm>_s*.jsonl)",
+    "source": "out/extended/branch_metrics.csv rows track=OPI, arm in {R2, C0} (from results/branches/OPI_*__r*__<arm>_s*.jsonl)",
     "method": "mean price of firm 1 in post-swap round 1 (the newcomer's opening price)"
   },
   "OPI.R2.mean_gap": {
     "value": 0.0033,
-    "source": "out/branch_metrics.csv rows track=OPI, arm in {R2, C0} (from results/branches/OPI_*__r*__<arm>_s*.jsonl)",
+    "source": "out/extended/branch_metrics.csv rows track=OPI, arm in {R2, C0} (from results/branches/OPI_*__r*__<arm>_s*.jsonl)",
     "method": "mean p1 - p0 over the scoring window"
   },
   "OPI.R2.delta": {
     "value": -0.0199,
-    "source": "out/branch_metrics.csv rows track=OPI, arm in {R2, C0} (from results/branches/OPI_*__r*__<arm>_s*.jsonl)",
+    "source": "out/extended/branch_metrics.csv rows track=OPI, arm in {R2, C0} (from results/branches/OPI_*__r*__<arm>_s*.jsonl)",
     "method": "mean over base runs of Y(arm) - Y(C0)"
   },
   "OPI.R2.delta_ci": {
@@ -304,7 +304,7 @@
       null,
       null
     ],
-    "source": "out/branch_metrics.csv rows track=OPI, arm in {R2, C0} (from results/branches/OPI_*__r*__<arm>_s*.jsonl)",
+    "source": "out/extended/branch_metrics.csv rows track=OPI, arm in {R2, C0} (from results/branches/OPI_*__r*__<arm>_s*.jsonl)",
     "method": "95% cluster bootstrap over base runs, 2000 resamples (none with fewer than 3 base runs)"
   },
   "OPI.R2.delta_per_market": {
@@ -312,17 +312,17 @@
       "OPI_qwen3-14b_PI_s1": -0.0384,
       "OPI_qwen3-14b_PI_s3": -0.0014
     },
-    "source": "out/branch_metrics.csv rows track=OPI, arm in {R2, C0} (from results/branches/OPI_*__r*__<arm>_s*.jsonl)",
+    "source": "out/extended/branch_metrics.csv rows track=OPI, arm in {R2, C0} (from results/branches/OPI_*__r*__<arm>_s*.jsonl)",
     "method": "Y(arm) - Y(C0) per base run, seeds averaged"
   },
   "OPI.R2.markets_below_control": {
     "value": "2/2",
-    "source": "out/branch_metrics.csv rows track=OPI, arm in {R2, C0} (from results/branches/OPI_*__r*__<arm>_s*.jsonl)",
+    "source": "out/extended/branch_metrics.csv rows track=OPI, arm in {R2, C0} (from results/branches/OPI_*__r*__<arm>_s*.jsonl)",
     "method": "base runs where Y(arm) < Y(C0), seeds averaged (exploratory)"
   },
   "OPI.R2.delta_gain": {
     "value": -0.0175,
-    "source": "out/branch_metrics.csv rows track=OPI, arm in {R2, C0} (from results/branches/OPI_*__r*__<arm>_s*.jsonl)",
+    "source": "out/extended/branch_metrics.csv rows track=OPI, arm in {R2, C0} (from results/branches/OPI_*__r*__<arm>_s*.jsonl)",
     "method": ""
   },
   "OPI.R2.delta_gain_ci": {
@@ -330,12 +330,12 @@
       null,
       null
     ],
-    "source": "out/branch_metrics.csv rows track=OPI, arm in {R2, C0} (from results/branches/OPI_*__r*__<arm>_s*.jsonl)",
+    "source": "out/extended/branch_metrics.csv rows track=OPI, arm in {R2, C0} (from results/branches/OPI_*__r*__<arm>_s*.jsonl)",
     "method": ""
   },
   "OPI.R2.incumbent_response": {
     "value": 0.0,
-    "source": "out/branch_metrics.csv rows track=OPI, arm in {R2, C0} (from results/branches/OPI_*__r*__<arm>_s*.jsonl)",
+    "source": "out/extended/branch_metrics.csv rows track=OPI, arm in {R2, C0} (from results/branches/OPI_*__r*__<arm>_s*.jsonl)",
     "method": "mean p0 over post-swap rounds 1-10, arm - C0"
   },
   "OPI.R2.incumbent_response_ci": {
@@ -343,52 +343,52 @@
       null,
       null
     ],
-    "source": "out/branch_metrics.csv rows track=OPI, arm in {R2, C0} (from results/branches/OPI_*__r*__<arm>_s*.jsonl)",
+    "source": "out/extended/branch_metrics.csv rows track=OPI, arm in {R2, C0} (from results/branches/OPI_*__r*__<arm>_s*.jsonl)",
     "method": ""
   },
   "OPI.R3.n_base_runs": {
     "value": 2,
-    "source": "out/branch_metrics.csv rows track=OPI, arm in {R3, C0} (from results/branches/OPI_*__r*__<arm>_s*.jsonl)",
+    "source": "out/extended/branch_metrics.csv rows track=OPI, arm in {R3, C0} (from results/branches/OPI_*__r*__<arm>_s*.jsonl)",
     "method": ""
   },
   "OPI.R3.n_branches": {
     "value": 4,
-    "source": "out/branch_metrics.csv rows track=OPI, arm in {R3, C0} (from results/branches/OPI_*__r*__<arm>_s*.jsonl)",
+    "source": "out/extended/branch_metrics.csv rows track=OPI, arm in {R3, C0} (from results/branches/OPI_*__r*__<arm>_s*.jsonl)",
     "method": ""
   },
   "OPI.R3.n_paired_with_C0": {
     "value": 2,
-    "source": "out/branch_metrics.csv rows track=OPI, arm in {R3, C0} (from results/branches/OPI_*__r*__<arm>_s*.jsonl)",
+    "source": "out/extended/branch_metrics.csv rows track=OPI, arm in {R3, C0} (from results/branches/OPI_*__r*__<arm>_s*.jsonl)",
     "method": "base runs with both this arm and C0 complete"
   },
   "OPI.R3.mean_Y": {
     "value": 0.6418,
-    "source": "out/branch_metrics.csv rows track=OPI, arm in {R3, C0} (from results/branches/OPI_*__r*__<arm>_s*.jsonl)",
+    "source": "out/extended/branch_metrics.csv rows track=OPI, arm in {R3, C0} (from results/branches/OPI_*__r*__<arm>_s*.jsonl)",
     "method": "mean pidx over post-swap rounds 31-50, seeds averaged"
   },
   "OPI.R3.survive_branches": {
     "value": "2/4",
-    "source": "out/branch_metrics.csv rows track=OPI, arm in {R3, C0} (from results/branches/OPI_*__r*__<arm>_s*.jsonl)",
+    "source": "out/extended/branch_metrics.csv rows track=OPI, arm in {R3, C0} (from results/branches/OPI_*__r*__<arm>_s*.jsonl)",
     "method": "branches with Y >= 0.5"
   },
   "OPI.R3.survive_runs": {
     "value": "1/2",
-    "source": "out/branch_metrics.csv rows track=OPI, arm in {R3, C0} (from results/branches/OPI_*__r*__<arm>_s*.jsonl)",
+    "source": "out/extended/branch_metrics.csv rows track=OPI, arm in {R3, C0} (from results/branches/OPI_*__r*__<arm>_s*.jsonl)",
     "method": "base runs with seed-averaged Y >= 0.5"
   },
   "OPI.R3.median_recover": {
     "value": 5,
-    "source": "out/branch_metrics.csv rows track=OPI, arm in {R3, C0} (from results/branches/OPI_*__r*__<arm>_s*.jsonl)",
+    "source": "out/extended/branch_metrics.csv rows track=OPI, arm in {R3, C0} (from results/branches/OPI_*__r*__<arm>_s*.jsonl)",
     "method": "median k (5-round mean >= 0.9 pre)"
   },
   "OPI.R3.censored_recover": {
     "value": "0/4",
-    "source": "out/branch_metrics.csv rows track=OPI, arm in {R3, C0} (from results/branches/OPI_*__r*__<arm>_s*.jsonl)",
+    "source": "out/extended/branch_metrics.csv rows track=OPI, arm in {R3, C0} (from results/branches/OPI_*__r*__<arm>_s*.jsonl)",
     "method": "branches that never recovered within the horizon"
   },
   "OPI.R3.mean_pre": {
     "value": 0.7042,
-    "source": "out/branch_metrics.csv rows track=OPI, arm in {R3, C0} (from results/branches/OPI_*__r*__<arm>_s*.jsonl)",
+    "source": "out/extended/branch_metrics.csv rows track=OPI, arm in {R3, C0} (from results/branches/OPI_*__r*__<arm>_s*.jsonl)",
     "method": "mean pidx over the 20 rounds before the swap"
   },
   "OPI.R3.Y_per_market": {
@@ -396,17 +396,17 @@
       "OPI_qwen3-14b_PI_s1": 0.489,
       "OPI_qwen3-14b_PI_s3": 0.7946
     },
-    "source": "out/branch_metrics.csv rows track=OPI, arm in {R3, C0} (from results/branches/OPI_*__r*__<arm>_s*.jsonl)",
+    "source": "out/extended/branch_metrics.csv rows track=OPI, arm in {R3, C0} (from results/branches/OPI_*__r*__<arm>_s*.jsonl)",
     "method": "seeds averaged"
   },
   "OPI.R3.mean_price": {
     "value": 1.7631,
-    "source": "out/branch_metrics.csv rows track=OPI, arm in {R3, C0} (from results/branches/OPI_*__r*__<arm>_s*.jsonl)",
+    "source": "out/extended/branch_metrics.csv rows track=OPI, arm in {R3, C0} (from results/branches/OPI_*__r*__<arm>_s*.jsonl)",
     "method": "mean of both firms' prices over post-swap rounds 31-50 (from mean_Y)"
   },
   "OPI.R3.mean_gain": {
     "value": 0.8193,
-    "source": "out/branch_metrics.csv rows track=OPI, arm in {R3, C0} (from results/branches/OPI_*__r*__<arm>_s*.jsonl)",
+    "source": "out/extended/branch_metrics.csv rows track=OPI, arm in {R3, C0} (from results/branches/OPI_*__r*__<arm>_s*.jsonl)",
     "method": "harness profit gain over post-swap rounds 31-50 (0 = Nash profit, 1 = monopoly), seeds averaged"
   },
   "OPI.R3.pre_per_market": {
@@ -414,22 +414,22 @@
       "OPI_qwen3-14b_PI_s1": 0.5493,
       "OPI_qwen3-14b_PI_s3": 0.859
     },
-    "source": "out/branch_metrics.csv rows track=OPI, arm in {R3, C0} (from results/branches/OPI_*__r*__<arm>_s*.jsonl)",
+    "source": "out/extended/branch_metrics.csv rows track=OPI, arm in {R3, C0} (from results/branches/OPI_*__r*__<arm>_s*.jsonl)",
     "method": "mean pidx over the 20 rounds before the swap"
   },
   "OPI.R3.newcomer_first_price": {
     "value": 2.89,
-    "source": "out/branch_metrics.csv rows track=OPI, arm in {R3, C0} (from results/branches/OPI_*__r*__<arm>_s*.jsonl)",
+    "source": "out/extended/branch_metrics.csv rows track=OPI, arm in {R3, C0} (from results/branches/OPI_*__r*__<arm>_s*.jsonl)",
     "method": "mean price of firm 1 in post-swap round 1 (the newcomer's opening price)"
   },
   "OPI.R3.mean_gap": {
     "value": -0.0214,
-    "source": "out/branch_metrics.csv rows track=OPI, arm in {R3, C0} (from results/branches/OPI_*__r*__<arm>_s*.jsonl)",
+    "source": "out/extended/branch_metrics.csv rows track=OPI, arm in {R3, C0} (from results/branches/OPI_*__r*__<arm>_s*.jsonl)",
     "method": "mean p1 - p0 over the scoring window"
   },
   "OPI.R3.delta": {
     "value": -0.0513,
-    "source": "out/branch_metrics.csv rows track=OPI, arm in {R3, C0} (from results/branches/OPI_*__r*__<arm>_s*.jsonl)",
+    "source": "out/extended/branch_metrics.csv rows track=OPI, arm in {R3, C0} (from results/branches/OPI_*__r*__<arm>_s*.jsonl)",
     "method": "mean over base runs of Y(arm) - Y(C0)"
   },
   "OPI.R3.delta_ci": {
@@ -437,7 +437,7 @@
       null,
       null
     ],
-    "source": "out/branch_metrics.csv rows track=OPI, arm in {R3, C0} (from results/branches/OPI_*__r*__<arm>_s*.jsonl)",
+    "source": "out/extended/branch_metrics.csv rows track=OPI, arm in {R3, C0} (from results/branches/OPI_*__r*__<arm>_s*.jsonl)",
     "method": "95% cluster bootstrap over base runs, 2000 resamples (none with fewer than 3 base runs)"
   },
   "OPI.R3.delta_per_market": {
@@ -445,17 +445,17 @@
       "OPI_qwen3-14b_PI_s1": -0.0617,
       "OPI_qwen3-14b_PI_s3": -0.0409
     },
-    "source": "out/branch_metrics.csv rows track=OPI, arm in {R3, C0} (from results/branches/OPI_*__r*__<arm>_s*.jsonl)",
+    "source": "out/extended/branch_metrics.csv rows track=OPI, arm in {R3, C0} (from results/branches/OPI_*__r*__<arm>_s*.jsonl)",
     "method": "Y(arm) - Y(C0) per base run, seeds averaged"
   },
   "OPI.R3.markets_below_control": {
     "value": "2/2",
-    "source": "out/branch_metrics.csv rows track=OPI, arm in {R3, C0} (from results/branches/OPI_*__r*__<arm>_s*.jsonl)",
+    "source": "out/extended/branch_metrics.csv rows track=OPI, arm in {R3, C0} (from results/branches/OPI_*__r*__<arm>_s*.jsonl)",
     "method": "base runs where Y(arm) < Y(C0), seeds averaged (exploratory)"
   },
   "OPI.R3.delta_gain": {
     "value": -0.04,
-    "source": "out/branch_metrics.csv rows track=OPI, arm in {R3, C0} (from results/branches/OPI_*__r*__<arm>_s*.jsonl)",
+    "source": "out/extended/branch_metrics.csv rows track=OPI, arm in {R3, C0} (from results/branches/OPI_*__r*__<arm>_s*.jsonl)",
     "method": ""
   },
   "OPI.R3.delta_gain_ci": {
@@ -463,12 +463,12 @@
       null,
       null
     ],
-    "source": "out/branch_metrics.csv rows track=OPI, arm in {R3, C0} (from results/branches/OPI_*__r*__<arm>_s*.jsonl)",
+    "source": "out/extended/branch_metrics.csv rows track=OPI, arm in {R3, C0} (from results/branches/OPI_*__r*__<arm>_s*.jsonl)",
     "method": ""
   },
   "OPI.R3.incumbent_response": {
     "value": 0.0,
-    "source": "out/branch_metrics.csv rows track=OPI, arm in {R3, C0} (from results/branches/OPI_*__r*__<arm>_s*.jsonl)",
+    "source": "out/extended/branch_metrics.csv rows track=OPI, arm in {R3, C0} (from results/branches/OPI_*__r*__<arm>_s*.jsonl)",
     "method": "mean p0 over post-swap rounds 1-10, arm - C0"
   },
   "OPI.R3.incumbent_response_ci": {
@@ -476,52 +476,52 @@
       null,
       null
     ],
-    "source": "out/branch_metrics.csv rows track=OPI, arm in {R3, C0} (from results/branches/OPI_*__r*__<arm>_s*.jsonl)",
+    "source": "out/extended/branch_metrics.csv rows track=OPI, arm in {R3, C0} (from results/branches/OPI_*__r*__<arm>_s*.jsonl)",
     "method": ""
   },
   "OPI.R4.n_base_runs": {
     "value": 2,
-    "source": "out/branch_metrics.csv rows track=OPI, arm in {R4, C0} (from results/branches/OPI_*__r*__<arm>_s*.jsonl)",
+    "source": "out/extended/branch_metrics.csv rows track=OPI, arm in {R4, C0} (from results/branches/OPI_*__r*__<arm>_s*.jsonl)",
     "method": ""
   },
   "OPI.R4.n_branches": {
     "value": 4,
-    "source": "out/branch_metrics.csv rows track=OPI, arm in {R4, C0} (from results/branches/OPI_*__r*__<arm>_s*.jsonl)",
+    "source": "out/extended/branch_metrics.csv rows track=OPI, arm in {R4, C0} (from results/branches/OPI_*__r*__<arm>_s*.jsonl)",
     "method": ""
   },
   "OPI.R4.n_paired_with_C0": {
     "value": 2,
-    "source": "out/branch_metrics.csv rows track=OPI, arm in {R4, C0} (from results/branches/OPI_*__r*__<arm>_s*.jsonl)",
+    "source": "out/extended/branch_metrics.csv rows track=OPI, arm in {R4, C0} (from results/branches/OPI_*__r*__<arm>_s*.jsonl)",
     "method": "base runs with both this arm and C0 complete"
   },
   "OPI.R4.mean_Y": {
     "value": 0.6903,
-    "source": "out/branch_metrics.csv rows track=OPI, arm in {R4, C0} (from results/branches/OPI_*__r*__<arm>_s*.jsonl)",
+    "source": "out/extended/branch_metrics.csv rows track=OPI, arm in {R4, C0} (from results/branches/OPI_*__r*__<arm>_s*.jsonl)",
     "method": "mean pidx over post-swap rounds 31-50, seeds averaged"
   },
   "OPI.R4.survive_branches": {
     "value": "4/4",
-    "source": "out/branch_metrics.csv rows track=OPI, arm in {R4, C0} (from results/branches/OPI_*__r*__<arm>_s*.jsonl)",
+    "source": "out/extended/branch_metrics.csv rows track=OPI, arm in {R4, C0} (from results/branches/OPI_*__r*__<arm>_s*.jsonl)",
     "method": "branches with Y >= 0.5"
   },
   "OPI.R4.survive_runs": {
     "value": "2/2",
-    "source": "out/branch_metrics.csv rows track=OPI, arm in {R4, C0} (from results/branches/OPI_*__r*__<arm>_s*.jsonl)",
+    "source": "out/extended/branch_metrics.csv rows track=OPI, arm in {R4, C0} (from results/branches/OPI_*__r*__<arm>_s*.jsonl)",
     "method": "base runs with seed-averaged Y >= 0.5"
   },
   "OPI.R4.median_recover": {
     "value": 5,
-    "source": "out/branch_metrics.csv rows track=OPI, arm in {R4, C0} (from results/branches/OPI_*__r*__<arm>_s*.jsonl)",
+    "source": "out/extended/branch_metrics.csv rows track=OPI, arm in {R4, C0} (from results/branches/OPI_*__r*__<arm>_s*.jsonl)",
     "method": "median k (5-round mean >= 0.9 pre)"
   },
   "OPI.R4.censored_recover": {
     "value": "0/4",
-    "source": "out/branch_metrics.csv rows track=OPI, arm in {R4, C0} (from results/branches/OPI_*__r*__<arm>_s*.jsonl)",
+    "source": "out/extended/branch_metrics.csv rows track=OPI, arm in {R4, C0} (from results/branches/OPI_*__r*__<arm>_s*.jsonl)",
     "method": "branches that never recovered within the horizon"
   },
   "OPI.R4.mean_pre": {
     "value": 0.7042,
-    "source": "out/branch_metrics.csv rows track=OPI, arm in {R4, C0} (from results/branches/OPI_*__r*__<arm>_s*.jsonl)",
+    "source": "out/extended/branch_metrics.csv rows track=OPI, arm in {R4, C0} (from results/branches/OPI_*__r*__<arm>_s*.jsonl)",
     "method": "mean pidx over the 20 rounds before the swap"
   },
   "OPI.R4.Y_per_market": {
@@ -529,17 +529,17 @@
       "OPI_qwen3-14b_PI_s1": 0.5466,
       "OPI_qwen3-14b_PI_s3": 0.8341
     },
-    "source": "out/branch_metrics.csv rows track=OPI, arm in {R4, C0} (from results/branches/OPI_*__r*__<arm>_s*.jsonl)",
+    "source": "out/extended/branch_metrics.csv rows track=OPI, arm in {R4, C0} (from results/branches/OPI_*__r*__<arm>_s*.jsonl)",
     "method": "seeds averaged"
   },
   "OPI.R4.mean_price": {
     "value": 1.785,
-    "source": "out/branch_metrics.csv rows track=OPI, arm in {R4, C0} (from results/branches/OPI_*__r*__<arm>_s*.jsonl)",
+    "source": "out/extended/branch_metrics.csv rows track=OPI, arm in {R4, C0} (from results/branches/OPI_*__r*__<arm>_s*.jsonl)",
     "method": "mean of both firms' prices over post-swap rounds 31-50 (from mean_Y)"
   },
   "OPI.R4.mean_gain": {
     "value": 0.8574,
-    "source": "out/branch_metrics.csv rows track=OPI, arm in {R4, C0} (from results/branches/OPI_*__r*__<arm>_s*.jsonl)",
+    "source": "out/extended/branch_metrics.csv rows track=OPI, arm in {R4, C0} (from results/branches/OPI_*__r*__<arm>_s*.jsonl)",
     "method": "harness profit gain over post-swap rounds 31-50 (0 = Nash profit, 1 = monopoly), seeds averaged"
   },
   "OPI.R4.pre_per_market": {
@@ -547,22 +547,22 @@
       "OPI_qwen3-14b_PI_s1": 0.5493,
       "OPI_qwen3-14b_PI_s3": 0.859
     },
-    "source": "out/branch_metrics.csv rows track=OPI, arm in {R4, C0} (from results/branches/OPI_*__r*__<arm>_s*.jsonl)",
+    "source": "out/extended/branch_metrics.csv rows track=OPI, arm in {R4, C0} (from results/branches/OPI_*__r*__<arm>_s*.jsonl)",
     "method": "mean pidx over the 20 rounds before the swap"
   },
   "OPI.R4.newcomer_first_price": {
     "value": 1.8,
-    "source": "out/branch_metrics.csv rows track=OPI, arm in {R4, C0} (from results/branches/OPI_*__r*__<arm>_s*.jsonl)",
+    "source": "out/extended/branch_metrics.csv rows track=OPI, arm in {R4, C0} (from results/branches/OPI_*__r*__<arm>_s*.jsonl)",
     "method": "mean price of firm 1 in post-swap round 1 (the newcomer's opening price)"
   },
   "OPI.R4.mean_gap": {
     "value": 0.0188,
-    "source": "out/branch_metrics.csv rows track=OPI, arm in {R4, C0} (from results/branches/OPI_*__r*__<arm>_s*.jsonl)",
+    "source": "out/extended/branch_metrics.csv rows track=OPI, arm in {R4, C0} (from results/branches/OPI_*__r*__<arm>_s*.jsonl)",
     "method": "mean p1 - p0 over the scoring window"
   },
   "OPI.R4.delta": {
     "value": -0.0028,
-    "source": "out/branch_metrics.csv rows track=OPI, arm in {R4, C0} (from results/branches/OPI_*__r*__<arm>_s*.jsonl)",
+    "source": "out/extended/branch_metrics.csv rows track=OPI, arm in {R4, C0} (from results/branches/OPI_*__r*__<arm>_s*.jsonl)",
     "method": "mean over base runs of Y(arm) - Y(C0)"
   },
   "OPI.R4.delta_ci": {
@@ -570,7 +570,7 @@
       null,
       null
     ],
-    "source": "out/branch_metrics.csv rows track=OPI, arm in {R4, C0} (from results/branches/OPI_*__r*__<arm>_s*.jsonl)",
+    "source": "out/extended/branch_metrics.csv rows track=OPI, arm in {R4, C0} (from results/branches/OPI_*__r*__<arm>_s*.jsonl)",
     "method": "95% cluster bootstrap over base runs, 2000 resamples (none with fewer than 3 base runs)"
   },
   "OPI.R4.delta_per_market": {
@@ -578,17 +578,17 @@
       "OPI_qwen3-14b_PI_s1": -0.0041,
       "OPI_qwen3-14b_PI_s3": -0.0014
     },
-    "source": "out/branch_metrics.csv rows track=OPI, arm in {R4, C0} (from results/branches/OPI_*__r*__<arm>_s*.jsonl)",
+    "source": "out/extended/branch_metrics.csv rows track=OPI, arm in {R4, C0} (from results/branches/OPI_*__r*__<arm>_s*.jsonl)",
     "method": "Y(arm) - Y(C0) per base run, seeds averaged"
   },
   "OPI.R4.markets_below_control": {
     "value": "2/2",
-    "source": "out/branch_metrics.csv rows track=OPI, arm in {R4, C0} (from results/branches/OPI_*__r*__<arm>_s*.jsonl)",
+    "source": "out/extended/branch_metrics.csv rows track=OPI, arm in {R4, C0} (from results/branches/OPI_*__r*__<arm>_s*.jsonl)",
     "method": "base runs where Y(arm) < Y(C0), seeds averaged (exploratory)"
   },
   "OPI.R4.delta_gain": {
     "value": -0.0019,
-    "source": "out/branch_metrics.csv rows track=OPI, arm in {R4, C0} (from results/branches/OPI_*__r*__<arm>_s*.jsonl)",
+    "source": "out/extended/branch_metrics.csv rows track=OPI, arm in {R4, C0} (from results/branches/OPI_*__r*__<arm>_s*.jsonl)",
     "method": ""
   },
   "OPI.R4.delta_gain_ci": {
@@ -596,12 +596,12 @@
       null,
       null
     ],
-    "source": "out/branch_metrics.csv rows track=OPI, arm in {R4, C0} (from results/branches/OPI_*__r*__<arm>_s*.jsonl)",
+    "source": "out/extended/branch_metrics.csv rows track=OPI, arm in {R4, C0} (from results/branches/OPI_*__r*__<arm>_s*.jsonl)",
     "method": ""
   },
   "OPI.R4.incumbent_response": {
     "value": 0.0,
-    "source": "out/branch_metrics.csv rows track=OPI, arm in {R4, C0} (from results/branches/OPI_*__r*__<arm>_s*.jsonl)",
+    "source": "out/extended/branch_metrics.csv rows track=OPI, arm in {R4, C0} (from results/branches/OPI_*__r*__<arm>_s*.jsonl)",
     "method": "mean p0 over post-swap rounds 1-10, arm - C0"
   },
   "OPI.R4.incumbent_response_ci": {
@@ -609,52 +609,52 @@
       null,
       null
     ],
-    "source": "out/branch_metrics.csv rows track=OPI, arm in {R4, C0} (from results/branches/OPI_*__r*__<arm>_s*.jsonl)",
+    "source": "out/extended/branch_metrics.csv rows track=OPI, arm in {R4, C0} (from results/branches/OPI_*__r*__<arm>_s*.jsonl)",
     "method": ""
   },
   "OPI.R5.n_base_runs": {
     "value": 2,
-    "source": "out/branch_metrics.csv rows track=OPI, arm in {R5, C0} (from results/branches/OPI_*__r*__<arm>_s*.jsonl)",
+    "source": "out/extended/branch_metrics.csv rows track=OPI, arm in {R5, C0} (from results/branches/OPI_*__r*__<arm>_s*.jsonl)",
     "method": ""
   },
   "OPI.R5.n_branches": {
     "value": 4,
-    "source": "out/branch_metrics.csv rows track=OPI, arm in {R5, C0} (from results/branches/OPI_*__r*__<arm>_s*.jsonl)",
+    "source": "out/extended/branch_metrics.csv rows track=OPI, arm in {R5, C0} (from results/branches/OPI_*__r*__<arm>_s*.jsonl)",
     "method": ""
   },
   "OPI.R5.n_paired_with_C0": {
     "value": 2,
-    "source": "out/branch_metrics.csv rows track=OPI, arm in {R5, C0} (from results/branches/OPI_*__r*__<arm>_s*.jsonl)",
+    "source": "out/extended/branch_metrics.csv rows track=OPI, arm in {R5, C0} (from results/branches/OPI_*__r*__<arm>_s*.jsonl)",
     "method": "base runs with both this arm and C0 complete"
   },
   "OPI.R5.mean_Y": {
     "value": 0.8278,
-    "source": "out/branch_metrics.csv rows track=OPI, arm in {R5, C0} (from results/branches/OPI_*__r*__<arm>_s*.jsonl)",
+    "source": "out/extended/branch_metrics.csv rows track=OPI, arm in {R5, C0} (from results/branches/OPI_*__r*__<arm>_s*.jsonl)",
     "method": "mean pidx over post-swap rounds 31-50, seeds averaged"
   },
   "OPI.R5.survive_branches": {
     "value": "4/4",
-    "source": "out/branch_metrics.csv rows track=OPI, arm in {R5, C0} (from results/branches/OPI_*__r*__<arm>_s*.jsonl)",
+    "source": "out/extended/branch_metrics.csv rows track=OPI, arm in {R5, C0} (from results/branches/OPI_*__r*__<arm>_s*.jsonl)",
     "method": "branches with Y >= 0.5"
   },
   "OPI.R5.survive_runs": {
     "value": "2/2",
-    "source": "out/branch_metrics.csv rows track=OPI, arm in {R5, C0} (from results/branches/OPI_*__r*__<arm>_s*.jsonl)",
+    "source": "out/extended/branch_metrics.csv rows track=OPI, arm in {R5, C0} (from results/branches/OPI_*__r*__<arm>_s*.jsonl)",
     "method": "base runs with seed-averaged Y >= 0.5"
   },
   "OPI.R5.median_recover": {
     "value": 5,
-    "source": "out/branch_metrics.csv rows track=OPI, arm in {R5, C0} (from results/branches/OPI_*__r*__<arm>_s*.jsonl)",
+    "source": "out/extended/branch_metrics.csv rows track=OPI, arm in {R5, C0} (from results/branches/OPI_*__r*__<arm>_s*.jsonl)",
     "method": "median k (5-round mean >= 0.9 pre)"
   },
   "OPI.R5.censored_recover": {
     "value": "0/4",
-    "source": "out/branch_metrics.csv rows track=OPI, arm in {R5, C0} (from results/branches/OPI_*__r*__<arm>_s*.jsonl)",
+    "source": "out/extended/branch_metrics.csv rows track=OPI, arm in {R5, C0} (from results/branches/OPI_*__r*__<arm>_s*.jsonl)",
     "method": "branches that never recovered within the horizon"
   },
   "OPI.R5.mean_pre": {
     "value": 0.7042,
-    "source": "out/branch_metrics.csv rows track=OPI, arm in {R5, C0} (from results/branches/OPI_*__r*__<arm>_s*.jsonl)",
+    "source": "out/extended/branch_metrics.csv rows track=OPI, arm in {R5, C0} (from results/branches/OPI_*__r*__<arm>_s*.jsonl)",
     "method": "mean pidx over the 20 rounds before the swap"
   },
   "OPI.R5.Y_per_market": {
@@ -662,17 +662,17 @@
       "OPI_qwen3-14b_PI_s1": 0.7736,
       "OPI_qwen3-14b_PI_s3": 0.882
     },
-    "source": "out/branch_metrics.csv rows track=OPI, arm in {R5, C0} (from results/branches/OPI_*__r*__<arm>_s*.jsonl)",
+    "source": "out/extended/branch_metrics.csv rows track=OPI, arm in {R5, C0} (from results/branches/OPI_*__r*__<arm>_s*.jsonl)",
     "method": "seeds averaged"
   },
   "OPI.R5.mean_price": {
     "value": 1.8471,
-    "source": "out/branch_metrics.csv rows track=OPI, arm in {R5, C0} (from results/branches/OPI_*__r*__<arm>_s*.jsonl)",
+    "source": "out/extended/branch_metrics.csv rows track=OPI, arm in {R5, C0} (from results/branches/OPI_*__r*__<arm>_s*.jsonl)",
     "method": "mean of both firms' prices over post-swap rounds 31-50 (from mean_Y)"
   },
   "OPI.R5.mean_gain": {
     "value": 0.9542,
-    "source": "out/branch_metrics.csv rows track=OPI, arm in {R5, C0} (from results/branches/OPI_*__r*__<arm>_s*.jsonl)",
+    "source": "out/extended/branch_metrics.csv rows track=OPI, arm in {R5, C0} (from results/branches/OPI_*__r*__<arm>_s*.jsonl)",
     "method": "harness profit gain over post-swap rounds 31-50 (0 = Nash profit, 1 = monopoly), seeds averaged"
   },
   "OPI.R5.pre_per_market": {
@@ -680,17 +680,17 @@
       "OPI_qwen3-14b_PI_s1": 0.5493,
       "OPI_qwen3-14b_PI_s3": 0.859
     },
-    "source": "out/branch_metrics.csv rows track=OPI, arm in {R5, C0} (from results/branches/OPI_*__r*__<arm>_s*.jsonl)",
+    "source": "out/extended/branch_metrics.csv rows track=OPI, arm in {R5, C0} (from results/branches/OPI_*__r*__<arm>_s*.jsonl)",
     "method": "mean pidx over the 20 rounds before the swap"
   },
   "OPI.R5.newcomer_first_price": {
     "value": 1.8025,
-    "source": "out/branch_metrics.csv rows track=OPI, arm in {R5, C0} (from results/branches/OPI_*__r*__<arm>_s*.jsonl)",
+    "source": "out/extended/branch_metrics.csv rows track=OPI, arm in {R5, C0} (from results/branches/OPI_*__r*__<arm>_s*.jsonl)",
     "method": "mean price of firm 1 in post-swap round 1 (the newcomer's opening price)"
   },
   "OPI.R5.delta": {
     "value": 0.1347,
-    "source": "out/branch_metrics.csv rows track=OPI, arm in {R5, C0} (from results/branches/OPI_*__r*__<arm>_s*.jsonl)",
+    "source": "out/extended/branch_metrics.csv rows track=OPI, arm in {R5, C0} (from results/branches/OPI_*__r*__<arm>_s*.jsonl)",
     "method": "mean over base runs of Y(arm) - Y(C0)"
   },
   "OPI.R5.delta_ci": {
@@ -698,7 +698,7 @@
       null,
       null
     ],
-    "source": "out/branch_metrics.csv rows track=OPI, arm in {R5, C0} (from results/branches/OPI_*__r*__<arm>_s*.jsonl)",
+    "source": "out/extended/branch_metrics.csv rows track=OPI, arm in {R5, C0} (from results/branches/OPI_*__r*__<arm>_s*.jsonl)",
     "method": "95% cluster bootstrap over base runs, 2000 resamples (none with fewer than 3 base runs)"
   },
   "OPI.R5.delta_per_market": {
@@ -706,17 +706,17 @@
       "OPI_qwen3-14b_PI_s1": 0.2229,
       "OPI_qwen3-14b_PI_s3": 0.0465
     },
-    "source": "out/branch_metrics.csv rows track=OPI, arm in {R5, C0} (from results/branches/OPI_*__r*__<arm>_s*.jsonl)",
+    "source": "out/extended/branch_metrics.csv rows track=OPI, arm in {R5, C0} (from results/branches/OPI_*__r*__<arm>_s*.jsonl)",
     "method": "Y(arm) - Y(C0) per base run, seeds averaged"
   },
   "OPI.R5.markets_below_control": {
     "value": "0/2",
-    "source": "out/branch_metrics.csv rows track=OPI, arm in {R5, C0} (from results/branches/OPI_*__r*__<arm>_s*.jsonl)",
+    "source": "out/extended/branch_metrics.csv rows track=OPI, arm in {R5, C0} (from results/branches/OPI_*__r*__<arm>_s*.jsonl)",
     "method": "base runs where Y(arm) < Y(C0), seeds averaged (exploratory)"
   },
   "OPI.R5.delta_gain": {
     "value": 0.0949,
-    "source": "out/branch_metrics.csv rows track=OPI, arm in {R5, C0} (from results/branches/OPI_*__r*__<arm>_s*.jsonl)",
+    "source": "out/extended/branch_metrics.csv rows track=OPI, arm in {R5, C0} (from results/branches/OPI_*__r*__<arm>_s*.jsonl)",
     "method": ""
   },
   "OPI.R5.delta_gain_ci": {
@@ -724,52 +724,52 @@
       null,
       null
     ],
-    "source": "out/branch_metrics.csv rows track=OPI, arm in {R5, C0} (from results/branches/OPI_*__r*__<arm>_s*.jsonl)",
+    "source": "out/extended/branch_metrics.csv rows track=OPI, arm in {R5, C0} (from results/branches/OPI_*__r*__<arm>_s*.jsonl)",
     "method": ""
   },
   "OPI.R5f.n_base_runs": {
     "value": 2,
-    "source": "out/branch_metrics.csv rows track=OPI, arm in {R5f, C0} (from results/branches/OPI_*__r*__<arm>_s*.jsonl)",
+    "source": "out/extended/branch_metrics.csv rows track=OPI, arm in {R5f, C0} (from results/branches/OPI_*__r*__<arm>_s*.jsonl)",
     "method": ""
   },
   "OPI.R5f.n_branches": {
     "value": 4,
-    "source": "out/branch_metrics.csv rows track=OPI, arm in {R5f, C0} (from results/branches/OPI_*__r*__<arm>_s*.jsonl)",
+    "source": "out/extended/branch_metrics.csv rows track=OPI, arm in {R5f, C0} (from results/branches/OPI_*__r*__<arm>_s*.jsonl)",
     "method": ""
   },
   "OPI.R5f.n_paired_with_C0": {
     "value": 2,
-    "source": "out/branch_metrics.csv rows track=OPI, arm in {R5f, C0} (from results/branches/OPI_*__r*__<arm>_s*.jsonl)",
+    "source": "out/extended/branch_metrics.csv rows track=OPI, arm in {R5f, C0} (from results/branches/OPI_*__r*__<arm>_s*.jsonl)",
     "method": "base runs with both this arm and C0 complete"
   },
   "OPI.R5f.mean_Y": {
     "value": 2.7225,
-    "source": "out/branch_metrics.csv rows track=OPI, arm in {R5f, C0} (from results/branches/OPI_*__r*__<arm>_s*.jsonl)",
+    "source": "out/extended/branch_metrics.csv rows track=OPI, arm in {R5f, C0} (from results/branches/OPI_*__r*__<arm>_s*.jsonl)",
     "method": "mean pidx over post-swap rounds 31-50, seeds averaged"
   },
   "OPI.R5f.survive_branches": {
     "value": "4/4",
-    "source": "out/branch_metrics.csv rows track=OPI, arm in {R5f, C0} (from results/branches/OPI_*__r*__<arm>_s*.jsonl)",
+    "source": "out/extended/branch_metrics.csv rows track=OPI, arm in {R5f, C0} (from results/branches/OPI_*__r*__<arm>_s*.jsonl)",
     "method": "branches with Y >= 0.5"
   },
   "OPI.R5f.survive_runs": {
     "value": "2/2",
-    "source": "out/branch_metrics.csv rows track=OPI, arm in {R5f, C0} (from results/branches/OPI_*__r*__<arm>_s*.jsonl)",
+    "source": "out/extended/branch_metrics.csv rows track=OPI, arm in {R5f, C0} (from results/branches/OPI_*__r*__<arm>_s*.jsonl)",
     "method": "base runs with seed-averaged Y >= 0.5"
   },
   "OPI.R5f.median_recover": {
     "value": 5,
-    "source": "out/branch_metrics.csv rows track=OPI, arm in {R5f, C0} (from results/branches/OPI_*__r*__<arm>_s*.jsonl)",
+    "source": "out/extended/branch_metrics.csv rows track=OPI, arm in {R5f, C0} (from results/branches/OPI_*__r*__<arm>_s*.jsonl)",
     "method": "median k (5-round mean >= 0.9 pre)"
   },
   "OPI.R5f.censored_recover": {
     "value": "0/4",
-    "source": "out/branch_metrics.csv rows track=OPI, arm in {R5f, C0} (from results/branches/OPI_*__r*__<arm>_s*.jsonl)",
+    "source": "out/extended/branch_metrics.csv rows track=OPI, arm in {R5f, C0} (from results/branches/OPI_*__r*__<arm>_s*.jsonl)",
     "method": "branches that never recovered within the horizon"
   },
   "OPI.R5f.mean_pre": {
     "value": 0.7042,
-    "source": "out/branch_metrics.csv rows track=OPI, arm in {R5f, C0} (from results/branches/OPI_*__r*__<arm>_s*.jsonl)",
+    "source": "out/extended/branch_metrics.csv rows track=OPI, arm in {R5f, C0} (from results/branches/OPI_*__r*__<arm>_s*.jsonl)",
     "method": "mean pidx over the 20 rounds before the swap"
   },
   "OPI.R5f.Y_per_market": {
@@ -777,17 +777,17 @@
       "OPI_qwen3-14b_PI_s1": 2.7191,
       "OPI_qwen3-14b_PI_s3": 2.7258
     },
-    "source": "out/branch_metrics.csv rows track=OPI, arm in {R5f, C0} (from results/branches/OPI_*__r*__<arm>_s*.jsonl)",
+    "source": "out/extended/branch_metrics.csv rows track=OPI, arm in {R5f, C0} (from results/branches/OPI_*__r*__<arm>_s*.jsonl)",
     "method": "seeds averaged"
   },
   "OPI.R5f.mean_price": {
     "value": 2.7036,
-    "source": "out/branch_metrics.csv rows track=OPI, arm in {R5f, C0} (from results/branches/OPI_*__r*__<arm>_s*.jsonl)",
+    "source": "out/extended/branch_metrics.csv rows track=OPI, arm in {R5f, C0} (from results/branches/OPI_*__r*__<arm>_s*.jsonl)",
     "method": "mean of both firms' prices over post-swap rounds 31-50 (from mean_Y)"
   },
   "OPI.R5f.mean_gain": {
     "value": -1.1498,
-    "source": "out/branch_metrics.csv rows track=OPI, arm in {R5f, C0} (from results/branches/OPI_*__r*__<arm>_s*.jsonl)",
+    "source": "out/extended/branch_metrics.csv rows track=OPI, arm in {R5f, C0} (from results/branches/OPI_*__r*__<arm>_s*.jsonl)",
     "method": "harness profit gain over post-swap rounds 31-50 (0 = Nash profit, 1 = monopoly), seeds averaged"
   },
   "OPI.R5f.pre_per_market": {
@@ -795,17 +795,17 @@
       "OPI_qwen3-14b_PI_s1": 0.5493,
       "OPI_qwen3-14b_PI_s3": 0.859
     },
-    "source": "out/branch_metrics.csv rows track=OPI, arm in {R5f, C0} (from results/branches/OPI_*__r*__<arm>_s*.jsonl)",
+    "source": "out/extended/branch_metrics.csv rows track=OPI, arm in {R5f, C0} (from results/branches/OPI_*__r*__<arm>_s*.jsonl)",
     "method": "mean pidx over the 20 rounds before the swap"
   },
   "OPI.R5f.newcomer_first_price": {
     "value": 2.89,
-    "source": "out/branch_metrics.csv rows track=OPI, arm in {R5f, C0} (from results/branches/OPI_*__r*__<arm>_s*.jsonl)",
+    "source": "out/extended/branch_metrics.csv rows track=OPI, arm in {R5f, C0} (from results/branches/OPI_*__r*__<arm>_s*.jsonl)",
     "method": "mean price of firm 1 in post-swap round 1 (the newcomer's opening price)"
   },
   "OPI.R5f.delta": {
     "value": 2.0293,
-    "source": "out/branch_metrics.csv rows track=OPI, arm in {R5f, C0} (from results/branches/OPI_*__r*__<arm>_s*.jsonl)",
+    "source": "out/extended/branch_metrics.csv rows track=OPI, arm in {R5f, C0} (from results/branches/OPI_*__r*__<arm>_s*.jsonl)",
     "method": "mean over base runs of Y(arm) - Y(C0)"
   },
   "OPI.R5f.delta_ci": {
@@ -813,7 +813,7 @@
       null,
       null
     ],
-    "source": "out/branch_metrics.csv rows track=OPI, arm in {R5f, C0} (from results/branches/OPI_*__r*__<arm>_s*.jsonl)",
+    "source": "out/extended/branch_metrics.csv rows track=OPI, arm in {R5f, C0} (from results/branches/OPI_*__r*__<arm>_s*.jsonl)",
     "method": "95% cluster bootstrap over base runs, 2000 resamples (none with fewer than 3 base runs)"
   },
   "OPI.R5f.delta_per_market": {
@@ -821,17 +821,17 @@
       "OPI_qwen3-14b_PI_s1": 2.1684,
       "OPI_qwen3-14b_PI_s3": 1.8903
     },
-    "source": "out/branch_metrics.csv rows track=OPI, arm in {R5f, C0} (from results/branches/OPI_*__r*__<arm>_s*.jsonl)",
+    "source": "out/extended/branch_metrics.csv rows track=OPI, arm in {R5f, C0} (from results/branches/OPI_*__r*__<arm>_s*.jsonl)",
     "method": "Y(arm) - Y(C0) per base run, seeds averaged"
   },
   "OPI.R5f.markets_below_control": {
     "value": "0/2",
-    "source": "out/branch_metrics.csv rows track=OPI, arm in {R5f, C0} (from results/branches/OPI_*__r*__<arm>_s*.jsonl)",
+    "source": "out/extended/branch_metrics.csv rows track=OPI, arm in {R5f, C0} (from results/branches/OPI_*__r*__<arm>_s*.jsonl)",
     "method": "base runs where Y(arm) < Y(C0), seeds averaged (exploratory)"
   },
   "OPI.R5f.delta_gain": {
     "value": -2.0091,
-    "source": "out/branch_metrics.csv rows track=OPI, arm in {R5f, C0} (from results/branches/OPI_*__r*__<arm>_s*.jsonl)",
+    "source": "out/extended/branch_metrics.csv rows track=OPI, arm in {R5f, C0} (from results/branches/OPI_*__r*__<arm>_s*.jsonl)",
     "method": ""
   },
   "OPI.R5f.delta_gain_ci": {
@@ -839,52 +839,52 @@
       null,
       null
     ],
-    "source": "out/branch_metrics.csv rows track=OPI, arm in {R5f, C0} (from results/branches/OPI_*__r*__<arm>_s*.jsonl)",
+    "source": "out/extended/branch_metrics.csv rows track=OPI, arm in {R5f, C0} (from results/branches/OPI_*__r*__<arm>_s*.jsonl)",
     "method": ""
   },
   "OPI.RP.n_base_runs": {
     "value": 2,
-    "source": "out/branch_metrics.csv rows track=OPI, arm in {RP, C0} (from results/branches/OPI_*__r*__<arm>_s*.jsonl)",
+    "source": "out/extended/branch_metrics.csv rows track=OPI, arm in {RP, C0} (from results/branches/OPI_*__r*__<arm>_s*.jsonl)",
     "method": ""
   },
   "OPI.RP.n_branches": {
     "value": 4,
-    "source": "out/branch_metrics.csv rows track=OPI, arm in {RP, C0} (from results/branches/OPI_*__r*__<arm>_s*.jsonl)",
+    "source": "out/extended/branch_metrics.csv rows track=OPI, arm in {RP, C0} (from results/branches/OPI_*__r*__<arm>_s*.jsonl)",
     "method": ""
   },
   "OPI.RP.n_paired_with_C0": {
     "value": 2,
-    "source": "out/branch_metrics.csv rows track=OPI, arm in {RP, C0} (from results/branches/OPI_*__r*__<arm>_s*.jsonl)",
+    "source": "out/extended/branch_metrics.csv rows track=OPI, arm in {RP, C0} (from results/branches/OPI_*__r*__<arm>_s*.jsonl)",
     "method": "base runs with both this arm and C0 complete"
   },
   "OPI.RP.mean_Y": {
     "value": 0.6931,
-    "source": "out/branch_metrics.csv rows track=OPI, arm in {RP, C0} (from results/branches/OPI_*__r*__<arm>_s*.jsonl)",
+    "source": "out/extended/branch_metrics.csv rows track=OPI, arm in {RP, C0} (from results/branches/OPI_*__r*__<arm>_s*.jsonl)",
     "method": "mean pidx over post-swap rounds 31-50, seeds averaged"
   },
   "OPI.RP.survive_branches": {
     "value": "4/4",
-    "source": "out/branch_metrics.csv rows track=OPI, arm in {RP, C0} (from results/branches/OPI_*__r*__<arm>_s*.jsonl)",
+    "source": "out/extended/branch_metrics.csv rows track=OPI, arm in {RP, C0} (from results/branches/OPI_*__r*__<arm>_s*.jsonl)",
     "method": "branches with Y >= 0.5"
   },
   "OPI.RP.survive_runs": {
     "value": "2/2",
-    "source": "out/branch_metrics.csv rows track=OPI, arm in {RP, C0} (from results/branches/OPI_*__r*__<arm>_s*.jsonl)",
+    "source": "out/extended/branch_metrics.csv rows track=OPI, arm in {RP, C0} (from results/branches/OPI_*__r*__<arm>_s*.jsonl)",
     "method": "base runs with seed-averaged Y >= 0.5"
   },
   "OPI.RP.median_recover": {
     "value": 5,
-    "source": "out/branch_metrics.csv rows track=OPI, arm in {RP, C0} (from results/branches/OPI_*__r*__<arm>_s*.jsonl)",
+    "source": "out/extended/branch_metrics.csv rows track=OPI, arm in {RP, C0} (from results/branches/OPI_*__r*__<arm>_s*.jsonl)",
     "method": "median k (5-round mean >= 0.9 pre)"
   },
   "OPI.RP.censored_recover": {
     "value": "0/4",
-    "source": "out/branch_metrics.csv rows track=OPI, arm in {RP, C0} (from results/branches/OPI_*__r*__<arm>_s*.jsonl)",
+    "source": "out/extended/branch_metrics.csv rows track=OPI, arm in {RP, C0} (from results/branches/OPI_*__r*__<arm>_s*.jsonl)",
     "method": "branches that never recovered within the horizon"
   },
   "OPI.RP.mean_pre": {
     "value": 0.7042,
-    "source": "out/branch_metrics.csv rows track=OPI, arm in {RP, C0} (from results/branches/OPI_*__r*__<arm>_s*.jsonl)",
+    "source": "out/extended/branch_metrics.csv rows track=OPI, arm in {RP, C0} (from results/branches/OPI_*__r*__<arm>_s*.jsonl)",
     "method": "mean pidx over the 20 rounds before the swap"
   },
   "OPI.RP.Y_per_market": {
@@ -892,17 +892,17 @@
       "OPI_qwen3-14b_PI_s1": 0.5521,
       "OPI_qwen3-14b_PI_s3": 0.8341
     },
-    "source": "out/branch_metrics.csv rows track=OPI, arm in {RP, C0} (from results/branches/OPI_*__r*__<arm>_s*.jsonl)",
+    "source": "out/extended/branch_metrics.csv rows track=OPI, arm in {RP, C0} (from results/branches/OPI_*__r*__<arm>_s*.jsonl)",
     "method": "seeds averaged"
   },
   "OPI.RP.mean_price": {
     "value": 1.7863,
-    "source": "out/branch_metrics.csv rows track=OPI, arm in {RP, C0} (from results/branches/OPI_*__r*__<arm>_s*.jsonl)",
+    "source": "out/extended/branch_metrics.csv rows track=OPI, arm in {RP, C0} (from results/branches/OPI_*__r*__<arm>_s*.jsonl)",
     "method": "mean of both firms' prices over post-swap rounds 31-50 (from mean_Y)"
   },
   "OPI.RP.mean_gain": {
     "value": 0.8597,
-    "source": "out/branch_metrics.csv rows track=OPI, arm in {RP, C0} (from results/branches/OPI_*__r*__<arm>_s*.jsonl)",
+    "source": "out/extended/branch_metrics.csv rows track=OPI, arm in {RP, C0} (from results/branches/OPI_*__r*__<arm>_s*.jsonl)",
     "method": "harness profit gain over post-swap rounds 31-50 (0 = Nash profit, 1 = monopoly), seeds averaged"
   },
   "OPI.RP.pre_per_market": {
@@ -910,22 +910,22 @@
       "OPI_qwen3-14b_PI_s1": 0.5493,
       "OPI_qwen3-14b_PI_s3": 0.859
     },
-    "source": "out/branch_metrics.csv rows track=OPI, arm in {RP, C0} (from results/branches/OPI_*__r*__<arm>_s*.jsonl)",
+    "source": "out/extended/branch_metrics.csv rows track=OPI, arm in {RP, C0} (from results/branches/OPI_*__r*__<arm>_s*.jsonl)",
     "method": "mean pidx over the 20 rounds before the swap"
   },
   "OPI.RP.newcomer_first_price": {
     "value": 1.8,
-    "source": "out/branch_metrics.csv rows track=OPI, arm in {RP, C0} (from results/branches/OPI_*__r*__<arm>_s*.jsonl)",
+    "source": "out/extended/branch_metrics.csv rows track=OPI, arm in {RP, C0} (from results/branches/OPI_*__r*__<arm>_s*.jsonl)",
     "method": "mean price of firm 1 in post-swap round 1 (the newcomer's opening price)"
   },
   "OPI.RP.mean_gap": {
     "value": 0.0225,
-    "source": "out/branch_metrics.csv rows track=OPI, arm in {RP, C0} (from results/branches/OPI_*__r*__<arm>_s*.jsonl)",
+    "source": "out/extended/branch_metrics.csv rows track=OPI, arm in {RP, C0} (from results/branches/OPI_*__r*__<arm>_s*.jsonl)",
     "method": "mean p1 - p0 over the scoring window"
   },
   "OPI.RP.delta": {
     "value": 0.0,
-    "source": "out/branch_metrics.csv rows track=OPI, arm in {RP, C0} (from results/branches/OPI_*__r*__<arm>_s*.jsonl)",
+    "source": "out/extended/branch_metrics.csv rows track=OPI, arm in {RP, C0} (from results/branches/OPI_*__r*__<arm>_s*.jsonl)",
     "method": "mean over base runs of Y(arm) - Y(C0)"
   },
   "OPI.RP.delta_ci": {
@@ -933,7 +933,7 @@
       null,
       null
     ],
-    "source": "out/branch_metrics.csv rows track=OPI, arm in {RP, C0} (from results/branches/OPI_*__r*__<arm>_s*.jsonl)",
+    "source": "out/extended/branch_metrics.csv rows track=OPI, arm in {RP, C0} (from results/branches/OPI_*__r*__<arm>_s*.jsonl)",
     "method": "95% cluster bootstrap over base runs, 2000 resamples (none with fewer than 3 base runs)"
   },
   "OPI.RP.delta_per_market": {
@@ -941,17 +941,17 @@
       "OPI_qwen3-14b_PI_s1": 0.0014,
       "OPI_qwen3-14b_PI_s3": -0.0014
     },
-    "source": "out/branch_metrics.csv rows track=OPI, arm in {RP, C0} (from results/branches/OPI_*__r*__<arm>_s*.jsonl)",
+    "source": "out/extended/branch_metrics.csv rows track=OPI, arm in {RP, C0} (from results/branches/OPI_*__r*__<arm>_s*.jsonl)",
     "method": "Y(arm) - Y(C0) per base run, seeds averaged"
   },
   "OPI.RP.markets_below_control": {
     "value": "1/2",
-    "source": "out/branch_metrics.csv rows track=OPI, arm in {RP, C0} (from results/branches/OPI_*__r*__<arm>_s*.jsonl)",
+    "source": "out/extended/branch_metrics.csv rows track=OPI, arm in {RP, C0} (from results/branches/OPI_*__r*__<arm>_s*.jsonl)",
     "method": "base runs where Y(arm) < Y(C0), seeds averaged (exploratory)"
   },
   "OPI.RP.delta_gain": {
     "value": 0.0004,
-    "source": "out/branch_metrics.csv rows track=OPI, arm in {RP, C0} (from results/branches/OPI_*__r*__<arm>_s*.jsonl)",
+    "source": "out/extended/branch_metrics.csv rows track=OPI, arm in {RP, C0} (from results/branches/OPI_*__r*__<arm>_s*.jsonl)",
     "method": ""
   },
   "OPI.RP.delta_gain_ci": {
@@ -959,12 +959,12 @@
       null,
       null
     ],
-    "source": "out/branch_metrics.csv rows track=OPI, arm in {RP, C0} (from results/branches/OPI_*__r*__<arm>_s*.jsonl)",
+    "source": "out/extended/branch_metrics.csv rows track=OPI, arm in {RP, C0} (from results/branches/OPI_*__r*__<arm>_s*.jsonl)",
     "method": ""
   },
   "OPI.RP.incumbent_response": {
     "value": 0.0,
-    "source": "out/branch_metrics.csv rows track=OPI, arm in {RP, C0} (from results/branches/OPI_*__r*__<arm>_s*.jsonl)",
+    "source": "out/extended/branch_metrics.csv rows track=OPI, arm in {RP, C0} (from results/branches/OPI_*__r*__<arm>_s*.jsonl)",
     "method": "mean p0 over post-swap rounds 1-10, arm - C0"
   },
   "OPI.RP.incumbent_response_ci": {
@@ -972,52 +972,52 @@
       null,
       null
     ],
-    "source": "out/branch_metrics.csv rows track=OPI, arm in {RP, C0} (from results/branches/OPI_*__r*__<arm>_s*.jsonl)",
+    "source": "out/extended/branch_metrics.csv rows track=OPI, arm in {RP, C0} (from results/branches/OPI_*__r*__<arm>_s*.jsonl)",
     "method": ""
   },
   "F.C0.n_base_runs": {
     "value": 8,
-    "source": "out/branch_metrics.csv rows track=F, arm in {C0, C0} (from results/branches/F_*__r*__<arm>_s*.jsonl)",
+    "source": "out/extended/branch_metrics.csv rows track=F, arm in {C0, C0} (from results/branches/F_*__r*__<arm>_s*.jsonl)",
     "method": ""
   },
   "F.C0.n_branches": {
     "value": 16,
-    "source": "out/branch_metrics.csv rows track=F, arm in {C0, C0} (from results/branches/F_*__r*__<arm>_s*.jsonl)",
+    "source": "out/extended/branch_metrics.csv rows track=F, arm in {C0, C0} (from results/branches/F_*__r*__<arm>_s*.jsonl)",
     "method": ""
   },
   "F.C0.n_paired_with_C0": {
     "value": 8,
-    "source": "out/branch_metrics.csv rows track=F, arm in {C0, C0} (from results/branches/F_*__r*__<arm>_s*.jsonl)",
+    "source": "out/extended/branch_metrics.csv rows track=F, arm in {C0, C0} (from results/branches/F_*__r*__<arm>_s*.jsonl)",
     "method": "base runs with both this arm and C0 complete"
   },
   "F.C0.mean_Y": {
     "value": 0.8166,
-    "source": "out/branch_metrics.csv rows track=F, arm in {C0, C0} (from results/branches/F_*__r*__<arm>_s*.jsonl)",
+    "source": "out/extended/branch_metrics.csv rows track=F, arm in {C0, C0} (from results/branches/F_*__r*__<arm>_s*.jsonl)",
     "method": "mean pidx over post-swap rounds 31-50, seeds averaged"
   },
   "F.C0.survive_branches": {
     "value": "12/16",
-    "source": "out/branch_metrics.csv rows track=F, arm in {C0, C0} (from results/branches/F_*__r*__<arm>_s*.jsonl)",
+    "source": "out/extended/branch_metrics.csv rows track=F, arm in {C0, C0} (from results/branches/F_*__r*__<arm>_s*.jsonl)",
     "method": "branches with Y >= 0.5"
   },
   "F.C0.survive_runs": {
     "value": "6/8",
-    "source": "out/branch_metrics.csv rows track=F, arm in {C0, C0} (from results/branches/F_*__r*__<arm>_s*.jsonl)",
+    "source": "out/extended/branch_metrics.csv rows track=F, arm in {C0, C0} (from results/branches/F_*__r*__<arm>_s*.jsonl)",
     "method": "base runs with seed-averaged Y >= 0.5"
   },
   "F.C0.median_recover": {
     "value": 5,
-    "source": "out/branch_metrics.csv rows track=F, arm in {C0, C0} (from results/branches/F_*__r*__<arm>_s*.jsonl)",
+    "source": "out/extended/branch_metrics.csv rows track=F, arm in {C0, C0} (from results/branches/F_*__r*__<arm>_s*.jsonl)",
     "method": "median k (5-round mean >= 0.9 pre)"
   },
   "F.C0.censored_recover": {
     "value": "0/16",
-    "source": "out/branch_metrics.csv rows track=F, arm in {C0, C0} (from results/branches/F_*__r*__<arm>_s*.jsonl)",
+    "source": "out/extended/branch_metrics.csv rows track=F, arm in {C0, C0} (from results/branches/F_*__r*__<arm>_s*.jsonl)",
     "method": "branches that never recovered within the horizon"
   },
   "F.C0.mean_pre": {
     "value": 0.8375,
-    "source": "out/branch_metrics.csv rows track=F, arm in {C0, C0} (from results/branches/F_*__r*__<arm>_s*.jsonl)",
+    "source": "out/extended/branch_metrics.csv rows track=F, arm in {C0, C0} (from results/branches/F_*__r*__<arm>_s*.jsonl)",
     "method": "mean pidx over the 20 rounds before the swap"
   },
   "F.C0.Y_per_market": {
@@ -1031,17 +1031,17 @@
       "F_gem25flash_P0think_s8": 0.8189,
       "F_gem25flash_P0think_s9": 0.8897
     },
-    "source": "out/branch_metrics.csv rows track=F, arm in {C0, C0} (from results/branches/F_*__r*__<arm>_s*.jsonl)",
+    "source": "out/extended/branch_metrics.csv rows track=F, arm in {C0, C0} (from results/branches/F_*__r*__<arm>_s*.jsonl)",
     "method": "seeds averaged"
   },
   "F.C0.mean_price": {
     "value": 1.8421,
-    "source": "out/branch_metrics.csv rows track=F, arm in {C0, C0} (from results/branches/F_*__r*__<arm>_s*.jsonl)",
+    "source": "out/extended/branch_metrics.csv rows track=F, arm in {C0, C0} (from results/branches/F_*__r*__<arm>_s*.jsonl)",
     "method": "mean of both firms' prices over post-swap rounds 31-50 (from mean_Y)"
   },
   "F.C0.mean_gain": {
     "value": 0.8867,
-    "source": "out/branch_metrics.csv rows track=F, arm in {C0, C0} (from results/branches/F_*__r*__<arm>_s*.jsonl)",
+    "source": "out/extended/branch_metrics.csv rows track=F, arm in {C0, C0} (from results/branches/F_*__r*__<arm>_s*.jsonl)",
     "method": "harness profit gain over post-swap rounds 31-50 (0 = Nash profit, 1 = monopoly), seeds averaged"
   },
   "F.C0.pre_per_market": {
@@ -1055,62 +1055,62 @@
       "F_gem25flash_P0think_s8": 0.8242,
       "F_gem25flash_P0think_s9": 0.916
     },
-    "source": "out/branch_metrics.csv rows track=F, arm in {C0, C0} (from results/branches/F_*__r*__<arm>_s*.jsonl)",
+    "source": "out/extended/branch_metrics.csv rows track=F, arm in {C0, C0} (from results/branches/F_*__r*__<arm>_s*.jsonl)",
     "method": "mean pidx over the 20 rounds before the swap"
   },
   "F.C0.newcomer_first_price": {
     "value": 1.8506,
-    "source": "out/branch_metrics.csv rows track=F, arm in {C0, C0} (from results/branches/F_*__r*__<arm>_s*.jsonl)",
+    "source": "out/extended/branch_metrics.csv rows track=F, arm in {C0, C0} (from results/branches/F_*__r*__<arm>_s*.jsonl)",
     "method": "mean price of firm 1 in post-swap round 1 (the newcomer's opening price)"
   },
   "F.C0.mean_gap": {
     "value": -0.0047,
-    "source": "out/branch_metrics.csv rows track=F, arm in {C0, C0} (from results/branches/F_*__r*__<arm>_s*.jsonl)",
+    "source": "out/extended/branch_metrics.csv rows track=F, arm in {C0, C0} (from results/branches/F_*__r*__<arm>_s*.jsonl)",
     "method": "mean p1 - p0 over the scoring window"
   },
   "F.R1.n_base_runs": {
     "value": 8,
-    "source": "out/branch_metrics.csv rows track=F, arm in {R1, C0} (from results/branches/F_*__r*__<arm>_s*.jsonl)",
+    "source": "out/extended/branch_metrics.csv rows track=F, arm in {R1, C0} (from results/branches/F_*__r*__<arm>_s*.jsonl)",
     "method": ""
   },
   "F.R1.n_branches": {
     "value": 16,
-    "source": "out/branch_metrics.csv rows track=F, arm in {R1, C0} (from results/branches/F_*__r*__<arm>_s*.jsonl)",
+    "source": "out/extended/branch_metrics.csv rows track=F, arm in {R1, C0} (from results/branches/F_*__r*__<arm>_s*.jsonl)",
     "method": ""
   },
   "F.R1.n_paired_with_C0": {
     "value": 8,
-    "source": "out/branch_metrics.csv rows track=F, arm in {R1, C0} (from results/branches/F_*__r*__<arm>_s*.jsonl)",
+    "source": "out/extended/branch_metrics.csv rows track=F, arm in {R1, C0} (from results/branches/F_*__r*__<arm>_s*.jsonl)",
     "method": "base runs with both this arm and C0 complete"
   },
   "F.R1.mean_Y": {
     "value": 0.8396,
-    "source": "out/branch_metrics.csv rows track=F, arm in {R1, C0} (from results/branches/F_*__r*__<arm>_s*.jsonl)",
+    "source": "out/extended/branch_metrics.csv rows track=F, arm in {R1, C0} (from results/branches/F_*__r*__<arm>_s*.jsonl)",
     "method": "mean pidx over post-swap rounds 31-50, seeds averaged"
   },
   "F.R1.survive_branches": {
     "value": "15/16",
-    "source": "out/branch_metrics.csv rows track=F, arm in {R1, C0} (from results/branches/F_*__r*__<arm>_s*.jsonl)",
+    "source": "out/extended/branch_metrics.csv rows track=F, arm in {R1, C0} (from results/branches/F_*__r*__<arm>_s*.jsonl)",
     "method": "branches with Y >= 0.5"
   },
   "F.R1.survive_runs": {
     "value": "7/8",
-    "source": "out/branch_metrics.csv rows track=F, arm in {R1, C0} (from results/branches/F_*__r*__<arm>_s*.jsonl)",
+    "source": "out/extended/branch_metrics.csv rows track=F, arm in {R1, C0} (from results/branches/F_*__r*__<arm>_s*.jsonl)",
     "method": "base runs with seed-averaged Y >= 0.5"
   },
   "F.R1.median_recover": {
     "value": 5,
-    "source": "out/branch_metrics.csv rows track=F, arm in {R1, C0} (from results/branches/F_*__r*__<arm>_s*.jsonl)",
+    "source": "out/extended/branch_metrics.csv rows track=F, arm in {R1, C0} (from results/branches/F_*__r*__<arm>_s*.jsonl)",
     "method": "median k (5-round mean >= 0.9 pre)"
   },
   "F.R1.censored_recover": {
     "value": "0/16",
-    "source": "out/branch_metrics.csv rows track=F, arm in {R1, C0} (from results/branches/F_*__r*__<arm>_s*.jsonl)",
+    "source": "out/extended/branch_metrics.csv rows track=F, arm in {R1, C0} (from results/branches/F_*__r*__<arm>_s*.jsonl)",
     "method": "branches that never recovered within the horizon"
   },
   "F.R1.mean_pre": {
     "value": 0.8375,
-    "source": "out/branch_metrics.csv rows track=F, arm in {R1, C0} (from results/branches/F_*__r*__<arm>_s*.jsonl)",
+    "source": "out/extended/branch_metrics.csv rows track=F, arm in {R1, C0} (from results/branches/F_*__r*__<arm>_s*.jsonl)",
     "method": "mean pidx over the 20 rounds before the swap"
   },
   "F.R1.Y_per_market": {
@@ -1124,17 +1124,17 @@
       "F_gem25flash_P0think_s8": 0.8292,
       "F_gem25flash_P0think_s9": 0.898
     },
-    "source": "out/branch_metrics.csv rows track=F, arm in {R1, C0} (from results/branches/F_*__r*__<arm>_s*.jsonl)",
+    "source": "out/extended/branch_metrics.csv rows track=F, arm in {R1, C0} (from results/branches/F_*__r*__<arm>_s*.jsonl)",
     "method": "seeds averaged"
   },
   "F.R1.mean_price": {
     "value": 1.8525,
-    "source": "out/branch_metrics.csv rows track=F, arm in {R1, C0} (from results/branches/F_*__r*__<arm>_s*.jsonl)",
+    "source": "out/extended/branch_metrics.csv rows track=F, arm in {R1, C0} (from results/branches/F_*__r*__<arm>_s*.jsonl)",
     "method": "mean of both firms' prices over post-swap rounds 31-50 (from mean_Y)"
   },
   "F.R1.mean_gain": {
     "value": 0.9029,
-    "source": "out/branch_metrics.csv rows track=F, arm in {R1, C0} (from results/branches/F_*__r*__<arm>_s*.jsonl)",
+    "source": "out/extended/branch_metrics.csv rows track=F, arm in {R1, C0} (from results/branches/F_*__r*__<arm>_s*.jsonl)",
     "method": "harness profit gain over post-swap rounds 31-50 (0 = Nash profit, 1 = monopoly), seeds averaged"
   },
   "F.R1.pre_per_market": {
@@ -1148,22 +1148,22 @@
       "F_gem25flash_P0think_s8": 0.8242,
       "F_gem25flash_P0think_s9": 0.916
     },
-    "source": "out/branch_metrics.csv rows track=F, arm in {R1, C0} (from results/branches/F_*__r*__<arm>_s*.jsonl)",
+    "source": "out/extended/branch_metrics.csv rows track=F, arm in {R1, C0} (from results/branches/F_*__r*__<arm>_s*.jsonl)",
     "method": "mean pidx over the 20 rounds before the swap"
   },
   "F.R1.newcomer_first_price": {
     "value": 1.8487,
-    "source": "out/branch_metrics.csv rows track=F, arm in {R1, C0} (from results/branches/F_*__r*__<arm>_s*.jsonl)",
+    "source": "out/extended/branch_metrics.csv rows track=F, arm in {R1, C0} (from results/branches/F_*__r*__<arm>_s*.jsonl)",
     "method": "mean price of firm 1 in post-swap round 1 (the newcomer's opening price)"
   },
   "F.R1.mean_gap": {
     "value": 0.0108,
-    "source": "out/branch_metrics.csv rows track=F, arm in {R1, C0} (from results/branches/F_*__r*__<arm>_s*.jsonl)",
+    "source": "out/extended/branch_metrics.csv rows track=F, arm in {R1, C0} (from results/branches/F_*__r*__<arm>_s*.jsonl)",
     "method": "mean p1 - p0 over the scoring window"
   },
   "F.R1.delta": {
     "value": 0.023,
-    "source": "out/branch_metrics.csv rows track=F, arm in {R1, C0} (from results/branches/F_*__r*__<arm>_s*.jsonl)",
+    "source": "out/extended/branch_metrics.csv rows track=F, arm in {R1, C0} (from results/branches/F_*__r*__<arm>_s*.jsonl)",
     "method": "mean over base runs of Y(arm) - Y(C0)"
   },
   "F.R1.delta_ci": {
@@ -1171,7 +1171,7 @@
       0.01085150433267066,
       0.03667286541475891
     ],
-    "source": "out/branch_metrics.csv rows track=F, arm in {R1, C0} (from results/branches/F_*__r*__<arm>_s*.jsonl)",
+    "source": "out/extended/branch_metrics.csv rows track=F, arm in {R1, C0} (from results/branches/F_*__r*__<arm>_s*.jsonl)",
     "method": "95% cluster bootstrap over base runs, 2000 resamples (none with fewer than 3 base runs)"
   },
   "F.R1.delta_per_market": {
@@ -1185,12 +1185,12 @@
       "F_gem25flash_P0think_s8": 0.0102,
       "F_gem25flash_P0think_s9": 0.0083
     },
-    "source": "out/branch_metrics.csv rows track=F, arm in {R1, C0} (from results/branches/F_*__r*__<arm>_s*.jsonl)",
+    "source": "out/extended/branch_metrics.csv rows track=F, arm in {R1, C0} (from results/branches/F_*__r*__<arm>_s*.jsonl)",
     "method": "Y(arm) - Y(C0) per base run, seeds averaged"
   },
   "F.R1.markets_below_control": {
     "value": "0/8",
-    "source": "out/branch_metrics.csv rows track=F, arm in {R1, C0} (from results/branches/F_*__r*__<arm>_s*.jsonl)",
+    "source": "out/extended/branch_metrics.csv rows track=F, arm in {R1, C0} (from results/branches/F_*__r*__<arm>_s*.jsonl)",
     "method": "base runs where Y(arm) < Y(C0), seeds averaged (exploratory)"
   },
   "F.R1.delta_leave_one_out": {
@@ -1198,12 +1198,12 @@
       0.01813151498626564,
       0.025834446189581067
     ],
-    "source": "out/branch_metrics.csv rows track=F, arm in {R1, C0} (from results/branches/F_*__r*__<arm>_s*.jsonl)",
+    "source": "out/extended/branch_metrics.csv rows track=F, arm in {R1, C0} (from results/branches/F_*__r*__<arm>_s*.jsonl)",
     "method": "range of the mean effect with one base run left out at a time (exploratory)"
   },
   "F.R1.delta_gain": {
     "value": 0.0162,
-    "source": "out/branch_metrics.csv rows track=F, arm in {R1, C0} (from results/branches/F_*__r*__<arm>_s*.jsonl)",
+    "source": "out/extended/branch_metrics.csv rows track=F, arm in {R1, C0} (from results/branches/F_*__r*__<arm>_s*.jsonl)",
     "method": ""
   },
   "F.R1.delta_gain_ci": {
@@ -1211,12 +1211,12 @@
       0.0027033899736167884,
       0.03511738696939547
     ],
-    "source": "out/branch_metrics.csv rows track=F, arm in {R1, C0} (from results/branches/F_*__r*__<arm>_s*.jsonl)",
+    "source": "out/extended/branch_metrics.csv rows track=F, arm in {R1, C0} (from results/branches/F_*__r*__<arm>_s*.jsonl)",
     "method": ""
   },
   "F.R1.incumbent_response": {
     "value": -0.0017,
-    "source": "out/branch_metrics.csv rows track=F, arm in {R1, C0} (from results/branches/F_*__r*__<arm>_s*.jsonl)",
+    "source": "out/extended/branch_metrics.csv rows track=F, arm in {R1, C0} (from results/branches/F_*__r*__<arm>_s*.jsonl)",
     "method": "mean p0 over post-swap rounds 1-10, arm - C0"
   },
   "F.R1.incumbent_response_ci": {
@@ -1224,52 +1224,52 @@
       -0.005250000000000005,
       0.0010000000000000842
     ],
-    "source": "out/branch_metrics.csv rows track=F, arm in {R1, C0} (from results/branches/F_*__r*__<arm>_s*.jsonl)",
+    "source": "out/extended/branch_metrics.csv rows track=F, arm in {R1, C0} (from results/branches/F_*__r*__<arm>_s*.jsonl)",
     "method": ""
   },
   "F.R2.n_base_runs": {
     "value": 8,
-    "source": "out/branch_metrics.csv rows track=F, arm in {R2, C0} (from results/branches/F_*__r*__<arm>_s*.jsonl)",
+    "source": "out/extended/branch_metrics.csv rows track=F, arm in {R2, C0} (from results/branches/F_*__r*__<arm>_s*.jsonl)",
     "method": ""
   },
   "F.R2.n_branches": {
     "value": 16,
-    "source": "out/branch_metrics.csv rows track=F, arm in {R2, C0} (from results/branches/F_*__r*__<arm>_s*.jsonl)",
+    "source": "out/extended/branch_metrics.csv rows track=F, arm in {R2, C0} (from results/branches/F_*__r*__<arm>_s*.jsonl)",
     "method": ""
   },
   "F.R2.n_paired_with_C0": {
     "value": 8,
-    "source": "out/branch_metrics.csv rows track=F, arm in {R2, C0} (from results/branches/F_*__r*__<arm>_s*.jsonl)",
+    "source": "out/extended/branch_metrics.csv rows track=F, arm in {R2, C0} (from results/branches/F_*__r*__<arm>_s*.jsonl)",
     "method": "base runs with both this arm and C0 complete"
   },
   "F.R2.mean_Y": {
     "value": 0.7909,
-    "source": "out/branch_metrics.csv rows track=F, arm in {R2, C0} (from results/branches/F_*__r*__<arm>_s*.jsonl)",
+    "source": "out/extended/branch_metrics.csv rows track=F, arm in {R2, C0} (from results/branches/F_*__r*__<arm>_s*.jsonl)",
     "method": "mean pidx over post-swap rounds 31-50, seeds averaged"
   },
   "F.R2.survive_branches": {
     "value": "12/16",
-    "source": "out/branch_metrics.csv rows track=F, arm in {R2, C0} (from results/branches/F_*__r*__<arm>_s*.jsonl)",
+    "source": "out/extended/branch_metrics.csv rows track=F, arm in {R2, C0} (from results/branches/F_*__r*__<arm>_s*.jsonl)",
     "method": "branches with Y >= 0.5"
   },
   "F.R2.survive_runs": {
     "value": "6/8",
-    "source": "out/branch_metrics.csv rows track=F, arm in {R2, C0} (from results/branches/F_*__r*__<arm>_s*.jsonl)",
+    "source": "out/extended/branch_metrics.csv rows track=F, arm in {R2, C0} (from results/branches/F_*__r*__<arm>_s*.jsonl)",
     "method": "base runs with seed-averaged Y >= 0.5"
   },
   "F.R2.median_recover": {
     "value": 5,
-    "source": "out/branch_metrics.csv rows track=F, arm in {R2, C0} (from results/branches/F_*__r*__<arm>_s*.jsonl)",
+    "source": "out/extended/branch_metrics.csv rows track=F, arm in {R2, C0} (from results/branches/F_*__r*__<arm>_s*.jsonl)",
     "method": "median k (5-round mean >= 0.9 pre)"
   },
   "F.R2.censored_recover": {
     "value": "0/16",
-    "source": "out/branch_metrics.csv rows track=F, arm in {R2, C0} (from results/branches/F_*__r*__<arm>_s*.jsonl)",
+    "source": "out/extended/branch_metrics.csv rows track=F, arm in {R2, C0} (from results/branches/F_*__r*__<arm>_s*.jsonl)",
     "method": "branches that never recovered within the horizon"
   },
   "F.R2.mean_pre": {
     "value": 0.8375,
-    "source": "out/branch_metrics.csv rows track=F, arm in {R2, C0} (from results/branches/F_*__r*__<arm>_s*.jsonl)",
+    "source": "out/extended/branch_metrics.csv rows track=F, arm in {R2, C0} (from results/branches/F_*__r*__<arm>_s*.jsonl)",
     "method": "mean pidx over the 20 rounds before the swap"
   },
   "F.R2.Y_per_market": {
@@ -1283,17 +1283,17 @@
       "F_gem25flash_P0think_s8": 0.8068,
       "F_gem25flash_P0think_s9": 0.8941
     },
-    "source": "out/branch_metrics.csv rows track=F, arm in {R2, C0} (from results/branches/F_*__r*__<arm>_s*.jsonl)",
+    "source": "out/extended/branch_metrics.csv rows track=F, arm in {R2, C0} (from results/branches/F_*__r*__<arm>_s*.jsonl)",
     "method": "seeds averaged"
   },
   "F.R2.mean_price": {
     "value": 1.8305,
-    "source": "out/branch_metrics.csv rows track=F, arm in {R2, C0} (from results/branches/F_*__r*__<arm>_s*.jsonl)",
+    "source": "out/extended/branch_metrics.csv rows track=F, arm in {R2, C0} (from results/branches/F_*__r*__<arm>_s*.jsonl)",
     "method": "mean of both firms' prices over post-swap rounds 31-50 (from mean_Y)"
   },
   "F.R2.mean_gain": {
     "value": 0.8687,
-    "source": "out/branch_metrics.csv rows track=F, arm in {R2, C0} (from results/branches/F_*__r*__<arm>_s*.jsonl)",
+    "source": "out/extended/branch_metrics.csv rows track=F, arm in {R2, C0} (from results/branches/F_*__r*__<arm>_s*.jsonl)",
     "method": "harness profit gain over post-swap rounds 31-50 (0 = Nash profit, 1 = monopoly), seeds averaged"
   },
   "F.R2.pre_per_market": {
@@ -1307,22 +1307,22 @@
       "F_gem25flash_P0think_s8": 0.8242,
       "F_gem25flash_P0think_s9": 0.916
     },
-    "source": "out/branch_metrics.csv rows track=F, arm in {R2, C0} (from results/branches/F_*__r*__<arm>_s*.jsonl)",
+    "source": "out/extended/branch_metrics.csv rows track=F, arm in {R2, C0} (from results/branches/F_*__r*__<arm>_s*.jsonl)",
     "method": "mean pidx over the 20 rounds before the swap"
   },
   "F.R2.newcomer_first_price": {
     "value": 1.8419,
-    "source": "out/branch_metrics.csv rows track=F, arm in {R2, C0} (from results/branches/F_*__r*__<arm>_s*.jsonl)",
+    "source": "out/extended/branch_metrics.csv rows track=F, arm in {R2, C0} (from results/branches/F_*__r*__<arm>_s*.jsonl)",
     "method": "mean price of firm 1 in post-swap round 1 (the newcomer's opening price)"
   },
   "F.R2.mean_gap": {
     "value": 0.0081,
-    "source": "out/branch_metrics.csv rows track=F, arm in {R2, C0} (from results/branches/F_*__r*__<arm>_s*.jsonl)",
+    "source": "out/extended/branch_metrics.csv rows track=F, arm in {R2, C0} (from results/branches/F_*__r*__<arm>_s*.jsonl)",
     "method": "mean p1 - p0 over the scoring window"
   },
   "F.R2.delta": {
     "value": -0.0257,
-    "source": "out/branch_metrics.csv rows track=F, arm in {R2, C0} (from results/branches/F_*__r*__<arm>_s*.jsonl)",
+    "source": "out/extended/branch_metrics.csv rows track=F, arm in {R2, C0} (from results/branches/F_*__r*__<arm>_s*.jsonl)",
     "method": "mean over base runs of Y(arm) - Y(C0)"
   },
   "F.R2.delta_ci": {
@@ -1330,7 +1330,7 @@
       -0.0580345502855941,
       -0.001486270700126864
     ],
-    "source": "out/branch_metrics.csv rows track=F, arm in {R2, C0} (from results/branches/F_*__r*__<arm>_s*.jsonl)",
+    "source": "out/extended/branch_metrics.csv rows track=F, arm in {R2, C0} (from results/branches/F_*__r*__<arm>_s*.jsonl)",
     "method": "95% cluster bootstrap over base runs, 2000 resamples (none with fewer than 3 base runs)"
   },
   "F.R2.delta_per_market": {
@@ -1344,12 +1344,12 @@
       "F_gem25flash_P0think_s8": -0.0122,
       "F_gem25flash_P0think_s9": 0.0044
     },
-    "source": "out/branch_metrics.csv rows track=F, arm in {R2, C0} (from results/branches/F_*__r*__<arm>_s*.jsonl)",
+    "source": "out/extended/branch_metrics.csv rows track=F, arm in {R2, C0} (from results/branches/F_*__r*__<arm>_s*.jsonl)",
     "method": "Y(arm) - Y(C0) per base run, seeds averaged"
   },
   "F.R2.markets_below_control": {
     "value": "5/8",
-    "source": "out/branch_metrics.csv rows track=F, arm in {R2, C0} (from results/branches/F_*__r*__<arm>_s*.jsonl)",
+    "source": "out/extended/branch_metrics.csv rows track=F, arm in {R2, C0} (from results/branches/F_*__r*__<arm>_s*.jsonl)",
     "method": "base runs where Y(arm) < Y(C0), seeds averaged (exploratory)"
   },
   "F.R2.delta_leave_one_out": {
@@ -1357,12 +1357,12 @@
       -0.030021680587280646,
       -0.010942112529837764
     ],
-    "source": "out/branch_metrics.csv rows track=F, arm in {R2, C0} (from results/branches/F_*__r*__<arm>_s*.jsonl)",
+    "source": "out/extended/branch_metrics.csv rows track=F, arm in {R2, C0} (from results/branches/F_*__r*__<arm>_s*.jsonl)",
     "method": "range of the mean effect with one base run left out at a time (exploratory)"
   },
   "F.R2.delta_gain": {
     "value": -0.0181,
-    "source": "out/branch_metrics.csv rows track=F, arm in {R2, C0} (from results/branches/F_*__r*__<arm>_s*.jsonl)",
+    "source": "out/extended/branch_metrics.csv rows track=F, arm in {R2, C0} (from results/branches/F_*__r*__<arm>_s*.jsonl)",
     "method": ""
   },
   "F.R2.delta_gain_ci": {
@@ -1370,12 +1370,12 @@
       -0.04765170289680817,
       -0.0018348918625130867
     ],
-    "source": "out/branch_metrics.csv rows track=F, arm in {R2, C0} (from results/branches/F_*__r*__<arm>_s*.jsonl)",
+    "source": "out/extended/branch_metrics.csv rows track=F, arm in {R2, C0} (from results/branches/F_*__r*__<arm>_s*.jsonl)",
     "method": ""
   },
   "F.R2.incumbent_response": {
     "value": -0.0003,
-    "source": "out/branch_metrics.csv rows track=F, arm in {R2, C0} (from results/branches/F_*__r*__<arm>_s*.jsonl)",
+    "source": "out/extended/branch_metrics.csv rows track=F, arm in {R2, C0} (from results/branches/F_*__r*__<arm>_s*.jsonl)",
     "method": "mean p0 over post-swap rounds 1-10, arm - C0"
   },
   "F.R2.incumbent_response_ci": {
@@ -1383,52 +1383,52 @@
       -0.0010625000000001605,
       0.0005625000000000768
     ],
-    "source": "out/branch_metrics.csv rows track=F, arm in {R2, C0} (from results/branches/F_*__r*__<arm>_s*.jsonl)",
+    "source": "out/extended/branch_metrics.csv rows track=F, arm in {R2, C0} (from results/branches/F_*__r*__<arm>_s*.jsonl)",
     "method": ""
   },
   "F.R3.n_base_runs": {
     "value": 8,
-    "source": "out/branch_metrics.csv rows track=F, arm in {R3, C0} (from results/branches/F_*__r*__<arm>_s*.jsonl)",
+    "source": "out/extended/branch_metrics.csv rows track=F, arm in {R3, C0} (from results/branches/F_*__r*__<arm>_s*.jsonl)",
     "method": ""
   },
   "F.R3.n_branches": {
     "value": 16,
-    "source": "out/branch_metrics.csv rows track=F, arm in {R3, C0} (from results/branches/F_*__r*__<arm>_s*.jsonl)",
+    "source": "out/extended/branch_metrics.csv rows track=F, arm in {R3, C0} (from results/branches/F_*__r*__<arm>_s*.jsonl)",
     "method": ""
   },
   "F.R3.n_paired_with_C0": {
     "value": 8,
-    "source": "out/branch_metrics.csv rows track=F, arm in {R3, C0} (from results/branches/F_*__r*__<arm>_s*.jsonl)",
+    "source": "out/extended/branch_metrics.csv rows track=F, arm in {R3, C0} (from results/branches/F_*__r*__<arm>_s*.jsonl)",
     "method": "base runs with both this arm and C0 complete"
   },
   "F.R3.mean_Y": {
     "value": 0.8056,
-    "source": "out/branch_metrics.csv rows track=F, arm in {R3, C0} (from results/branches/F_*__r*__<arm>_s*.jsonl)",
+    "source": "out/extended/branch_metrics.csv rows track=F, arm in {R3, C0} (from results/branches/F_*__r*__<arm>_s*.jsonl)",
     "method": "mean pidx over post-swap rounds 31-50, seeds averaged"
   },
   "F.R3.survive_branches": {
     "value": "16/16",
-    "source": "out/branch_metrics.csv rows track=F, arm in {R3, C0} (from results/branches/F_*__r*__<arm>_s*.jsonl)",
+    "source": "out/extended/branch_metrics.csv rows track=F, arm in {R3, C0} (from results/branches/F_*__r*__<arm>_s*.jsonl)",
     "method": "branches with Y >= 0.5"
   },
   "F.R3.survive_runs": {
     "value": "8/8",
-    "source": "out/branch_metrics.csv rows track=F, arm in {R3, C0} (from results/branches/F_*__r*__<arm>_s*.jsonl)",
+    "source": "out/extended/branch_metrics.csv rows track=F, arm in {R3, C0} (from results/branches/F_*__r*__<arm>_s*.jsonl)",
     "method": "base runs with seed-averaged Y >= 0.5"
   },
   "F.R3.median_recover": {
     "value": 5,
-    "source": "out/branch_metrics.csv rows track=F, arm in {R3, C0} (from results/branches/F_*__r*__<arm>_s*.jsonl)",
+    "source": "out/extended/branch_metrics.csv rows track=F, arm in {R3, C0} (from results/branches/F_*__r*__<arm>_s*.jsonl)",
     "method": "median k (5-round mean >= 0.9 pre)"
   },
   "F.R3.censored_recover": {
     "value": "0/16",
-    "source": "out/branch_metrics.csv rows track=F, arm in {R3, C0} (from results/branches/F_*__r*__<arm>_s*.jsonl)",
+    "source": "out/extended/branch_metrics.csv rows track=F, arm in {R3, C0} (from results/branches/F_*__r*__<arm>_s*.jsonl)",
     "method": "branches that never recovered within the horizon"
   },
   "F.R3.mean_pre": {
     "value": 0.8375,
-    "source": "out/branch_metrics.csv rows track=F, arm in {R3, C0} (from results/branches/F_*__r*__<arm>_s*.jsonl)",
+    "source": "out/extended/branch_metrics.csv rows track=F, arm in {R3, C0} (from results/branches/F_*__r*__<arm>_s*.jsonl)",
     "method": "mean pidx over the 20 rounds before the swap"
   },
   "F.R3.Y_per_market": {
@@ -1442,17 +1442,17 @@
       "F_gem25flash_P0think_s8": 0.7761,
       "F_gem25flash_P0think_s9": 0.83
     },
-    "source": "out/branch_metrics.csv rows track=F, arm in {R3, C0} (from results/branches/F_*__r*__<arm>_s*.jsonl)",
+    "source": "out/extended/branch_metrics.csv rows track=F, arm in {R3, C0} (from results/branches/F_*__r*__<arm>_s*.jsonl)",
     "method": "seeds averaged"
   },
   "F.R3.mean_price": {
     "value": 1.8371,
-    "source": "out/branch_metrics.csv rows track=F, arm in {R3, C0} (from results/branches/F_*__r*__<arm>_s*.jsonl)",
+    "source": "out/extended/branch_metrics.csv rows track=F, arm in {R3, C0} (from results/branches/F_*__r*__<arm>_s*.jsonl)",
     "method": "mean of both firms' prices over post-swap rounds 31-50 (from mean_Y)"
   },
   "F.R3.mean_gain": {
     "value": 0.9103,
-    "source": "out/branch_metrics.csv rows track=F, arm in {R3, C0} (from results/branches/F_*__r*__<arm>_s*.jsonl)",
+    "source": "out/extended/branch_metrics.csv rows track=F, arm in {R3, C0} (from results/branches/F_*__r*__<arm>_s*.jsonl)",
     "method": "harness profit gain over post-swap rounds 31-50 (0 = Nash profit, 1 = monopoly), seeds averaged"
   },
   "F.R3.pre_per_market": {
@@ -1466,22 +1466,22 @@
       "F_gem25flash_P0think_s8": 0.8242,
       "F_gem25flash_P0think_s9": 0.916
     },
-    "source": "out/branch_metrics.csv rows track=F, arm in {R3, C0} (from results/branches/F_*__r*__<arm>_s*.jsonl)",
+    "source": "out/extended/branch_metrics.csv rows track=F, arm in {R3, C0} (from results/branches/F_*__r*__<arm>_s*.jsonl)",
     "method": "mean pidx over the 20 rounds before the swap"
   },
   "F.R3.newcomer_first_price": {
     "value": 2.6631,
-    "source": "out/branch_metrics.csv rows track=F, arm in {R3, C0} (from results/branches/F_*__r*__<arm>_s*.jsonl)",
+    "source": "out/extended/branch_metrics.csv rows track=F, arm in {R3, C0} (from results/branches/F_*__r*__<arm>_s*.jsonl)",
     "method": "mean price of firm 1 in post-swap round 1 (the newcomer's opening price)"
   },
   "F.R3.mean_gap": {
     "value": -0.0146,
-    "source": "out/branch_metrics.csv rows track=F, arm in {R3, C0} (from results/branches/F_*__r*__<arm>_s*.jsonl)",
+    "source": "out/extended/branch_metrics.csv rows track=F, arm in {R3, C0} (from results/branches/F_*__r*__<arm>_s*.jsonl)",
     "method": "mean p1 - p0 over the scoring window"
   },
   "F.R3.delta": {
     "value": -0.011,
-    "source": "out/branch_metrics.csv rows track=F, arm in {R3, C0} (from results/branches/F_*__r*__<arm>_s*.jsonl)",
+    "source": "out/extended/branch_metrics.csv rows track=F, arm in {R3, C0} (from results/branches/F_*__r*__<arm>_s*.jsonl)",
     "method": "mean over base runs of Y(arm) - Y(C0)"
   },
   "F.R3.delta_ci": {
@@ -1489,7 +1489,7 @@
       -0.06187552311237557,
       0.047390432562243706
     ],
-    "source": "out/branch_metrics.csv rows track=F, arm in {R3, C0} (from results/branches/F_*__r*__<arm>_s*.jsonl)",
+    "source": "out/extended/branch_metrics.csv rows track=F, arm in {R3, C0} (from results/branches/F_*__r*__<arm>_s*.jsonl)",
     "method": "95% cluster bootstrap over base runs, 2000 resamples (none with fewer than 3 base runs)"
   },
   "F.R3.delta_per_market": {
@@ -1503,12 +1503,12 @@
       "F_gem25flash_P0think_s8": -0.0429,
       "F_gem25flash_P0think_s9": -0.0597
     },
-    "source": "out/branch_metrics.csv rows track=F, arm in {R3, C0} (from results/branches/F_*__r*__<arm>_s*.jsonl)",
+    "source": "out/extended/branch_metrics.csv rows track=F, arm in {R3, C0} (from results/branches/F_*__r*__<arm>_s*.jsonl)",
     "method": "Y(arm) - Y(C0) per base run, seeds averaged"
   },
   "F.R3.markets_below_control": {
     "value": "5/8",
-    "source": "out/branch_metrics.csv rows track=F, arm in {R3, C0} (from results/branches/F_*__r*__<arm>_s*.jsonl)",
+    "source": "out/extended/branch_metrics.csv rows track=F, arm in {R3, C0} (from results/branches/F_*__r*__<arm>_s*.jsonl)",
     "method": "base runs where Y(arm) < Y(C0), seeds averaged (exploratory)"
   },
   "F.R3.delta_leave_one_out": {
@@ -1516,12 +1516,12 @@
       -0.030456204911570226,
       0.002607145945737616
     ],
-    "source": "out/branch_metrics.csv rows track=F, arm in {R3, C0} (from results/branches/F_*__r*__<arm>_s*.jsonl)",
+    "source": "out/extended/branch_metrics.csv rows track=F, arm in {R3, C0} (from results/branches/F_*__r*__<arm>_s*.jsonl)",
     "method": "range of the mean effect with one base run left out at a time (exploratory)"
   },
   "F.R3.delta_gain": {
     "value": 0.0236,
-    "source": "out/branch_metrics.csv rows track=F, arm in {R3, C0} (from results/branches/F_*__r*__<arm>_s*.jsonl)",
+    "source": "out/extended/branch_metrics.csv rows track=F, arm in {R3, C0} (from results/branches/F_*__r*__<arm>_s*.jsonl)",
     "method": ""
   },
   "F.R3.delta_gain_ci": {
@@ -1529,12 +1529,12 @@
       -0.02957839367567268,
       0.08550534608899504
     ],
-    "source": "out/branch_metrics.csv rows track=F, arm in {R3, C0} (from results/branches/F_*__r*__<arm>_s*.jsonl)",
+    "source": "out/extended/branch_metrics.csv rows track=F, arm in {R3, C0} (from results/branches/F_*__r*__<arm>_s*.jsonl)",
     "method": ""
   },
   "F.R3.incumbent_response": {
     "value": 0.0394,
-    "source": "out/branch_metrics.csv rows track=F, arm in {R3, C0} (from results/branches/F_*__r*__<arm>_s*.jsonl)",
+    "source": "out/extended/branch_metrics.csv rows track=F, arm in {R3, C0} (from results/branches/F_*__r*__<arm>_s*.jsonl)",
     "method": "mean p0 over post-swap rounds 1-10, arm - C0"
   },
   "F.R3.incumbent_response_ci": {
@@ -1542,52 +1542,52 @@
       0.012000000000000066,
       0.07007187500000017
     ],
-    "source": "out/branch_metrics.csv rows track=F, arm in {R3, C0} (from results/branches/F_*__r*__<arm>_s*.jsonl)",
+    "source": "out/extended/branch_metrics.csv rows track=F, arm in {R3, C0} (from results/branches/F_*__r*__<arm>_s*.jsonl)",
     "method": ""
   },
   "F.R4.n_base_runs": {
     "value": 8,
-    "source": "out/branch_metrics.csv rows track=F, arm in {R4, C0} (from results/branches/F_*__r*__<arm>_s*.jsonl)",
+    "source": "out/extended/branch_metrics.csv rows track=F, arm in {R4, C0} (from results/branches/F_*__r*__<arm>_s*.jsonl)",
     "method": ""
   },
   "F.R4.n_branches": {
     "value": 16,
-    "source": "out/branch_metrics.csv rows track=F, arm in {R4, C0} (from results/branches/F_*__r*__<arm>_s*.jsonl)",
+    "source": "out/extended/branch_metrics.csv rows track=F, arm in {R4, C0} (from results/branches/F_*__r*__<arm>_s*.jsonl)",
     "method": ""
   },
   "F.R4.n_paired_with_C0": {
     "value": 8,
-    "source": "out/branch_metrics.csv rows track=F, arm in {R4, C0} (from results/branches/F_*__r*__<arm>_s*.jsonl)",
+    "source": "out/extended/branch_metrics.csv rows track=F, arm in {R4, C0} (from results/branches/F_*__r*__<arm>_s*.jsonl)",
     "method": "base runs with both this arm and C0 complete"
   },
   "F.R4.mean_Y": {
     "value": 0.8146,
-    "source": "out/branch_metrics.csv rows track=F, arm in {R4, C0} (from results/branches/F_*__r*__<arm>_s*.jsonl)",
+    "source": "out/extended/branch_metrics.csv rows track=F, arm in {R4, C0} (from results/branches/F_*__r*__<arm>_s*.jsonl)",
     "method": "mean pidx over post-swap rounds 31-50, seeds averaged"
   },
   "F.R4.survive_branches": {
     "value": "13/16",
-    "source": "out/branch_metrics.csv rows track=F, arm in {R4, C0} (from results/branches/F_*__r*__<arm>_s*.jsonl)",
+    "source": "out/extended/branch_metrics.csv rows track=F, arm in {R4, C0} (from results/branches/F_*__r*__<arm>_s*.jsonl)",
     "method": "branches with Y >= 0.5"
   },
   "F.R4.survive_runs": {
     "value": "7/8",
-    "source": "out/branch_metrics.csv rows track=F, arm in {R4, C0} (from results/branches/F_*__r*__<arm>_s*.jsonl)",
+    "source": "out/extended/branch_metrics.csv rows track=F, arm in {R4, C0} (from results/branches/F_*__r*__<arm>_s*.jsonl)",
     "method": "base runs with seed-averaged Y >= 0.5"
   },
   "F.R4.median_recover": {
     "value": 5,
-    "source": "out/branch_metrics.csv rows track=F, arm in {R4, C0} (from results/branches/F_*__r*__<arm>_s*.jsonl)",
+    "source": "out/extended/branch_metrics.csv rows track=F, arm in {R4, C0} (from results/branches/F_*__r*__<arm>_s*.jsonl)",
     "method": "median k (5-round mean >= 0.9 pre)"
   },
   "F.R4.censored_recover": {
     "value": "0/16",
-    "source": "out/branch_metrics.csv rows track=F, arm in {R4, C0} (from results/branches/F_*__r*__<arm>_s*.jsonl)",
+    "source": "out/extended/branch_metrics.csv rows track=F, arm in {R4, C0} (from results/branches/F_*__r*__<arm>_s*.jsonl)",
     "method": "branches that never recovered within the horizon"
   },
   "F.R4.mean_pre": {
     "value": 0.8375,
-    "source": "out/branch_metrics.csv rows track=F, arm in {R4, C0} (from results/branches/F_*__r*__<arm>_s*.jsonl)",
+    "source": "out/extended/branch_metrics.csv rows track=F, arm in {R4, C0} (from results/branches/F_*__r*__<arm>_s*.jsonl)",
     "method": "mean pidx over the 20 rounds before the swap"
   },
   "F.R4.Y_per_market": {
@@ -1601,17 +1601,17 @@
       "F_gem25flash_P0think_s8": 0.8286,
       "F_gem25flash_P0think_s9": 0.8939
     },
-    "source": "out/branch_metrics.csv rows track=F, arm in {R4, C0} (from results/branches/F_*__r*__<arm>_s*.jsonl)",
+    "source": "out/extended/branch_metrics.csv rows track=F, arm in {R4, C0} (from results/branches/F_*__r*__<arm>_s*.jsonl)",
     "method": "seeds averaged"
   },
   "F.R4.mean_price": {
     "value": 1.8412,
-    "source": "out/branch_metrics.csv rows track=F, arm in {R4, C0} (from results/branches/F_*__r*__<arm>_s*.jsonl)",
+    "source": "out/extended/branch_metrics.csv rows track=F, arm in {R4, C0} (from results/branches/F_*__r*__<arm>_s*.jsonl)",
     "method": "mean of both firms' prices over post-swap rounds 31-50 (from mean_Y)"
   },
   "F.R4.mean_gain": {
     "value": 0.9003,
-    "source": "out/branch_metrics.csv rows track=F, arm in {R4, C0} (from results/branches/F_*__r*__<arm>_s*.jsonl)",
+    "source": "out/extended/branch_metrics.csv rows track=F, arm in {R4, C0} (from results/branches/F_*__r*__<arm>_s*.jsonl)",
     "method": "harness profit gain over post-swap rounds 31-50 (0 = Nash profit, 1 = monopoly), seeds averaged"
   },
   "F.R4.pre_per_market": {
@@ -1625,22 +1625,22 @@
       "F_gem25flash_P0think_s8": 0.8242,
       "F_gem25flash_P0think_s9": 0.916
     },
-    "source": "out/branch_metrics.csv rows track=F, arm in {R4, C0} (from results/branches/F_*__r*__<arm>_s*.jsonl)",
+    "source": "out/extended/branch_metrics.csv rows track=F, arm in {R4, C0} (from results/branches/F_*__r*__<arm>_s*.jsonl)",
     "method": "mean pidx over the 20 rounds before the swap"
   },
   "F.R4.newcomer_first_price": {
     "value": 1.8575,
-    "source": "out/branch_metrics.csv rows track=F, arm in {R4, C0} (from results/branches/F_*__r*__<arm>_s*.jsonl)",
+    "source": "out/extended/branch_metrics.csv rows track=F, arm in {R4, C0} (from results/branches/F_*__r*__<arm>_s*.jsonl)",
     "method": "mean price of firm 1 in post-swap round 1 (the newcomer's opening price)"
   },
   "F.R4.mean_gap": {
     "value": -0.0054,
-    "source": "out/branch_metrics.csv rows track=F, arm in {R4, C0} (from results/branches/F_*__r*__<arm>_s*.jsonl)",
+    "source": "out/extended/branch_metrics.csv rows track=F, arm in {R4, C0} (from results/branches/F_*__r*__<arm>_s*.jsonl)",
     "method": "mean p1 - p0 over the scoring window"
   },
   "F.R4.delta": {
     "value": -0.002,
-    "source": "out/branch_metrics.csv rows track=F, arm in {R4, C0} (from results/branches/F_*__r*__<arm>_s*.jsonl)",
+    "source": "out/extended/branch_metrics.csv rows track=F, arm in {R4, C0} (from results/branches/F_*__r*__<arm>_s*.jsonl)",
     "method": "mean over base runs of Y(arm) - Y(C0)"
   },
   "F.R4.delta_ci": {
@@ -1648,7 +1648,7 @@
       -0.024853556905261386,
       0.019701727885403003
     ],
-    "source": "out/branch_metrics.csv rows track=F, arm in {R4, C0} (from results/branches/F_*__r*__<arm>_s*.jsonl)",
+    "source": "out/extended/branch_metrics.csv rows track=F, arm in {R4, C0} (from results/branches/F_*__r*__<arm>_s*.jsonl)",
     "method": "95% cluster bootstrap over base runs, 2000 resamples (none with fewer than 3 base runs)"
   },
   "F.R4.delta_per_market": {
@@ -1662,12 +1662,12 @@
       "F_gem25flash_P0think_s8": 0.0097,
       "F_gem25flash_P0think_s9": 0.0041
     },
-    "source": "out/branch_metrics.csv rows track=F, arm in {R4, C0} (from results/branches/F_*__r*__<arm>_s*.jsonl)",
+    "source": "out/extended/branch_metrics.csv rows track=F, arm in {R4, C0} (from results/branches/F_*__r*__<arm>_s*.jsonl)",
     "method": "Y(arm) - Y(C0) per base run, seeds averaged"
   },
   "F.R4.markets_below_control": {
     "value": "3/8",
-    "source": "out/branch_metrics.csv rows track=F, arm in {R4, C0} (from results/branches/F_*__r*__<arm>_s*.jsonl)",
+    "source": "out/extended/branch_metrics.csv rows track=F, arm in {R4, C0} (from results/branches/F_*__r*__<arm>_s*.jsonl)",
     "method": "base runs where Y(arm) < Y(C0), seeds averaged (exploratory)"
   },
   "F.R4.delta_leave_one_out": {
@@ -1675,12 +1675,12 @@
       -0.0080189488937078,
       0.004187234397699746
     ],
-    "source": "out/branch_metrics.csv rows track=F, arm in {R4, C0} (from results/branches/F_*__r*__<arm>_s*.jsonl)",
+    "source": "out/extended/branch_metrics.csv rows track=F, arm in {R4, C0} (from results/branches/F_*__r*__<arm>_s*.jsonl)",
     "method": "range of the mean effect with one base run left out at a time (exploratory)"
   },
   "F.R4.delta_gain": {
     "value": 0.0136,
-    "source": "out/branch_metrics.csv rows track=F, arm in {R4, C0} (from results/branches/F_*__r*__<arm>_s*.jsonl)",
+    "source": "out/extended/branch_metrics.csv rows track=F, arm in {R4, C0} (from results/branches/F_*__r*__<arm>_s*.jsonl)",
     "method": ""
   },
   "F.R4.delta_gain_ci": {
@@ -1688,12 +1688,12 @@
       -0.0011779099222597581,
       0.033244524279419874
     ],
-    "source": "out/branch_metrics.csv rows track=F, arm in {R4, C0} (from results/branches/F_*__r*__<arm>_s*.jsonl)",
+    "source": "out/extended/branch_metrics.csv rows track=F, arm in {R4, C0} (from results/branches/F_*__r*__<arm>_s*.jsonl)",
     "method": ""
   },
   "F.R4.incumbent_response": {
     "value": -0.002,
-    "source": "out/branch_metrics.csv rows track=F, arm in {R4, C0} (from results/branches/F_*__r*__<arm>_s*.jsonl)",
+    "source": "out/extended/branch_metrics.csv rows track=F, arm in {R4, C0} (from results/branches/F_*__r*__<arm>_s*.jsonl)",
     "method": "mean p0 over post-swap rounds 1-10, arm - C0"
   },
   "F.R4.incumbent_response_ci": {
@@ -1701,52 +1701,52 @@
       -0.006374999999999964,
       0.0019375000000000642
     ],
-    "source": "out/branch_metrics.csv rows track=F, arm in {R4, C0} (from results/branches/F_*__r*__<arm>_s*.jsonl)",
+    "source": "out/extended/branch_metrics.csv rows track=F, arm in {R4, C0} (from results/branches/F_*__r*__<arm>_s*.jsonl)",
     "method": ""
   },
   "F.R5.n_base_runs": {
     "value": 8,
-    "source": "out/branch_metrics.csv rows track=F, arm in {R5, C0} (from results/branches/F_*__r*__<arm>_s*.jsonl)",
+    "source": "out/extended/branch_metrics.csv rows track=F, arm in {R5, C0} (from results/branches/F_*__r*__<arm>_s*.jsonl)",
     "method": ""
   },
   "F.R5.n_branches": {
     "value": 16,
-    "source": "out/branch_metrics.csv rows track=F, arm in {R5, C0} (from results/branches/F_*__r*__<arm>_s*.jsonl)",
+    "source": "out/extended/branch_metrics.csv rows track=F, arm in {R5, C0} (from results/branches/F_*__r*__<arm>_s*.jsonl)",
     "method": ""
   },
   "F.R5.n_paired_with_C0": {
     "value": 8,
-    "source": "out/branch_metrics.csv rows track=F, arm in {R5, C0} (from results/branches/F_*__r*__<arm>_s*.jsonl)",
+    "source": "out/extended/branch_metrics.csv rows track=F, arm in {R5, C0} (from results/branches/F_*__r*__<arm>_s*.jsonl)",
     "method": "base runs with both this arm and C0 complete"
   },
   "F.R5.mean_Y": {
     "value": 0.7771,
-    "source": "out/branch_metrics.csv rows track=F, arm in {R5, C0} (from results/branches/F_*__r*__<arm>_s*.jsonl)",
+    "source": "out/extended/branch_metrics.csv rows track=F, arm in {R5, C0} (from results/branches/F_*__r*__<arm>_s*.jsonl)",
     "method": "mean pidx over post-swap rounds 31-50, seeds averaged"
   },
   "F.R5.survive_branches": {
     "value": "12/16",
-    "source": "out/branch_metrics.csv rows track=F, arm in {R5, C0} (from results/branches/F_*__r*__<arm>_s*.jsonl)",
+    "source": "out/extended/branch_metrics.csv rows track=F, arm in {R5, C0} (from results/branches/F_*__r*__<arm>_s*.jsonl)",
     "method": "branches with Y >= 0.5"
   },
   "F.R5.survive_runs": {
     "value": "6/8",
-    "source": "out/branch_metrics.csv rows track=F, arm in {R5, C0} (from results/branches/F_*__r*__<arm>_s*.jsonl)",
+    "source": "out/extended/branch_metrics.csv rows track=F, arm in {R5, C0} (from results/branches/F_*__r*__<arm>_s*.jsonl)",
     "method": "base runs with seed-averaged Y >= 0.5"
   },
   "F.R5.median_recover": {
     "value": 5,
-    "source": "out/branch_metrics.csv rows track=F, arm in {R5, C0} (from results/branches/F_*__r*__<arm>_s*.jsonl)",
+    "source": "out/extended/branch_metrics.csv rows track=F, arm in {R5, C0} (from results/branches/F_*__r*__<arm>_s*.jsonl)",
     "method": "median k (5-round mean >= 0.9 pre)"
   },
   "F.R5.censored_recover": {
     "value": "0/16",
-    "source": "out/branch_metrics.csv rows track=F, arm in {R5, C0} (from results/branches/F_*__r*__<arm>_s*.jsonl)",
+    "source": "out/extended/branch_metrics.csv rows track=F, arm in {R5, C0} (from results/branches/F_*__r*__<arm>_s*.jsonl)",
     "method": "branches that never recovered within the horizon"
   },
   "F.R5.mean_pre": {
     "value": 0.8375,
-    "source": "out/branch_metrics.csv rows track=F, arm in {R5, C0} (from results/branches/F_*__r*__<arm>_s*.jsonl)",
+    "source": "out/extended/branch_metrics.csv rows track=F, arm in {R5, C0} (from results/branches/F_*__r*__<arm>_s*.jsonl)",
     "method": "mean pidx over the 20 rounds before the swap"
   },
   "F.R5.Y_per_market": {
@@ -1760,17 +1760,17 @@
       "F_gem25flash_P0think_s8": 0.7343,
       "F_gem25flash_P0think_s9": 0.8878
     },
-    "source": "out/branch_metrics.csv rows track=F, arm in {R5, C0} (from results/branches/F_*__r*__<arm>_s*.jsonl)",
+    "source": "out/extended/branch_metrics.csv rows track=F, arm in {R5, C0} (from results/branches/F_*__r*__<arm>_s*.jsonl)",
     "method": "seeds averaged"
   },
   "F.R5.mean_price": {
     "value": 1.8242,
-    "source": "out/branch_metrics.csv rows track=F, arm in {R5, C0} (from results/branches/F_*__r*__<arm>_s*.jsonl)",
+    "source": "out/extended/branch_metrics.csv rows track=F, arm in {R5, C0} (from results/branches/F_*__r*__<arm>_s*.jsonl)",
     "method": "mean of both firms' prices over post-swap rounds 31-50 (from mean_Y)"
   },
   "F.R5.mean_gain": {
     "value": 0.8677,
-    "source": "out/branch_metrics.csv rows track=F, arm in {R5, C0} (from results/branches/F_*__r*__<arm>_s*.jsonl)",
+    "source": "out/extended/branch_metrics.csv rows track=F, arm in {R5, C0} (from results/branches/F_*__r*__<arm>_s*.jsonl)",
     "method": "harness profit gain over post-swap rounds 31-50 (0 = Nash profit, 1 = monopoly), seeds averaged"
   },
   "F.R5.pre_per_market": {
@@ -1784,17 +1784,17 @@
       "F_gem25flash_P0think_s8": 0.8242,
       "F_gem25flash_P0think_s9": 0.916
     },
-    "source": "out/branch_metrics.csv rows track=F, arm in {R5, C0} (from results/branches/F_*__r*__<arm>_s*.jsonl)",
+    "source": "out/extended/branch_metrics.csv rows track=F, arm in {R5, C0} (from results/branches/F_*__r*__<arm>_s*.jsonl)",
     "method": "mean pidx over the 20 rounds before the swap"
   },
   "F.R5.newcomer_first_price": {
     "value": 1.8444,
-    "source": "out/branch_metrics.csv rows track=F, arm in {R5, C0} (from results/branches/F_*__r*__<arm>_s*.jsonl)",
+    "source": "out/extended/branch_metrics.csv rows track=F, arm in {R5, C0} (from results/branches/F_*__r*__<arm>_s*.jsonl)",
     "method": "mean price of firm 1 in post-swap round 1 (the newcomer's opening price)"
   },
   "F.R5.delta": {
     "value": -0.0395,
-    "source": "out/branch_metrics.csv rows track=F, arm in {R5, C0} (from results/branches/F_*__r*__<arm>_s*.jsonl)",
+    "source": "out/extended/branch_metrics.csv rows track=F, arm in {R5, C0} (from results/branches/F_*__r*__<arm>_s*.jsonl)",
     "method": "mean over base runs of Y(arm) - Y(C0)"
   },
   "F.R5.delta_ci": {
@@ -1802,7 +1802,7 @@
       -0.08447547886302596,
       -0.001693657309447004
     ],
-    "source": "out/branch_metrics.csv rows track=F, arm in {R5, C0} (from results/branches/F_*__r*__<arm>_s*.jsonl)",
+    "source": "out/extended/branch_metrics.csv rows track=F, arm in {R5, C0} (from results/branches/F_*__r*__<arm>_s*.jsonl)",
     "method": "95% cluster bootstrap over base runs, 2000 resamples (none with fewer than 3 base runs)"
   },
   "F.R5.delta_per_market": {
@@ -1816,12 +1816,12 @@
       "F_gem25flash_P0think_s8": -0.0846,
       "F_gem25flash_P0think_s9": -0.0019
     },
-    "source": "out/branch_metrics.csv rows track=F, arm in {R5, C0} (from results/branches/F_*__r*__<arm>_s*.jsonl)",
+    "source": "out/extended/branch_metrics.csv rows track=F, arm in {R5, C0} (from results/branches/F_*__r*__<arm>_s*.jsonl)",
     "method": "Y(arm) - Y(C0) per base run, seeds averaged"
   },
   "F.R5.markets_below_control": {
     "value": "6/8",
-    "source": "out/branch_metrics.csv rows track=F, arm in {R5, C0} (from results/branches/F_*__r*__<arm>_s*.jsonl)",
+    "source": "out/extended/branch_metrics.csv rows track=F, arm in {R5, C0} (from results/branches/F_*__r*__<arm>_s*.jsonl)",
     "method": "base runs where Y(arm) < Y(C0), seeds averaged (exploratory)"
   },
   "F.R5.delta_leave_one_out": {
@@ -1829,12 +1829,12 @@
       -0.04815319557354629,
       -0.01994861670602205
     ],
-    "source": "out/branch_metrics.csv rows track=F, arm in {R5, C0} (from results/branches/F_*__r*__<arm>_s*.jsonl)",
+    "source": "out/extended/branch_metrics.csv rows track=F, arm in {R5, C0} (from results/branches/F_*__r*__<arm>_s*.jsonl)",
     "method": "range of the mean effect with one base run left out at a time (exploratory)"
   },
   "F.R5.delta_gain": {
     "value": -0.019,
-    "source": "out/branch_metrics.csv rows track=F, arm in {R5, C0} (from results/branches/F_*__r*__<arm>_s*.jsonl)",
+    "source": "out/extended/branch_metrics.csv rows track=F, arm in {R5, C0} (from results/branches/F_*__r*__<arm>_s*.jsonl)",
     "method": ""
   },
   "F.R5.delta_gain_ci": {
@@ -1842,52 +1842,52 @@
       -0.03668330349591219,
       -0.003969387020482747
     ],
-    "source": "out/branch_metrics.csv rows track=F, arm in {R5, C0} (from results/branches/F_*__r*__<arm>_s*.jsonl)",
+    "source": "out/extended/branch_metrics.csv rows track=F, arm in {R5, C0} (from results/branches/F_*__r*__<arm>_s*.jsonl)",
     "method": ""
   },
   "F.R5f.n_base_runs": {
     "value": 8,
-    "source": "out/branch_metrics.csv rows track=F, arm in {R5f, C0} (from results/branches/F_*__r*__<arm>_s*.jsonl)",
+    "source": "out/extended/branch_metrics.csv rows track=F, arm in {R5f, C0} (from results/branches/F_*__r*__<arm>_s*.jsonl)",
     "method": ""
   },
   "F.R5f.n_branches": {
     "value": 16,
-    "source": "out/branch_metrics.csv rows track=F, arm in {R5f, C0} (from results/branches/F_*__r*__<arm>_s*.jsonl)",
+    "source": "out/extended/branch_metrics.csv rows track=F, arm in {R5f, C0} (from results/branches/F_*__r*__<arm>_s*.jsonl)",
     "method": ""
   },
   "F.R5f.n_paired_with_C0": {
     "value": 8,
-    "source": "out/branch_metrics.csv rows track=F, arm in {R5f, C0} (from results/branches/F_*__r*__<arm>_s*.jsonl)",
+    "source": "out/extended/branch_metrics.csv rows track=F, arm in {R5f, C0} (from results/branches/F_*__r*__<arm>_s*.jsonl)",
     "method": "base runs with both this arm and C0 complete"
   },
   "F.R5f.mean_Y": {
     "value": 1.8847,
-    "source": "out/branch_metrics.csv rows track=F, arm in {R5f, C0} (from results/branches/F_*__r*__<arm>_s*.jsonl)",
+    "source": "out/extended/branch_metrics.csv rows track=F, arm in {R5f, C0} (from results/branches/F_*__r*__<arm>_s*.jsonl)",
     "method": "mean pidx over post-swap rounds 31-50, seeds averaged"
   },
   "F.R5f.survive_branches": {
     "value": "16/16",
-    "source": "out/branch_metrics.csv rows track=F, arm in {R5f, C0} (from results/branches/F_*__r*__<arm>_s*.jsonl)",
+    "source": "out/extended/branch_metrics.csv rows track=F, arm in {R5f, C0} (from results/branches/F_*__r*__<arm>_s*.jsonl)",
     "method": "branches with Y >= 0.5"
   },
   "F.R5f.survive_runs": {
     "value": "8/8",
-    "source": "out/branch_metrics.csv rows track=F, arm in {R5f, C0} (from results/branches/F_*__r*__<arm>_s*.jsonl)",
+    "source": "out/extended/branch_metrics.csv rows track=F, arm in {R5f, C0} (from results/branches/F_*__r*__<arm>_s*.jsonl)",
     "method": "base runs with seed-averaged Y >= 0.5"
   },
   "F.R5f.median_recover": {
     "value": 5,
-    "source": "out/branch_metrics.csv rows track=F, arm in {R5f, C0} (from results/branches/F_*__r*__<arm>_s*.jsonl)",
+    "source": "out/extended/branch_metrics.csv rows track=F, arm in {R5f, C0} (from results/branches/F_*__r*__<arm>_s*.jsonl)",
     "method": "median k (5-round mean >= 0.9 pre)"
   },
   "F.R5f.censored_recover": {
     "value": "0/16",
-    "source": "out/branch_metrics.csv rows track=F, arm in {R5f, C0} (from results/branches/F_*__r*__<arm>_s*.jsonl)",
+    "source": "out/extended/branch_metrics.csv rows track=F, arm in {R5f, C0} (from results/branches/F_*__r*__<arm>_s*.jsonl)",
     "method": "branches that never recovered within the horizon"
   },
   "F.R5f.mean_pre": {
     "value": 0.8375,
-    "source": "out/branch_metrics.csv rows track=F, arm in {R5f, C0} (from results/branches/F_*__r*__<arm>_s*.jsonl)",
+    "source": "out/extended/branch_metrics.csv rows track=F, arm in {R5f, C0} (from results/branches/F_*__r*__<arm>_s*.jsonl)",
     "method": "mean pidx over the 20 rounds before the swap"
   },
   "F.R5f.Y_per_market": {
@@ -1901,17 +1901,17 @@
       "F_gem25flash_P0think_s8": 1.7627,
       "F_gem25flash_P0think_s9": 1.7027
     },
-    "source": "out/branch_metrics.csv rows track=F, arm in {R5f, C0} (from results/branches/F_*__r*__<arm>_s*.jsonl)",
+    "source": "out/extended/branch_metrics.csv rows track=F, arm in {R5f, C0} (from results/branches/F_*__r*__<arm>_s*.jsonl)",
     "method": "seeds averaged"
   },
   "F.R5f.mean_price": {
     "value": 2.3249,
-    "source": "out/branch_metrics.csv rows track=F, arm in {R5f, C0} (from results/branches/F_*__r*__<arm>_s*.jsonl)",
+    "source": "out/extended/branch_metrics.csv rows track=F, arm in {R5f, C0} (from results/branches/F_*__r*__<arm>_s*.jsonl)",
     "method": "mean of both firms' prices over post-swap rounds 31-50 (from mean_Y)"
   },
   "F.R5f.mean_gain": {
     "value": -0.017,
-    "source": "out/branch_metrics.csv rows track=F, arm in {R5f, C0} (from results/branches/F_*__r*__<arm>_s*.jsonl)",
+    "source": "out/extended/branch_metrics.csv rows track=F, arm in {R5f, C0} (from results/branches/F_*__r*__<arm>_s*.jsonl)",
     "method": "harness profit gain over post-swap rounds 31-50 (0 = Nash profit, 1 = monopoly), seeds averaged"
   },
   "F.R5f.pre_per_market": {
@@ -1925,17 +1925,17 @@
       "F_gem25flash_P0think_s8": 0.8242,
       "F_gem25flash_P0think_s9": 0.916
     },
-    "source": "out/branch_metrics.csv rows track=F, arm in {R5f, C0} (from results/branches/F_*__r*__<arm>_s*.jsonl)",
+    "source": "out/extended/branch_metrics.csv rows track=F, arm in {R5f, C0} (from results/branches/F_*__r*__<arm>_s*.jsonl)",
     "method": "mean pidx over the 20 rounds before the swap"
   },
   "F.R5f.newcomer_first_price": {
     "value": 2.7688,
-    "source": "out/branch_metrics.csv rows track=F, arm in {R5f, C0} (from results/branches/F_*__r*__<arm>_s*.jsonl)",
+    "source": "out/extended/branch_metrics.csv rows track=F, arm in {R5f, C0} (from results/branches/F_*__r*__<arm>_s*.jsonl)",
     "method": "mean price of firm 1 in post-swap round 1 (the newcomer's opening price)"
   },
   "F.R5f.delta": {
     "value": 1.0681,
-    "source": "out/branch_metrics.csv rows track=F, arm in {R5f, C0} (from results/branches/F_*__r*__<arm>_s*.jsonl)",
+    "source": "out/extended/branch_metrics.csv rows track=F, arm in {R5f, C0} (from results/branches/F_*__r*__<arm>_s*.jsonl)",
     "method": "mean over base runs of Y(arm) - Y(C0)"
   },
   "F.R5f.delta_ci": {
@@ -1943,7 +1943,7 @@
       0.7977748087322967,
       1.3403413842571066
     ],
-    "source": "out/branch_metrics.csv rows track=F, arm in {R5f, C0} (from results/branches/F_*__r*__<arm>_s*.jsonl)",
+    "source": "out/extended/branch_metrics.csv rows track=F, arm in {R5f, C0} (from results/branches/F_*__r*__<arm>_s*.jsonl)",
     "method": "95% cluster bootstrap over base runs, 2000 resamples (none with fewer than 3 base runs)"
   },
   "F.R5f.delta_per_market": {
@@ -1957,12 +1957,12 @@
       "F_gem25flash_P0think_s8": 0.9437,
       "F_gem25flash_P0think_s9": 0.813
     },
-    "source": "out/branch_metrics.csv rows track=F, arm in {R5f, C0} (from results/branches/F_*__r*__<arm>_s*.jsonl)",
+    "source": "out/extended/branch_metrics.csv rows track=F, arm in {R5f, C0} (from results/branches/F_*__r*__<arm>_s*.jsonl)",
     "method": "Y(arm) - Y(C0) per base run, seeds averaged"
   },
   "F.R5f.markets_below_control": {
     "value": "0/8",
-    "source": "out/branch_metrics.csv rows track=F, arm in {R5f, C0} (from results/branches/F_*__r*__<arm>_s*.jsonl)",
+    "source": "out/extended/branch_metrics.csv rows track=F, arm in {R5f, C0} (from results/branches/F_*__r*__<arm>_s*.jsonl)",
     "method": "base runs where Y(arm) < Y(C0), seeds averaged (exploratory)"
   },
   "F.R5f.delta_leave_one_out": {
@@ -1970,12 +1970,12 @@
       1.0036721846863537,
       1.147065211701918
     ],
-    "source": "out/branch_metrics.csv rows track=F, arm in {R5f, C0} (from results/branches/F_*__r*__<arm>_s*.jsonl)",
+    "source": "out/extended/branch_metrics.csv rows track=F, arm in {R5f, C0} (from results/branches/F_*__r*__<arm>_s*.jsonl)",
     "method": "range of the mean effect with one base run left out at a time (exploratory)"
   },
   "F.R5f.delta_gain": {
     "value": -0.9037,
-    "source": "out/branch_metrics.csv rows track=F, arm in {R5f, C0} (from results/branches/F_*__r*__<arm>_s*.jsonl)",
+    "source": "out/extended/branch_metrics.csv rows track=F, arm in {R5f, C0} (from results/branches/F_*__r*__<arm>_s*.jsonl)",
     "method": ""
   },
   "F.R5f.delta_gain_ci": {
@@ -1983,52 +1983,52 @@
       -1.3450161149650424,
       -0.41977891539065504
     ],
-    "source": "out/branch_metrics.csv rows track=F, arm in {R5f, C0} (from results/branches/F_*__r*__<arm>_s*.jsonl)",
+    "source": "out/extended/branch_metrics.csv rows track=F, arm in {R5f, C0} (from results/branches/F_*__r*__<arm>_s*.jsonl)",
     "method": ""
   },
   "F.RN.n_base_runs": {
     "value": 8,
-    "source": "out/branch_metrics.csv rows track=F, arm in {RN, C0} (from results/branches/F_*__r*__<arm>_s*.jsonl)",
+    "source": "out/extended/branch_metrics.csv rows track=F, arm in {RN, C0} (from results/branches/F_*__r*__<arm>_s*.jsonl)",
     "method": ""
   },
   "F.RN.n_branches": {
     "value": 16,
-    "source": "out/branch_metrics.csv rows track=F, arm in {RN, C0} (from results/branches/F_*__r*__<arm>_s*.jsonl)",
+    "source": "out/extended/branch_metrics.csv rows track=F, arm in {RN, C0} (from results/branches/F_*__r*__<arm>_s*.jsonl)",
     "method": ""
   },
   "F.RN.n_paired_with_C0": {
     "value": 8,
-    "source": "out/branch_metrics.csv rows track=F, arm in {RN, C0} (from results/branches/F_*__r*__<arm>_s*.jsonl)",
+    "source": "out/extended/branch_metrics.csv rows track=F, arm in {RN, C0} (from results/branches/F_*__r*__<arm>_s*.jsonl)",
     "method": "base runs with both this arm and C0 complete"
   },
   "F.RN.mean_Y": {
     "value": 0.5667,
-    "source": "out/branch_metrics.csv rows track=F, arm in {RN, C0} (from results/branches/F_*__r*__<arm>_s*.jsonl)",
+    "source": "out/extended/branch_metrics.csv rows track=F, arm in {RN, C0} (from results/branches/F_*__r*__<arm>_s*.jsonl)",
     "method": "mean pidx over post-swap rounds 31-50, seeds averaged"
   },
   "F.RN.survive_branches": {
     "value": "9/16",
-    "source": "out/branch_metrics.csv rows track=F, arm in {RN, C0} (from results/branches/F_*__r*__<arm>_s*.jsonl)",
+    "source": "out/extended/branch_metrics.csv rows track=F, arm in {RN, C0} (from results/branches/F_*__r*__<arm>_s*.jsonl)",
     "method": "branches with Y >= 0.5"
   },
   "F.RN.survive_runs": {
     "value": "4/8",
-    "source": "out/branch_metrics.csv rows track=F, arm in {RN, C0} (from results/branches/F_*__r*__<arm>_s*.jsonl)",
+    "source": "out/extended/branch_metrics.csv rows track=F, arm in {RN, C0} (from results/branches/F_*__r*__<arm>_s*.jsonl)",
     "method": "base runs with seed-averaged Y >= 0.5"
   },
   "F.RN.median_recover": {
     "value": 5,
-    "source": "out/branch_metrics.csv rows track=F, arm in {RN, C0} (from results/branches/F_*__r*__<arm>_s*.jsonl)",
+    "source": "out/extended/branch_metrics.csv rows track=F, arm in {RN, C0} (from results/branches/F_*__r*__<arm>_s*.jsonl)",
     "method": "median k (5-round mean >= 0.9 pre)"
   },
   "F.RN.censored_recover": {
     "value": "2/16",
-    "source": "out/branch_metrics.csv rows track=F, arm in {RN, C0} (from results/branches/F_*__r*__<arm>_s*.jsonl)",
+    "source": "out/extended/branch_metrics.csv rows track=F, arm in {RN, C0} (from results/branches/F_*__r*__<arm>_s*.jsonl)",
     "method": "branches that never recovered within the horizon"
   },
   "F.RN.mean_pre": {
     "value": 0.8375,
-    "source": "out/branch_metrics.csv rows track=F, arm in {RN, C0} (from results/branches/F_*__r*__<arm>_s*.jsonl)",
+    "source": "out/extended/branch_metrics.csv rows track=F, arm in {RN, C0} (from results/branches/F_*__r*__<arm>_s*.jsonl)",
     "method": "mean pidx over the 20 rounds before the swap"
   },
   "F.RN.Y_per_market": {
@@ -2042,17 +2042,17 @@
       "F_gem25flash_P0think_s8": 0.4835,
       "F_gem25flash_P0think_s9": 0.8919
     },
-    "source": "out/branch_metrics.csv rows track=F, arm in {RN, C0} (from results/branches/F_*__r*__<arm>_s*.jsonl)",
+    "source": "out/extended/branch_metrics.csv rows track=F, arm in {RN, C0} (from results/branches/F_*__r*__<arm>_s*.jsonl)",
     "method": "seeds averaged"
   },
   "F.RN.mean_price": {
     "value": 1.7291,
-    "source": "out/branch_metrics.csv rows track=F, arm in {RN, C0} (from results/branches/F_*__r*__<arm>_s*.jsonl)",
+    "source": "out/extended/branch_metrics.csv rows track=F, arm in {RN, C0} (from results/branches/F_*__r*__<arm>_s*.jsonl)",
     "method": "mean of both firms' prices over post-swap rounds 31-50 (from mean_Y)"
   },
   "F.RN.mean_gain": {
     "value": 0.6698,
-    "source": "out/branch_metrics.csv rows track=F, arm in {RN, C0} (from results/branches/F_*__r*__<arm>_s*.jsonl)",
+    "source": "out/extended/branch_metrics.csv rows track=F, arm in {RN, C0} (from results/branches/F_*__r*__<arm>_s*.jsonl)",
     "method": "harness profit gain over post-swap rounds 31-50 (0 = Nash profit, 1 = monopoly), seeds averaged"
   },
   "F.RN.pre_per_market": {
@@ -2066,22 +2066,22 @@
       "F_gem25flash_P0think_s8": 0.8242,
       "F_gem25flash_P0think_s9": 0.916
     },
-    "source": "out/branch_metrics.csv rows track=F, arm in {RN, C0} (from results/branches/F_*__r*__<arm>_s*.jsonl)",
+    "source": "out/extended/branch_metrics.csv rows track=F, arm in {RN, C0} (from results/branches/F_*__r*__<arm>_s*.jsonl)",
     "method": "mean pidx over the 20 rounds before the swap"
   },
   "F.RN.newcomer_first_price": {
     "value": 1.8319,
-    "source": "out/branch_metrics.csv rows track=F, arm in {RN, C0} (from results/branches/F_*__r*__<arm>_s*.jsonl)",
+    "source": "out/extended/branch_metrics.csv rows track=F, arm in {RN, C0} (from results/branches/F_*__r*__<arm>_s*.jsonl)",
     "method": "mean price of firm 1 in post-swap round 1 (the newcomer's opening price)"
   },
   "F.RN.mean_gap": {
     "value": -0.1056,
-    "source": "out/branch_metrics.csv rows track=F, arm in {RN, C0} (from results/branches/F_*__r*__<arm>_s*.jsonl)",
+    "source": "out/extended/branch_metrics.csv rows track=F, arm in {RN, C0} (from results/branches/F_*__r*__<arm>_s*.jsonl)",
     "method": "mean p1 - p0 over the scoring window"
   },
   "F.RN.delta": {
     "value": -0.2499,
-    "source": "out/branch_metrics.csv rows track=F, arm in {RN, C0} (from results/branches/F_*__r*__<arm>_s*.jsonl)",
+    "source": "out/extended/branch_metrics.csv rows track=F, arm in {RN, C0} (from results/branches/F_*__r*__<arm>_s*.jsonl)",
     "method": "mean over base runs of Y(arm) - Y(C0)"
   },
   "F.RN.delta_ci": {
@@ -2089,7 +2089,7 @@
       -0.36705010339203475,
       -0.1348652402625607
     ],
-    "source": "out/branch_metrics.csv rows track=F, arm in {RN, C0} (from results/branches/F_*__r*__<arm>_s*.jsonl)",
+    "source": "out/extended/branch_metrics.csv rows track=F, arm in {RN, C0} (from results/branches/F_*__r*__<arm>_s*.jsonl)",
     "method": "95% cluster bootstrap over base runs, 2000 resamples (none with fewer than 3 base runs)"
   },
   "F.RN.delta_per_market": {
@@ -2103,12 +2103,12 @@
       "F_gem25flash_P0think_s8": -0.3354,
       "F_gem25flash_P0think_s9": 0.0022
     },
-    "source": "out/branch_metrics.csv rows track=F, arm in {RN, C0} (from results/branches/F_*__r*__<arm>_s*.jsonl)",
+    "source": "out/extended/branch_metrics.csv rows track=F, arm in {RN, C0} (from results/branches/F_*__r*__<arm>_s*.jsonl)",
     "method": "Y(arm) - Y(C0) per base run, seeds averaged"
   },
   "F.RN.markets_below_control": {
     "value": "7/8",
-    "source": "out/branch_metrics.csv rows track=F, arm in {RN, C0} (from results/branches/F_*__r*__<arm>_s*.jsonl)",
+    "source": "out/extended/branch_metrics.csv rows track=F, arm in {RN, C0} (from results/branches/F_*__r*__<arm>_s*.jsonl)",
     "method": "base runs where Y(arm) < Y(C0), seeds averaged (exploratory)"
   },
   "F.RN.delta_leave_one_out": {
@@ -2116,12 +2116,12 @@
       -0.2859565075938489,
       -0.21607709580582307
     ],
-    "source": "out/branch_metrics.csv rows track=F, arm in {RN, C0} (from results/branches/F_*__r*__<arm>_s*.jsonl)",
+    "source": "out/extended/branch_metrics.csv rows track=F, arm in {RN, C0} (from results/branches/F_*__r*__<arm>_s*.jsonl)",
     "method": "range of the mean effect with one base run left out at a time (exploratory)"
   },
   "F.RN.delta_gain": {
     "value": -0.217,
-    "source": "out/branch_metrics.csv rows track=F, arm in {RN, C0} (from results/branches/F_*__r*__<arm>_s*.jsonl)",
+    "source": "out/extended/branch_metrics.csv rows track=F, arm in {RN, C0} (from results/branches/F_*__r*__<arm>_s*.jsonl)",
     "method": ""
   },
   "F.RN.delta_gain_ci": {
@@ -2129,12 +2129,12 @@
       -0.31307569682271497,
       -0.12472029828227084
     ],
-    "source": "out/branch_metrics.csv rows track=F, arm in {RN, C0} (from results/branches/F_*__r*__<arm>_s*.jsonl)",
+    "source": "out/extended/branch_metrics.csv rows track=F, arm in {RN, C0} (from results/branches/F_*__r*__<arm>_s*.jsonl)",
     "method": ""
   },
   "F.RN.incumbent_response": {
     "value": -0.0027,
-    "source": "out/branch_metrics.csv rows track=F, arm in {RN, C0} (from results/branches/F_*__r*__<arm>_s*.jsonl)",
+    "source": "out/extended/branch_metrics.csv rows track=F, arm in {RN, C0} (from results/branches/F_*__r*__<arm>_s*.jsonl)",
     "method": "mean p0 over post-swap rounds 1-10, arm - C0"
   },
   "F.RN.incumbent_response_ci": {
@@ -2142,52 +2142,52 @@
       -0.006439062499999928,
       0.000500000000000056
     ],
-    "source": "out/branch_metrics.csv rows track=F, arm in {RN, C0} (from results/branches/F_*__r*__<arm>_s*.jsonl)",
+    "source": "out/extended/branch_metrics.csv rows track=F, arm in {RN, C0} (from results/branches/F_*__r*__<arm>_s*.jsonl)",
     "method": ""
   },
   "F.RNf.n_base_runs": {
     "value": 8,
-    "source": "out/branch_metrics.csv rows track=F, arm in {RNf, C0} (from results/branches/F_*__r*__<arm>_s*.jsonl)",
+    "source": "out/extended/branch_metrics.csv rows track=F, arm in {RNf, C0} (from results/branches/F_*__r*__<arm>_s*.jsonl)",
     "method": ""
   },
   "F.RNf.n_branches": {
     "value": 16,
-    "source": "out/branch_metrics.csv rows track=F, arm in {RNf, C0} (from results/branches/F_*__r*__<arm>_s*.jsonl)",
+    "source": "out/extended/branch_metrics.csv rows track=F, arm in {RNf, C0} (from results/branches/F_*__r*__<arm>_s*.jsonl)",
     "method": ""
   },
   "F.RNf.n_paired_with_C0": {
     "value": 8,
-    "source": "out/branch_metrics.csv rows track=F, arm in {RNf, C0} (from results/branches/F_*__r*__<arm>_s*.jsonl)",
+    "source": "out/extended/branch_metrics.csv rows track=F, arm in {RNf, C0} (from results/branches/F_*__r*__<arm>_s*.jsonl)",
     "method": "base runs with both this arm and C0 complete"
   },
   "F.RNf.mean_Y": {
     "value": 0.6359,
-    "source": "out/branch_metrics.csv rows track=F, arm in {RNf, C0} (from results/branches/F_*__r*__<arm>_s*.jsonl)",
+    "source": "out/extended/branch_metrics.csv rows track=F, arm in {RNf, C0} (from results/branches/F_*__r*__<arm>_s*.jsonl)",
     "method": "mean pidx over post-swap rounds 31-50, seeds averaged"
   },
   "F.RNf.survive_branches": {
     "value": "11/16",
-    "source": "out/branch_metrics.csv rows track=F, arm in {RNf, C0} (from results/branches/F_*__r*__<arm>_s*.jsonl)",
+    "source": "out/extended/branch_metrics.csv rows track=F, arm in {RNf, C0} (from results/branches/F_*__r*__<arm>_s*.jsonl)",
     "method": "branches with Y >= 0.5"
   },
   "F.RNf.survive_runs": {
     "value": "6/8",
-    "source": "out/branch_metrics.csv rows track=F, arm in {RNf, C0} (from results/branches/F_*__r*__<arm>_s*.jsonl)",
+    "source": "out/extended/branch_metrics.csv rows track=F, arm in {RNf, C0} (from results/branches/F_*__r*__<arm>_s*.jsonl)",
     "method": "base runs with seed-averaged Y >= 0.5"
   },
   "F.RNf.median_recover": {
     "value": 5,
-    "source": "out/branch_metrics.csv rows track=F, arm in {RNf, C0} (from results/branches/F_*__r*__<arm>_s*.jsonl)",
+    "source": "out/extended/branch_metrics.csv rows track=F, arm in {RNf, C0} (from results/branches/F_*__r*__<arm>_s*.jsonl)",
     "method": "median k (5-round mean >= 0.9 pre)"
   },
   "F.RNf.censored_recover": {
     "value": "2/16",
-    "source": "out/branch_metrics.csv rows track=F, arm in {RNf, C0} (from results/branches/F_*__r*__<arm>_s*.jsonl)",
+    "source": "out/extended/branch_metrics.csv rows track=F, arm in {RNf, C0} (from results/branches/F_*__r*__<arm>_s*.jsonl)",
     "method": "branches that never recovered within the horizon"
   },
   "F.RNf.mean_pre": {
     "value": 0.8375,
-    "source": "out/branch_metrics.csv rows track=F, arm in {RNf, C0} (from results/branches/F_*__r*__<arm>_s*.jsonl)",
+    "source": "out/extended/branch_metrics.csv rows track=F, arm in {RNf, C0} (from results/branches/F_*__r*__<arm>_s*.jsonl)",
     "method": "mean pidx over the 20 rounds before the swap"
   },
   "F.RNf.Y_per_market": {
@@ -2201,17 +2201,17 @@
       "F_gem25flash_P0think_s8": 0.781,
       "F_gem25flash_P0think_s9": 0.6746
     },
-    "source": "out/branch_metrics.csv rows track=F, arm in {RNf, C0} (from results/branches/F_*__r*__<arm>_s*.jsonl)",
+    "source": "out/extended/branch_metrics.csv rows track=F, arm in {RNf, C0} (from results/branches/F_*__r*__<arm>_s*.jsonl)",
     "method": "seeds averaged"
   },
   "F.RNf.mean_price": {
     "value": 1.7604,
-    "source": "out/branch_metrics.csv rows track=F, arm in {RNf, C0} (from results/branches/F_*__r*__<arm>_s*.jsonl)",
+    "source": "out/extended/branch_metrics.csv rows track=F, arm in {RNf, C0} (from results/branches/F_*__r*__<arm>_s*.jsonl)",
     "method": "mean of both firms' prices over post-swap rounds 31-50 (from mean_Y)"
   },
   "F.RNf.mean_gain": {
     "value": 0.71,
-    "source": "out/branch_metrics.csv rows track=F, arm in {RNf, C0} (from results/branches/F_*__r*__<arm>_s*.jsonl)",
+    "source": "out/extended/branch_metrics.csv rows track=F, arm in {RNf, C0} (from results/branches/F_*__r*__<arm>_s*.jsonl)",
     "method": "harness profit gain over post-swap rounds 31-50 (0 = Nash profit, 1 = monopoly), seeds averaged"
   },
   "F.RNf.pre_per_market": {
@@ -2225,22 +2225,22 @@
       "F_gem25flash_P0think_s8": 0.8242,
       "F_gem25flash_P0think_s9": 0.916
     },
-    "source": "out/branch_metrics.csv rows track=F, arm in {RNf, C0} (from results/branches/F_*__r*__<arm>_s*.jsonl)",
+    "source": "out/extended/branch_metrics.csv rows track=F, arm in {RNf, C0} (from results/branches/F_*__r*__<arm>_s*.jsonl)",
     "method": "mean pidx over the 20 rounds before the swap"
   },
   "F.RNf.newcomer_first_price": {
     "value": 2.055,
-    "source": "out/branch_metrics.csv rows track=F, arm in {RNf, C0} (from results/branches/F_*__r*__<arm>_s*.jsonl)",
+    "source": "out/extended/branch_metrics.csv rows track=F, arm in {RNf, C0} (from results/branches/F_*__r*__<arm>_s*.jsonl)",
     "method": "mean price of firm 1 in post-swap round 1 (the newcomer's opening price)"
   },
   "F.RNf.mean_gap": {
     "value": -0.1264,
-    "source": "out/branch_metrics.csv rows track=F, arm in {RNf, C0} (from results/branches/F_*__r*__<arm>_s*.jsonl)",
+    "source": "out/extended/branch_metrics.csv rows track=F, arm in {RNf, C0} (from results/branches/F_*__r*__<arm>_s*.jsonl)",
     "method": "mean p1 - p0 over the scoring window"
   },
   "F.RNf.delta": {
     "value": -0.1807,
-    "source": "out/branch_metrics.csv rows track=F, arm in {RNf, C0} (from results/branches/F_*__r*__<arm>_s*.jsonl)",
+    "source": "out/extended/branch_metrics.csv rows track=F, arm in {RNf, C0} (from results/branches/F_*__r*__<arm>_s*.jsonl)",
     "method": "mean over base runs of Y(arm) - Y(C0)"
   },
   "F.RNf.delta_ci": {
@@ -2248,7 +2248,7 @@
       -0.31439809972916755,
       -0.033821299536608576
     ],
-    "source": "out/branch_metrics.csv rows track=F, arm in {RNf, C0} (from results/branches/F_*__r*__<arm>_s*.jsonl)",
+    "source": "out/extended/branch_metrics.csv rows track=F, arm in {RNf, C0} (from results/branches/F_*__r*__<arm>_s*.jsonl)",
     "method": "95% cluster bootstrap over base runs, 2000 resamples (none with fewer than 3 base runs)"
   },
   "F.RNf.delta_per_market": {
@@ -2262,12 +2262,12 @@
       "F_gem25flash_P0think_s8": -0.0379,
       "F_gem25flash_P0think_s9": -0.2151
     },
-    "source": "out/branch_metrics.csv rows track=F, arm in {RNf, C0} (from results/branches/F_*__r*__<arm>_s*.jsonl)",
+    "source": "out/extended/branch_metrics.csv rows track=F, arm in {RNf, C0} (from results/branches/F_*__r*__<arm>_s*.jsonl)",
     "method": "Y(arm) - Y(C0) per base run, seeds averaged"
   },
   "F.RNf.markets_below_control": {
     "value": "7/8",
-    "source": "out/branch_metrics.csv rows track=F, arm in {RNf, C0} (from results/branches/F_*__r*__<arm>_s*.jsonl)",
+    "source": "out/extended/branch_metrics.csv rows track=F, arm in {RNf, C0} (from results/branches/F_*__r*__<arm>_s*.jsonl)",
     "method": "base runs where Y(arm) < Y(C0), seeds averaged (exploratory)"
   },
   "F.RNf.delta_leave_one_out": {
@@ -2275,12 +2275,12 @@
       -0.23199648695934166,
       -0.14761976362456325
     ],
-    "source": "out/branch_metrics.csv rows track=F, arm in {RNf, C0} (from results/branches/F_*__r*__<arm>_s*.jsonl)",
+    "source": "out/extended/branch_metrics.csv rows track=F, arm in {RNf, C0} (from results/branches/F_*__r*__<arm>_s*.jsonl)",
     "method": "range of the mean effect with one base run left out at a time (exploratory)"
   },
   "F.RNf.delta_gain": {
     "value": -0.1767,
-    "source": "out/branch_metrics.csv rows track=F, arm in {RNf, C0} (from results/branches/F_*__r*__<arm>_s*.jsonl)",
+    "source": "out/extended/branch_metrics.csv rows track=F, arm in {RNf, C0} (from results/branches/F_*__r*__<arm>_s*.jsonl)",
     "method": ""
   },
   "F.RNf.delta_gain_ci": {
@@ -2288,12 +2288,12 @@
       -0.26764872788579863,
       -0.06607401880117254
     ],
-    "source": "out/branch_metrics.csv rows track=F, arm in {RNf, C0} (from results/branches/F_*__r*__<arm>_s*.jsonl)",
+    "source": "out/extended/branch_metrics.csv rows track=F, arm in {RNf, C0} (from results/branches/F_*__r*__<arm>_s*.jsonl)",
     "method": ""
   },
   "F.RNf.incumbent_response": {
     "value": 0.0181,
-    "source": "out/branch_metrics.csv rows track=F, arm in {RNf, C0} (from results/branches/F_*__r*__<arm>_s*.jsonl)",
+    "source": "out/extended/branch_metrics.csv rows track=F, arm in {RNf, C0} (from results/branches/F_*__r*__<arm>_s*.jsonl)",
     "method": "mean p0 over post-swap rounds 1-10, arm - C0"
   },
   "F.RNf.incumbent_response_ci": {
@@ -2301,52 +2301,52 @@
       -0.002937499999999873,
       0.04513437500000006
     ],
-    "source": "out/branch_metrics.csv rows track=F, arm in {RNf, C0} (from results/branches/F_*__r*__<arm>_s*.jsonl)",
+    "source": "out/extended/branch_metrics.csv rows track=F, arm in {RNf, C0} (from results/branches/F_*__r*__<arm>_s*.jsonl)",
     "method": ""
   },
   "F.RX.n_base_runs": {
     "value": 8,
-    "source": "out/branch_metrics.csv rows track=F, arm in {RX, C0} (from results/branches/F_*__r*__<arm>_s*.jsonl)",
+    "source": "out/extended/branch_metrics.csv rows track=F, arm in {RX, C0} (from results/branches/F_*__r*__<arm>_s*.jsonl)",
     "method": ""
   },
   "F.RX.n_branches": {
     "value": 16,
-    "source": "out/branch_metrics.csv rows track=F, arm in {RX, C0} (from results/branches/F_*__r*__<arm>_s*.jsonl)",
+    "source": "out/extended/branch_metrics.csv rows track=F, arm in {RX, C0} (from results/branches/F_*__r*__<arm>_s*.jsonl)",
     "method": ""
   },
   "F.RX.n_paired_with_C0": {
     "value": 8,
-    "source": "out/branch_metrics.csv rows track=F, arm in {RX, C0} (from results/branches/F_*__r*__<arm>_s*.jsonl)",
+    "source": "out/extended/branch_metrics.csv rows track=F, arm in {RX, C0} (from results/branches/F_*__r*__<arm>_s*.jsonl)",
     "method": "base runs with both this arm and C0 complete"
   },
   "F.RX.mean_Y": {
     "value": 0.4772,
-    "source": "out/branch_metrics.csv rows track=F, arm in {RX, C0} (from results/branches/F_*__r*__<arm>_s*.jsonl)",
+    "source": "out/extended/branch_metrics.csv rows track=F, arm in {RX, C0} (from results/branches/F_*__r*__<arm>_s*.jsonl)",
     "method": "mean pidx over post-swap rounds 31-50, seeds averaged"
   },
   "F.RX.survive_branches": {
     "value": "6/16",
-    "source": "out/branch_metrics.csv rows track=F, arm in {RX, C0} (from results/branches/F_*__r*__<arm>_s*.jsonl)",
+    "source": "out/extended/branch_metrics.csv rows track=F, arm in {RX, C0} (from results/branches/F_*__r*__<arm>_s*.jsonl)",
     "method": "branches with Y >= 0.5"
   },
   "F.RX.survive_runs": {
     "value": "3/8",
-    "source": "out/branch_metrics.csv rows track=F, arm in {RX, C0} (from results/branches/F_*__r*__<arm>_s*.jsonl)",
+    "source": "out/extended/branch_metrics.csv rows track=F, arm in {RX, C0} (from results/branches/F_*__r*__<arm>_s*.jsonl)",
     "method": "base runs with seed-averaged Y >= 0.5"
   },
   "F.RX.median_recover": {
     "value": ">50",
-    "source": "out/branch_metrics.csv rows track=F, arm in {RX, C0} (from results/branches/F_*__r*__<arm>_s*.jsonl)",
+    "source": "out/extended/branch_metrics.csv rows track=F, arm in {RX, C0} (from results/branches/F_*__r*__<arm>_s*.jsonl)",
     "method": "median k (5-round mean >= 0.9 pre)"
   },
   "F.RX.censored_recover": {
     "value": "8/16",
-    "source": "out/branch_metrics.csv rows track=F, arm in {RX, C0} (from results/branches/F_*__r*__<arm>_s*.jsonl)",
+    "source": "out/extended/branch_metrics.csv rows track=F, arm in {RX, C0} (from results/branches/F_*__r*__<arm>_s*.jsonl)",
     "method": "branches that never recovered within the horizon"
   },
   "F.RX.mean_pre": {
     "value": 0.8375,
-    "source": "out/branch_metrics.csv rows track=F, arm in {RX, C0} (from results/branches/F_*__r*__<arm>_s*.jsonl)",
+    "source": "out/extended/branch_metrics.csv rows track=F, arm in {RX, C0} (from results/branches/F_*__r*__<arm>_s*.jsonl)",
     "method": "mean pidx over the 20 rounds before the swap"
   },
   "F.RX.Y_per_market": {
@@ -2360,17 +2360,17 @@
       "F_gem25flash_P0think_s8": 0.5056,
       "F_gem25flash_P0think_s9": 0.7033
     },
-    "source": "out/branch_metrics.csv rows track=F, arm in {RX, C0} (from results/branches/F_*__r*__<arm>_s*.jsonl)",
+    "source": "out/extended/branch_metrics.csv rows track=F, arm in {RX, C0} (from results/branches/F_*__r*__<arm>_s*.jsonl)",
     "method": "seeds averaged"
   },
   "F.RX.mean_price": {
     "value": 1.6886,
-    "source": "out/branch_metrics.csv rows track=F, arm in {RX, C0} (from results/branches/F_*__r*__<arm>_s*.jsonl)",
+    "source": "out/extended/branch_metrics.csv rows track=F, arm in {RX, C0} (from results/branches/F_*__r*__<arm>_s*.jsonl)",
     "method": "mean of both firms' prices over post-swap rounds 31-50 (from mean_Y)"
   },
   "F.RX.mean_gain": {
     "value": 0.5514,
-    "source": "out/branch_metrics.csv rows track=F, arm in {RX, C0} (from results/branches/F_*__r*__<arm>_s*.jsonl)",
+    "source": "out/extended/branch_metrics.csv rows track=F, arm in {RX, C0} (from results/branches/F_*__r*__<arm>_s*.jsonl)",
     "method": "harness profit gain over post-swap rounds 31-50 (0 = Nash profit, 1 = monopoly), seeds averaged"
   },
   "F.RX.pre_per_market": {
@@ -2384,22 +2384,22 @@
       "F_gem25flash_P0think_s8": 0.8242,
       "F_gem25flash_P0think_s9": 0.916
     },
-    "source": "out/branch_metrics.csv rows track=F, arm in {RX, C0} (from results/branches/F_*__r*__<arm>_s*.jsonl)",
+    "source": "out/extended/branch_metrics.csv rows track=F, arm in {RX, C0} (from results/branches/F_*__r*__<arm>_s*.jsonl)",
     "method": "mean pidx over the 20 rounds before the swap"
   },
   "F.RX.newcomer_first_price": {
     "value": 1.7687,
-    "source": "out/branch_metrics.csv rows track=F, arm in {RX, C0} (from results/branches/F_*__r*__<arm>_s*.jsonl)",
+    "source": "out/extended/branch_metrics.csv rows track=F, arm in {RX, C0} (from results/branches/F_*__r*__<arm>_s*.jsonl)",
     "method": "mean price of firm 1 in post-swap round 1 (the newcomer's opening price)"
   },
   "F.RX.mean_gap": {
     "value": -0.1263,
-    "source": "out/branch_metrics.csv rows track=F, arm in {RX, C0} (from results/branches/F_*__r*__<arm>_s*.jsonl)",
+    "source": "out/extended/branch_metrics.csv rows track=F, arm in {RX, C0} (from results/branches/F_*__r*__<arm>_s*.jsonl)",
     "method": "mean p1 - p0 over the scoring window"
   },
   "F.RX.delta": {
     "value": -0.3394,
-    "source": "out/branch_metrics.csv rows track=F, arm in {RX, C0} (from results/branches/F_*__r*__<arm>_s*.jsonl)",
+    "source": "out/extended/branch_metrics.csv rows track=F, arm in {RX, C0} (from results/branches/F_*__r*__<arm>_s*.jsonl)",
     "method": "mean over base runs of Y(arm) - Y(C0)"
   },
   "F.RX.delta_ci": {
@@ -2407,7 +2407,7 @@
       -0.47330031212279183,
       -0.2006733319541675
     ],
-    "source": "out/branch_metrics.csv rows track=F, arm in {RX, C0} (from results/branches/F_*__r*__<arm>_s*.jsonl)",
+    "source": "out/extended/branch_metrics.csv rows track=F, arm in {RX, C0} (from results/branches/F_*__r*__<arm>_s*.jsonl)",
     "method": "95% cluster bootstrap over base runs, 2000 resamples (none with fewer than 3 base runs)"
   },
   "F.RX.delta_per_market": {
@@ -2421,12 +2421,12 @@
       "F_gem25flash_P0think_s8": -0.3133,
       "F_gem25flash_P0think_s9": -0.1864
     },
-    "source": "out/branch_metrics.csv rows track=F, arm in {RX, C0} (from results/branches/F_*__r*__<arm>_s*.jsonl)",
+    "source": "out/extended/branch_metrics.csv rows track=F, arm in {RX, C0} (from results/branches/F_*__r*__<arm>_s*.jsonl)",
     "method": "Y(arm) - Y(C0) per base run, seeds averaged"
   },
   "F.RX.markets_below_control": {
     "value": "8/8",
-    "source": "out/branch_metrics.csv rows track=F, arm in {RX, C0} (from results/branches/F_*__r*__<arm>_s*.jsonl)",
+    "source": "out/extended/branch_metrics.csv rows track=F, arm in {RX, C0} (from results/branches/F_*__r*__<arm>_s*.jsonl)",
     "method": "base runs where Y(arm) < Y(C0), seeds averaged (exploratory)"
   },
   "F.RX.delta_leave_one_out": {
@@ -2434,12 +2434,12 @@
       -0.3776806422302513,
       -0.3006118279857977
     ],
-    "source": "out/branch_metrics.csv rows track=F, arm in {RX, C0} (from results/branches/F_*__r*__<arm>_s*.jsonl)",
+    "source": "out/extended/branch_metrics.csv rows track=F, arm in {RX, C0} (from results/branches/F_*__r*__<arm>_s*.jsonl)",
     "method": "range of the mean effect with one base run left out at a time (exploratory)"
   },
   "F.RX.delta_gain": {
     "value": -0.3353,
-    "source": "out/branch_metrics.csv rows track=F, arm in {RX, C0} (from results/branches/F_*__r*__<arm>_s*.jsonl)",
+    "source": "out/extended/branch_metrics.csv rows track=F, arm in {RX, C0} (from results/branches/F_*__r*__<arm>_s*.jsonl)",
     "method": ""
   },
   "F.RX.delta_gain_ci": {
@@ -2447,12 +2447,12 @@
       -0.4603757594706219,
       -0.21417306701019845
     ],
-    "source": "out/branch_metrics.csv rows track=F, arm in {RX, C0} (from results/branches/F_*__r*__<arm>_s*.jsonl)",
+    "source": "out/extended/branch_metrics.csv rows track=F, arm in {RX, C0} (from results/branches/F_*__r*__<arm>_s*.jsonl)",
     "method": ""
   },
   "F.RX.incumbent_response": {
     "value": -0.0079,
-    "source": "out/branch_metrics.csv rows track=F, arm in {RX, C0} (from results/branches/F_*__r*__<arm>_s*.jsonl)",
+    "source": "out/extended/branch_metrics.csv rows track=F, arm in {RX, C0} (from results/branches/F_*__r*__<arm>_s*.jsonl)",
     "method": "mean p0 over post-swap rounds 1-10, arm - C0"
   },
   "F.RX.incumbent_response_ci": {
@@ -2460,22 +2460,22 @@
       -0.02037499999999995,
       0.0008140625000001509
     ],
-    "source": "out/branch_metrics.csv rows track=F, arm in {RX, C0} (from results/branches/F_*__r*__<arm>_s*.jsonl)",
+    "source": "out/extended/branch_metrics.csv rows track=F, arm in {RX, C0} (from results/branches/F_*__r*__<arm>_s*.jsonl)",
     "method": ""
   },
   "all.min_branch_Y": {
     "value": 0.2192,
-    "source": "out/branch_metrics.csv (every complete branch except C0)",
+    "source": "out/extended/branch_metrics.csv (every complete branch except C0)",
     "method": "lowest post-swap index of any single branch: F RX, F_gem25flash_P0think_s6, seed 102"
   },
   "OPI.contrast.R3-R2": {
     "value": -0.0314,
-    "source": "out/branch_metrics.csv rows track=OPI, arm in {R3, R2} (from results/branches/OPI_*__r*__<arm>_s*.jsonl)",
+    "source": "out/extended/branch_metrics.csv rows track=OPI, arm in {R3, R2} (from results/branches/OPI_*__r*__<arm>_s*.jsonl)",
     "method": "paired mean, seeds averaged"
   },
   "OPI.contrast.R3-R2.n": {
     "value": 2,
-    "source": "out/branch_metrics.csv rows track=OPI, arm in {R3, R2} (from results/branches/OPI_*__r*__<arm>_s*.jsonl)",
+    "source": "out/extended/branch_metrics.csv rows track=OPI, arm in {R3, R2} (from results/branches/OPI_*__r*__<arm>_s*.jsonl)",
     "method": "base runs in the contrast"
   },
   "OPI.contrast.R3-R2.ci": {
@@ -2483,17 +2483,17 @@
       null,
       null
     ],
-    "source": "out/branch_metrics.csv rows track=OPI, arm in {R3, R2} (from results/branches/OPI_*__r*__<arm>_s*.jsonl)",
+    "source": "out/extended/branch_metrics.csv rows track=OPI, arm in {R3, R2} (from results/branches/OPI_*__r*__<arm>_s*.jsonl)",
     "method": "cluster bootstrap 95%"
   },
   "OPI.contrast.R5-R5f": {
     "value": -1.8947,
-    "source": "out/branch_metrics.csv rows track=OPI, arm in {R5, R5f} (from results/branches/OPI_*__r*__<arm>_s*.jsonl)",
+    "source": "out/extended/branch_metrics.csv rows track=OPI, arm in {R5, R5f} (from results/branches/OPI_*__r*__<arm>_s*.jsonl)",
     "method": "paired mean, seeds averaged"
   },
   "OPI.contrast.R5-R5f.n": {
     "value": 2,
-    "source": "out/branch_metrics.csv rows track=OPI, arm in {R5, R5f} (from results/branches/OPI_*__r*__<arm>_s*.jsonl)",
+    "source": "out/extended/branch_metrics.csv rows track=OPI, arm in {R5, R5f} (from results/branches/OPI_*__r*__<arm>_s*.jsonl)",
     "method": "base runs in the contrast"
   },
   "OPI.contrast.R5-R5f.ci": {
@@ -2501,17 +2501,17 @@
       null,
       null
     ],
-    "source": "out/branch_metrics.csv rows track=OPI, arm in {R5, R5f} (from results/branches/OPI_*__r*__<arm>_s*.jsonl)",
+    "source": "out/extended/branch_metrics.csv rows track=OPI, arm in {R5, R5f} (from results/branches/OPI_*__r*__<arm>_s*.jsonl)",
     "method": "cluster bootstrap 95%"
   },
   "OPI.contrast.R4-C0": {
     "value": -0.0028,
-    "source": "out/branch_metrics.csv rows track=OPI, arm in {R4, C0} (from results/branches/OPI_*__r*__<arm>_s*.jsonl)",
+    "source": "out/extended/branch_metrics.csv rows track=OPI, arm in {R4, C0} (from results/branches/OPI_*__r*__<arm>_s*.jsonl)",
     "method": "paired mean, seeds averaged"
   },
   "OPI.contrast.R4-C0.n": {
     "value": 2,
-    "source": "out/branch_metrics.csv rows track=OPI, arm in {R4, C0} (from results/branches/OPI_*__r*__<arm>_s*.jsonl)",
+    "source": "out/extended/branch_metrics.csv rows track=OPI, arm in {R4, C0} (from results/branches/OPI_*__r*__<arm>_s*.jsonl)",
     "method": "base runs in the contrast"
   },
   "OPI.contrast.R4-C0.ci": {
@@ -2519,17 +2519,17 @@
       null,
       null
     ],
-    "source": "out/branch_metrics.csv rows track=OPI, arm in {R4, C0} (from results/branches/OPI_*__r*__<arm>_s*.jsonl)",
+    "source": "out/extended/branch_metrics.csv rows track=OPI, arm in {R4, C0} (from results/branches/OPI_*__r*__<arm>_s*.jsonl)",
     "method": "cluster bootstrap 95%"
   },
   "OPI.contrast.R2-R1": {
     "value": -0.0095,
-    "source": "out/branch_metrics.csv rows track=OPI, arm in {R2, R1} (from results/branches/OPI_*__r*__<arm>_s*.jsonl)",
+    "source": "out/extended/branch_metrics.csv rows track=OPI, arm in {R2, R1} (from results/branches/OPI_*__r*__<arm>_s*.jsonl)",
     "method": "paired mean, seeds averaged"
   },
   "OPI.contrast.R2-R1.n": {
     "value": 2,
-    "source": "out/branch_metrics.csv rows track=OPI, arm in {R2, R1} (from results/branches/OPI_*__r*__<arm>_s*.jsonl)",
+    "source": "out/extended/branch_metrics.csv rows track=OPI, arm in {R2, R1} (from results/branches/OPI_*__r*__<arm>_s*.jsonl)",
     "method": "base runs in the contrast"
   },
   "OPI.contrast.R2-R1.ci": {
@@ -2537,17 +2537,17 @@
       null,
       null
     ],
-    "source": "out/branch_metrics.csv rows track=OPI, arm in {R2, R1} (from results/branches/OPI_*__r*__<arm>_s*.jsonl)",
+    "source": "out/extended/branch_metrics.csv rows track=OPI, arm in {R2, R1} (from results/branches/OPI_*__r*__<arm>_s*.jsonl)",
     "method": "cluster bootstrap 95%"
   },
   "OPI.contrast.RP-C0": {
     "value": 0.0,
-    "source": "out/branch_metrics.csv rows track=OPI, arm in {RP, C0} (from results/branches/OPI_*__r*__<arm>_s*.jsonl)",
+    "source": "out/extended/branch_metrics.csv rows track=OPI, arm in {RP, C0} (from results/branches/OPI_*__r*__<arm>_s*.jsonl)",
     "method": "paired mean, seeds averaged"
   },
   "OPI.contrast.RP-C0.n": {
     "value": 2,
-    "source": "out/branch_metrics.csv rows track=OPI, arm in {RP, C0} (from results/branches/OPI_*__r*__<arm>_s*.jsonl)",
+    "source": "out/extended/branch_metrics.csv rows track=OPI, arm in {RP, C0} (from results/branches/OPI_*__r*__<arm>_s*.jsonl)",
     "method": "base runs in the contrast"
   },
   "OPI.contrast.RP-C0.ci": {
@@ -2555,27 +2555,27 @@
       null,
       null
     ],
-    "source": "out/branch_metrics.csv rows track=OPI, arm in {RP, C0} (from results/branches/OPI_*__r*__<arm>_s*.jsonl)",
+    "source": "out/extended/branch_metrics.csv rows track=OPI, arm in {RP, C0} (from results/branches/OPI_*__r*__<arm>_s*.jsonl)",
     "method": "cluster bootstrap 95%"
   },
   "OPI.R5.median_persistence": {
     "value": ">50",
-    "source": "out/branch_metrics.csv rows track=OPI, arm in {R5} (from results/branches/OPI_*__r*__<arm>_s*.jsonl)",
+    "source": "out/extended/branch_metrics.csv rows track=OPI, arm in {R5} (from results/branches/OPI_*__r*__<arm>_s*.jsonl)",
     "method": "first k with 5-round mean pidx < 0.5; None = never within horizon"
   },
   "OPI.R5.persist_censored": {
     "value": "4/4",
-    "source": "out/branch_metrics.csv rows track=OPI, arm in {R5} (from results/branches/OPI_*__r*__<arm>_s*.jsonl)",
+    "source": "out/extended/branch_metrics.csv rows track=OPI, arm in {R5} (from results/branches/OPI_*__r*__<arm>_s*.jsonl)",
     "method": ""
   },
   "F.contrast.R3-R2": {
     "value": 0.0147,
-    "source": "out/branch_metrics.csv rows track=F, arm in {R3, R2} (from results/branches/F_*__r*__<arm>_s*.jsonl)",
+    "source": "out/extended/branch_metrics.csv rows track=F, arm in {R3, R2} (from results/branches/F_*__r*__<arm>_s*.jsonl)",
     "method": "paired mean, seeds averaged"
   },
   "F.contrast.R3-R2.n": {
     "value": 8,
-    "source": "out/branch_metrics.csv rows track=F, arm in {R3, R2} (from results/branches/F_*__r*__<arm>_s*.jsonl)",
+    "source": "out/extended/branch_metrics.csv rows track=F, arm in {R3, R2} (from results/branches/F_*__r*__<arm>_s*.jsonl)",
     "method": "base runs in the contrast"
   },
   "F.contrast.R3-R2.ci": {
@@ -2583,17 +2583,17 @@
       -0.05264509077588984,
       0.09328940975912745
     ],
-    "source": "out/branch_metrics.csv rows track=F, arm in {R3, R2} (from results/branches/F_*__r*__<arm>_s*.jsonl)",
+    "source": "out/extended/branch_metrics.csv rows track=F, arm in {R3, R2} (from results/branches/F_*__r*__<arm>_s*.jsonl)",
     "method": "cluster bootstrap 95%"
   },
   "F.contrast.R5-R5f": {
     "value": -1.1077,
-    "source": "out/branch_metrics.csv rows track=F, arm in {R5, R5f} (from results/branches/F_*__r*__<arm>_s*.jsonl)",
+    "source": "out/extended/branch_metrics.csv rows track=F, arm in {R5, R5f} (from results/branches/F_*__r*__<arm>_s*.jsonl)",
     "method": "paired mean, seeds averaged"
   },
   "F.contrast.R5-R5f.n": {
     "value": 8,
-    "source": "out/branch_metrics.csv rows track=F, arm in {R5, R5f} (from results/branches/F_*__r*__<arm>_s*.jsonl)",
+    "source": "out/extended/branch_metrics.csv rows track=F, arm in {R5, R5f} (from results/branches/F_*__r*__<arm>_s*.jsonl)",
     "method": "base runs in the contrast"
   },
   "F.contrast.R5-R5f.ci": {
@@ -2601,17 +2601,17 @@
       -1.3897633414798143,
       -0.8273083901212133
     ],
-    "source": "out/branch_metrics.csv rows track=F, arm in {R5, R5f} (from results/branches/F_*__r*__<arm>_s*.jsonl)",
+    "source": "out/extended/branch_metrics.csv rows track=F, arm in {R5, R5f} (from results/branches/F_*__r*__<arm>_s*.jsonl)",
     "method": "cluster bootstrap 95%"
   },
   "F.contrast.R4-C0": {
     "value": -0.002,
-    "source": "out/branch_metrics.csv rows track=F, arm in {R4, C0} (from results/branches/F_*__r*__<arm>_s*.jsonl)",
+    "source": "out/extended/branch_metrics.csv rows track=F, arm in {R4, C0} (from results/branches/F_*__r*__<arm>_s*.jsonl)",
     "method": "paired mean, seeds averaged"
   },
   "F.contrast.R4-C0.n": {
     "value": 8,
-    "source": "out/branch_metrics.csv rows track=F, arm in {R4, C0} (from results/branches/F_*__r*__<arm>_s*.jsonl)",
+    "source": "out/extended/branch_metrics.csv rows track=F, arm in {R4, C0} (from results/branches/F_*__r*__<arm>_s*.jsonl)",
     "method": "base runs in the contrast"
   },
   "F.contrast.R4-C0.ci": {
@@ -2619,17 +2619,17 @@
       -0.024853556905261386,
       0.019701727885403003
     ],
-    "source": "out/branch_metrics.csv rows track=F, arm in {R4, C0} (from results/branches/F_*__r*__<arm>_s*.jsonl)",
+    "source": "out/extended/branch_metrics.csv rows track=F, arm in {R4, C0} (from results/branches/F_*__r*__<arm>_s*.jsonl)",
     "method": "cluster bootstrap 95%"
   },
   "F.contrast.R2-R1": {
     "value": -0.0487,
-    "source": "out/branch_metrics.csv rows track=F, arm in {R2, R1} (from results/branches/F_*__r*__<arm>_s*.jsonl)",
+    "source": "out/extended/branch_metrics.csv rows track=F, arm in {R2, R1} (from results/branches/F_*__r*__<arm>_s*.jsonl)",
     "method": "paired mean, seeds averaged"
   },
   "F.contrast.R2-R1.n": {
     "value": 8,
-    "source": "out/branch_metrics.csv rows track=F, arm in {R2, R1} (from results/branches/F_*__r*__<arm>_s*.jsonl)",
+    "source": "out/extended/branch_metrics.csv rows track=F, arm in {R2, R1} (from results/branches/F_*__r*__<arm>_s*.jsonl)",
     "method": "base runs in the contrast"
   },
   "F.contrast.R2-R1.ci": {
@@ -2637,17 +2637,17 @@
       -0.08046600441617212,
       -0.022051245346824483
     ],
-    "source": "out/branch_metrics.csv rows track=F, arm in {R2, R1} (from results/branches/F_*__r*__<arm>_s*.jsonl)",
+    "source": "out/extended/branch_metrics.csv rows track=F, arm in {R2, R1} (from results/branches/F_*__r*__<arm>_s*.jsonl)",
     "method": "cluster bootstrap 95%"
   },
   "F.contrast.RNf-RN": {
     "value": 0.0692,
-    "source": "out/branch_metrics.csv rows track=F, arm in {RNf, RN} (from results/branches/F_*__r*__<arm>_s*.jsonl)",
+    "source": "out/extended/branch_metrics.csv rows track=F, arm in {RNf, RN} (from results/branches/F_*__r*__<arm>_s*.jsonl)",
     "method": "paired mean, seeds averaged"
   },
   "F.contrast.RNf-RN.n": {
     "value": 8,
-    "source": "out/branch_metrics.csv rows track=F, arm in {RNf, RN} (from results/branches/F_*__r*__<arm>_s*.jsonl)",
+    "source": "out/extended/branch_metrics.csv rows track=F, arm in {RNf, RN} (from results/branches/F_*__r*__<arm>_s*.jsonl)",
     "method": "base runs in the contrast"
   },
   "F.contrast.RNf-RN.ci": {
@@ -2655,17 +2655,17 @@
       -0.05289049826358528,
       0.19301212496153655
     ],
-    "source": "out/branch_metrics.csv rows track=F, arm in {RNf, RN} (from results/branches/F_*__r*__<arm>_s*.jsonl)",
+    "source": "out/extended/branch_metrics.csv rows track=F, arm in {RNf, RN} (from results/branches/F_*__r*__<arm>_s*.jsonl)",
     "method": "cluster bootstrap 95%"
   },
   "F.contrast.RN-R2": {
     "value": -0.2242,
-    "source": "out/branch_metrics.csv rows track=F, arm in {RN, R2} (from results/branches/F_*__r*__<arm>_s*.jsonl)",
+    "source": "out/extended/branch_metrics.csv rows track=F, arm in {RN, R2} (from results/branches/F_*__r*__<arm>_s*.jsonl)",
     "method": "paired mean, seeds averaged"
   },
   "F.contrast.RN-R2.n": {
     "value": 8,
-    "source": "out/branch_metrics.csv rows track=F, arm in {RN, R2} (from results/branches/F_*__r*__<arm>_s*.jsonl)",
+    "source": "out/extended/branch_metrics.csv rows track=F, arm in {RN, R2} (from results/branches/F_*__r*__<arm>_s*.jsonl)",
     "method": "base runs in the contrast"
   },
   "F.contrast.RN-R2.ci": {
@@ -2673,17 +2673,17 @@
       -0.3531793956720133,
       -0.09655488474504584
     ],
-    "source": "out/branch_metrics.csv rows track=F, arm in {RN, R2} (from results/branches/F_*__r*__<arm>_s*.jsonl)",
+    "source": "out/extended/branch_metrics.csv rows track=F, arm in {RN, R2} (from results/branches/F_*__r*__<arm>_s*.jsonl)",
     "method": "cluster bootstrap 95%"
   },
   "F.contrast.RX-R2": {
     "value": -0.3137,
-    "source": "out/branch_metrics.csv rows track=F, arm in {RX, R2} (from results/branches/F_*__r*__<arm>_s*.jsonl)",
+    "source": "out/extended/branch_metrics.csv rows track=F, arm in {RX, R2} (from results/branches/F_*__r*__<arm>_s*.jsonl)",
     "method": "paired mean, seeds averaged"
   },
   "F.contrast.RX-R2.n": {
     "value": 8,
-    "source": "out/branch_metrics.csv rows track=F, arm in {RX, R2} (from results/branches/F_*__r*__<arm>_s*.jsonl)",
+    "source": "out/extended/branch_metrics.csv rows track=F, arm in {RX, R2} (from results/branches/F_*__r*__<arm>_s*.jsonl)",
     "method": "base runs in the contrast"
   },
   "F.contrast.RX-R2.ci": {
@@ -2691,17 +2691,17 @@
       -0.4537904168510101,
       -0.1651488698885186
     ],
-    "source": "out/branch_metrics.csv rows track=F, arm in {RX, R2} (from results/branches/F_*__r*__<arm>_s*.jsonl)",
+    "source": "out/extended/branch_metrics.csv rows track=F, arm in {RX, R2} (from results/branches/F_*__r*__<arm>_s*.jsonl)",
     "method": "cluster bootstrap 95%"
   },
   "F.contrast.RX-RN": {
     "value": -0.0895,
-    "source": "out/branch_metrics.csv rows track=F, arm in {RX, RN} (from results/branches/F_*__r*__<arm>_s*.jsonl)",
+    "source": "out/extended/branch_metrics.csv rows track=F, arm in {RX, RN} (from results/branches/F_*__r*__<arm>_s*.jsonl)",
     "method": "paired mean, seeds averaged"
   },
   "F.contrast.RX-RN.n": {
     "value": 8,
-    "source": "out/branch_metrics.csv rows track=F, arm in {RX, RN} (from results/branches/F_*__r*__<arm>_s*.jsonl)",
+    "source": "out/extended/branch_metrics.csv rows track=F, arm in {RX, RN} (from results/branches/F_*__r*__<arm>_s*.jsonl)",
     "method": "base runs in the contrast"
   },
   "F.contrast.RX-RN.ci": {
@@ -2709,44 +2709,44 @@
       -0.19055372953022207,
       -0.005312553642081572
     ],
-    "source": "out/branch_metrics.csv rows track=F, arm in {RX, RN} (from results/branches/F_*__r*__<arm>_s*.jsonl)",
+    "source": "out/extended/branch_metrics.csv rows track=F, arm in {RX, RN} (from results/branches/F_*__r*__<arm>_s*.jsonl)",
     "method": "cluster bootstrap 95%"
   },
   "F.R5.median_persistence": {
     "value": ">50",
-    "source": "out/branch_metrics.csv rows track=F, arm in {R5} (from results/branches/F_*__r*__<arm>_s*.jsonl)",
+    "source": "out/extended/branch_metrics.csv rows track=F, arm in {R5} (from results/branches/F_*__r*__<arm>_s*.jsonl)",
     "method": "first k with 5-round mean pidx < 0.5; None = never within horizon"
   },
   "F.R5.persist_censored": {
     "value": "12/16",
-    "source": "out/branch_metrics.csv rows track=F, arm in {R5} (from results/branches/F_*__r*__<arm>_s*.jsonl)",
+    "source": "out/extended/branch_metrics.csv rows track=F, arm in {R5} (from results/branches/F_*__r*__<arm>_s*.jsonl)",
     "method": ""
   },
   "O.base.n_runs": {
     "value": 10,
-    "source": "out/run_metrics.csv rows track=O (from results/jsonl/O_*.jsonl)",
+    "source": "out/extended/run_metrics.csv rows track=O (from results/jsonl/O_*.jsonl)",
     "method": ""
   },
   "O.base.n_colluding": {
     "value": 0,
-    "source": "out/run_metrics.csv rows track=O (from results/jsonl/O_*.jsonl)",
+    "source": "out/extended/run_metrics.csv rows track=O (from results/jsonl/O_*.jsonl)",
     "method": "R20 > 0.5 by max_t"
   },
   "O.base.n_branchable": {
     "value": 0,
-    "source": "out/run_metrics.csv rows track=O (from results/jsonl/O_*.jsonl)",
+    "source": "out/extended/run_metrics.csv rows track=O (from results/jsonl/O_*.jsonl)",
     "method": "colluding and reached the branch round"
   },
   "O.base.models": {
     "value": [
       "openrouter:qwen/qwen3-14b|openrouter:qwen/qwen3-14b"
     ],
-    "source": "out/run_metrics.csv rows track=O (from results/jsonl/O_*.jsonl)",
+    "source": "out/extended/run_metrics.csv rows track=O (from results/jsonl/O_*.jsonl)",
     "method": ""
   },
   "O.base.repeat_share_median": {
     "value": 0.9497,
-    "source": "out/run_metrics.csv rows track=O (from results/jsonl/O_*.jsonl)",
+    "source": "out/extended/run_metrics.csv rows track=O (from results/jsonl/O_*.jsonl)",
     "method": "median over base runs of the share of firm-rounds that repeat the firm's previous price"
   },
   "O.base.repeat_share_range": {
@@ -2754,7 +2754,7 @@
       0.8894472361809045,
       0.9773869346733668
     ],
-    "source": "out/run_metrics.csv rows track=O (from results/jsonl/O_*.jsonl)",
+    "source": "out/extended/run_metrics.csv rows track=O (from results/jsonl/O_*.jsonl)",
     "method": ""
   },
   "O.base.max_R20": {
@@ -2770,7 +2770,7 @@
       "O_qwen3-14b_P0_s8": 0.1263,
       "O_qwen3-14b_P0_s9": 0.2153
     },
-    "source": "out/run_metrics.csv rows track=O (from results/jsonl/O_*.jsonl)",
+    "source": "out/extended/run_metrics.csv rows track=O (from results/jsonl/O_*.jsonl)",
     "method": "highest 20-round rolling mean of pidx in each base run"
   },
   "O.base.rounds": {
@@ -2786,7 +2786,7 @@
       "O_qwen3-14b_P0_s8": 200.0,
       "O_qwen3-14b_P0_s9": 200.0
     },
-    "source": "out/run_metrics.csv rows track=O (from results/jsonl/O_*.jsonl)",
+    "source": "out/extended/run_metrics.csv rows track=O (from results/jsonl/O_*.jsonl)",
     "method": "complete rounds on disk"
   },
   "O.base.gain_last50": {
@@ -2802,12 +2802,12 @@
       "O_qwen3-14b_P0_s8": -0.0108,
       "O_qwen3-14b_P0_s9": 0.0625
     },
-    "source": "out/run_metrics.csv rows track=O (from results/jsonl/O_*.jsonl)",
+    "source": "out/extended/run_metrics.csv rows track=O (from results/jsonl/O_*.jsonl)",
     "method": "market mean profit gain over the last 50 rounds"
   },
   "O.base.positive_control_pass": {
     "value": 0,
-    "source": "out/run_metrics.csv rows track=O (from results/jsonl/O_*.jsonl)",
+    "source": "out/extended/run_metrics.csv rows track=O (from results/jsonl/O_*.jsonl)",
     "method": "runs passing the harness's positive-control check (gain over the last 50 rounds > 0.5)"
   },
   "O.base.first_prices": {
@@ -2933,27 +2933,27 @@
         1.505
       ]
     },
-    "source": "out/run_metrics.csv rows track=O (from results/jsonl/O_*.jsonl)",
+    "source": "out/extended/run_metrics.csv rows track=O (from results/jsonl/O_*.jsonl)",
     "method": "mean of the two firms' prices in rounds 0-9 (round 0 = first played round)"
   },
   "OPI.base.n_runs": {
     "value": 6,
-    "source": "out/run_metrics.csv rows track=OPI (from results/jsonl/OPI_*.jsonl)",
+    "source": "out/extended/run_metrics.csv rows track=OPI (from results/jsonl/OPI_*.jsonl)",
     "method": ""
   },
   "OPI.base.n_colluding": {
     "value": 2,
-    "source": "out/run_metrics.csv rows track=OPI (from results/jsonl/OPI_*.jsonl)",
+    "source": "out/extended/run_metrics.csv rows track=OPI (from results/jsonl/OPI_*.jsonl)",
     "method": "R20 > 0.5 by max_t"
   },
   "OPI.base.n_branchable": {
     "value": 2,
-    "source": "out/run_metrics.csv rows track=OPI (from results/jsonl/OPI_*.jsonl)",
+    "source": "out/extended/run_metrics.csv rows track=OPI (from results/jsonl/OPI_*.jsonl)",
     "method": "colluding and reached the branch round"
   },
   "OPI.base.crossing_median": {
     "value": 19.0,
-    "source": "out/run_metrics.csv rows track=OPI (from results/jsonl/OPI_*.jsonl)",
+    "source": "out/extended/run_metrics.csv rows track=OPI (from results/jsonl/OPI_*.jsonl)",
     "method": ""
   },
   "OPI.base.crossing_range": {
@@ -2961,19 +2961,19 @@
       19,
       19
     ],
-    "source": "out/run_metrics.csv rows track=OPI (from results/jsonl/OPI_*.jsonl)",
+    "source": "out/extended/run_metrics.csv rows track=OPI (from results/jsonl/OPI_*.jsonl)",
     "method": ""
   },
   "OPI.base.models": {
     "value": [
       "openrouter:qwen/qwen3-14b|openrouter:qwen/qwen3-14b"
     ],
-    "source": "out/run_metrics.csv rows track=OPI (from results/jsonl/OPI_*.jsonl)",
+    "source": "out/extended/run_metrics.csv rows track=OPI (from results/jsonl/OPI_*.jsonl)",
     "method": ""
   },
   "OPI.base.repeat_share_median": {
     "value": 0.9178,
-    "source": "out/run_metrics.csv rows track=OPI (from results/jsonl/OPI_*.jsonl)",
+    "source": "out/extended/run_metrics.csv rows track=OPI (from results/jsonl/OPI_*.jsonl)",
     "method": "median over base runs of the share of firm-rounds that repeat the firm's previous price"
   },
   "OPI.base.repeat_share_range": {
@@ -2981,7 +2981,7 @@
       0.8288590604026845,
       0.9496644295302014
     ],
-    "source": "out/run_metrics.csv rows track=OPI (from results/jsonl/OPI_*.jsonl)",
+    "source": "out/extended/run_metrics.csv rows track=OPI (from results/jsonl/OPI_*.jsonl)",
     "method": ""
   },
   "OPI.base.max_R20": {
@@ -2993,7 +2993,7 @@
       "OPI_qwen3-14b_PI_s4": 0.1296,
       "OPI_qwen3-14b_PI_s5": 0.1766
     },
-    "source": "out/run_metrics.csv rows track=OPI (from results/jsonl/OPI_*.jsonl)",
+    "source": "out/extended/run_metrics.csv rows track=OPI (from results/jsonl/OPI_*.jsonl)",
     "method": "highest 20-round rolling mean of pidx in each base run"
   },
   "OPI.base.rounds": {
@@ -3005,7 +3005,7 @@
       "OPI_qwen3-14b_PI_s4": 150.0,
       "OPI_qwen3-14b_PI_s5": 150.0
     },
-    "source": "out/run_metrics.csv rows track=OPI (from results/jsonl/OPI_*.jsonl)",
+    "source": "out/extended/run_metrics.csv rows track=OPI (from results/jsonl/OPI_*.jsonl)",
     "method": "complete rounds on disk"
   },
   "OPI.base.gain_last50": {
@@ -3017,12 +3017,12 @@
       "OPI_qwen3-14b_PI_s4": -0.0525,
       "OPI_qwen3-14b_PI_s5": 0.1435
     },
-    "source": "out/run_metrics.csv rows track=OPI (from results/jsonl/OPI_*.jsonl)",
+    "source": "out/extended/run_metrics.csv rows track=OPI (from results/jsonl/OPI_*.jsonl)",
     "method": "market mean profit gain over the last 50 rounds"
   },
   "OPI.base.positive_control_pass": {
     "value": 2,
-    "source": "out/run_metrics.csv rows track=OPI (from results/jsonl/OPI_*.jsonl)",
+    "source": "out/extended/run_metrics.csv rows track=OPI (from results/jsonl/OPI_*.jsonl)",
     "method": "runs passing the harness's positive-control check (gain over the last 50 rounds > 0.5)"
   },
   "OPI.base.first_prices": {
@@ -3100,27 +3100,27 @@
         1.555
       ]
     },
-    "source": "out/run_metrics.csv rows track=OPI (from results/jsonl/OPI_*.jsonl)",
+    "source": "out/extended/run_metrics.csv rows track=OPI (from results/jsonl/OPI_*.jsonl)",
     "method": "mean of the two firms' prices in rounds 0-9 (round 0 = first played round)"
   },
   "F.base.n_runs": {
     "value": 10,
-    "source": "out/run_metrics.csv rows track=F (from results/jsonl/F_*.jsonl)",
+    "source": "out/extended/run_metrics.csv rows track=F (from results/jsonl/F_*.jsonl)",
     "method": ""
   },
   "F.base.n_colluding": {
     "value": 8,
-    "source": "out/run_metrics.csv rows track=F (from results/jsonl/F_*.jsonl)",
+    "source": "out/extended/run_metrics.csv rows track=F (from results/jsonl/F_*.jsonl)",
     "method": "R20 > 0.5 by max_t"
   },
   "F.base.n_branchable": {
     "value": 8,
-    "source": "out/run_metrics.csv rows track=F (from results/jsonl/F_*.jsonl)",
+    "source": "out/extended/run_metrics.csv rows track=F (from results/jsonl/F_*.jsonl)",
     "method": "colluding and reached the branch round"
   },
   "F.base.crossing_median": {
     "value": 19.0,
-    "source": "out/run_metrics.csv rows track=F (from results/jsonl/F_*.jsonl)",
+    "source": "out/extended/run_metrics.csv rows track=F (from results/jsonl/F_*.jsonl)",
     "method": ""
   },
   "F.base.crossing_range": {
@@ -3128,19 +3128,19 @@
       19,
       20
     ],
-    "source": "out/run_metrics.csv rows track=F (from results/jsonl/F_*.jsonl)",
+    "source": "out/extended/run_metrics.csv rows track=F (from results/jsonl/F_*.jsonl)",
     "method": ""
   },
   "F.base.models": {
     "value": [
       "openrouter:google/gemini-2.5-flash|openrouter:google/gemini-2.5-flash"
     ],
-    "source": "out/run_metrics.csv rows track=F (from results/jsonl/F_*.jsonl)",
+    "source": "out/extended/run_metrics.csv rows track=F (from results/jsonl/F_*.jsonl)",
     "method": ""
   },
   "F.base.repeat_share_median": {
     "value": 0.453,
-    "source": "out/run_metrics.csv rows track=F (from results/jsonl/F_*.jsonl)",
+    "source": "out/extended/run_metrics.csv rows track=F (from results/jsonl/F_*.jsonl)",
     "method": "median over base runs of the share of firm-rounds that repeat the firm's previous price"
   },
   "F.base.repeat_share_range": {
@@ -3148,7 +3148,7 @@
       0.3087248322147651,
       0.7013422818791947
     ],
-    "source": "out/run_metrics.csv rows track=F (from results/jsonl/F_*.jsonl)",
+    "source": "out/extended/run_metrics.csv rows track=F (from results/jsonl/F_*.jsonl)",
     "method": ""
   },
   "F.base.max_R20": {
@@ -3164,7 +3164,7 @@
       "F_gem25flash_P0think_s8": 0.8773,
       "F_gem25flash_P0think_s9": 0.9309
     },
-    "source": "out/run_metrics.csv rows track=F (from results/jsonl/F_*.jsonl)",
+    "source": "out/extended/run_metrics.csv rows track=F (from results/jsonl/F_*.jsonl)",
     "method": "highest 20-round rolling mean of pidx in each base run"
   },
   "F.base.rounds": {
@@ -3180,7 +3180,7 @@
       "F_gem25flash_P0think_s8": 150.0,
       "F_gem25flash_P0think_s9": 150.0
     },
-    "source": "out/run_metrics.csv rows track=F (from results/jsonl/F_*.jsonl)",
+    "source": "out/extended/run_metrics.csv rows track=F (from results/jsonl/F_*.jsonl)",
     "method": "complete rounds on disk"
   },
   "F.base.gain_last50": {
@@ -3196,12 +3196,12 @@
       "F_gem25flash_P0think_s8": 0.9423,
       "F_gem25flash_P0think_s9": 0.9856
     },
-    "source": "out/run_metrics.csv rows track=F (from results/jsonl/F_*.jsonl)",
+    "source": "out/extended/run_metrics.csv rows track=F (from results/jsonl/F_*.jsonl)",
     "method": "market mean profit gain over the last 50 rounds"
   },
   "F.base.positive_control_pass": {
     "value": 7,
-    "source": "out/run_metrics.csv rows track=F (from results/jsonl/F_*.jsonl)",
+    "source": "out/extended/run_metrics.csv rows track=F (from results/jsonl/F_*.jsonl)",
     "method": "runs passing the harness's positive-control check (gain over the last 50 rounds > 0.5)"
   },
   "F.base.first_prices": {
@@ -3327,135 +3327,135 @@
         1.875
       ]
     },
-    "source": "out/run_metrics.csv rows track=F (from results/jsonl/F_*.jsonl)",
+    "source": "out/extended/run_metrics.csv rows track=F (from results/jsonl/F_*.jsonl)",
     "method": "mean of the two firms' prices in rounds 0-9 (round 0 = first played round)"
   },
   "B-O.n": {
     "value": 4,
-    "source": "out/run_metrics.csv rows track=B-O (from results/jsonl/B-O_*.jsonl)",
+    "source": "out/extended/run_metrics.csv rows track=B-O (from results/jsonl/B-O_*.jsonl)",
     "method": "complete (50-round) baseline runs"
   },
   "B-O.n_incomplete": {
     "value": 0,
-    "source": "out/run_metrics.csv rows track=B-O (from results/jsonl/B-O_*.jsonl)",
+    "source": "out/extended/run_metrics.csv rows track=B-O (from results/jsonl/B-O_*.jsonl)",
     "method": ""
   },
   "B-O.n_colluding_Y": {
     "value": 3,
-    "source": "out/run_metrics.csv rows track=B-O (from results/jsonl/B-O_*.jsonl)",
+    "source": "out/extended/run_metrics.csv rows track=B-O (from results/jsonl/B-O_*.jsonl)",
     "method": "pidx rounds 30-49 >= 0.5"
   },
   "B-O.n_crossed": {
     "value": 3,
-    "source": "out/run_metrics.csv rows track=B-O (from results/jsonl/B-O_*.jsonl)",
+    "source": "out/extended/run_metrics.csv rows track=B-O (from results/jsonl/B-O_*.jsonl)",
     "method": "20-round rolling mean of pidx above 0.5 at some round (the base-run criterion)"
   },
   "B-O.mean_Y": {
     "value": 0.6626,
-    "source": "out/run_metrics.csv rows track=B-O (from results/jsonl/B-O_*.jsonl)",
+    "source": "out/extended/run_metrics.csv rows track=B-O (from results/jsonl/B-O_*.jsonl)",
     "method": ""
   },
   "B-O.models": {
     "value": [
       "openrouter:google/gemini-2.5-flash|openrouter:google/gemini-2.5-flash"
     ],
-    "source": "out/run_metrics.csv rows track=B-O (from results/jsonl/B-O_*.jsonl)",
+    "source": "out/extended/run_metrics.csv rows track=B-O (from results/jsonl/B-O_*.jsonl)",
     "method": ""
   },
   "B-F.n": {
     "value": 4,
-    "source": "out/run_metrics.csv rows track=B-F (from results/jsonl/B-F_*.jsonl)",
+    "source": "out/extended/run_metrics.csv rows track=B-F (from results/jsonl/B-F_*.jsonl)",
     "method": "complete (50-round) baseline runs"
   },
   "B-F.n_incomplete": {
     "value": 0,
-    "source": "out/run_metrics.csv rows track=B-F (from results/jsonl/B-F_*.jsonl)",
+    "source": "out/extended/run_metrics.csv rows track=B-F (from results/jsonl/B-F_*.jsonl)",
     "method": ""
   },
   "B-F.n_colluding_Y": {
     "value": 1,
-    "source": "out/run_metrics.csv rows track=B-F (from results/jsonl/B-F_*.jsonl)",
+    "source": "out/extended/run_metrics.csv rows track=B-F (from results/jsonl/B-F_*.jsonl)",
     "method": "pidx rounds 30-49 >= 0.5"
   },
   "B-F.n_crossed": {
     "value": 1,
-    "source": "out/run_metrics.csv rows track=B-F (from results/jsonl/B-F_*.jsonl)",
+    "source": "out/extended/run_metrics.csv rows track=B-F (from results/jsonl/B-F_*.jsonl)",
     "method": "20-round rolling mean of pidx above 0.5 at some round (the base-run criterion)"
   },
   "B-F.mean_Y": {
     "value": 0.2185,
-    "source": "out/run_metrics.csv rows track=B-F (from results/jsonl/B-F_*.jsonl)",
+    "source": "out/extended/run_metrics.csv rows track=B-F (from results/jsonl/B-F_*.jsonl)",
     "method": ""
   },
   "B-F.models": {
     "value": [
       "openrouter:openai/gpt-4.1|openrouter:openai/gpt-4.1"
     ],
-    "source": "out/run_metrics.csv rows track=B-F (from results/jsonl/B-F_*.jsonl)",
+    "source": "out/extended/run_metrics.csv rows track=B-F (from results/jsonl/B-F_*.jsonl)",
     "method": ""
   },
   "B-N.n": {
     "value": 4,
-    "source": "out/run_metrics.csv rows track=B-N (from results/jsonl/B-N_*.jsonl)",
+    "source": "out/extended/run_metrics.csv rows track=B-N (from results/jsonl/B-N_*.jsonl)",
     "method": "complete (50-round) baseline runs"
   },
   "B-N.n_incomplete": {
     "value": 0,
-    "source": "out/run_metrics.csv rows track=B-N (from results/jsonl/B-N_*.jsonl)",
+    "source": "out/extended/run_metrics.csv rows track=B-N (from results/jsonl/B-N_*.jsonl)",
     "method": ""
   },
   "B-N.n_colluding_Y": {
     "value": 1,
-    "source": "out/run_metrics.csv rows track=B-N (from results/jsonl/B-N_*.jsonl)",
+    "source": "out/extended/run_metrics.csv rows track=B-N (from results/jsonl/B-N_*.jsonl)",
     "method": "pidx rounds 30-49 >= 0.5"
   },
   "B-N.n_crossed": {
     "value": 2,
-    "source": "out/run_metrics.csv rows track=B-N (from results/jsonl/B-N_*.jsonl)",
+    "source": "out/extended/run_metrics.csv rows track=B-N (from results/jsonl/B-N_*.jsonl)",
     "method": "20-round rolling mean of pidx above 0.5 at some round (the base-run criterion)"
   },
   "B-N.mean_Y": {
     "value": 0.2547,
-    "source": "out/run_metrics.csv rows track=B-N (from results/jsonl/B-N_*.jsonl)",
+    "source": "out/extended/run_metrics.csv rows track=B-N (from results/jsonl/B-N_*.jsonl)",
     "method": ""
   },
   "B-N.models": {
     "value": [
       "openrouter:anthropic/claude-haiku-5.5|openrouter:anthropic/claude-haiku-5.5"
     ],
-    "source": "out/run_metrics.csv rows track=B-N (from results/jsonl/B-N_*.jsonl)",
+    "source": "out/extended/run_metrics.csv rows track=B-N (from results/jsonl/B-N_*.jsonl)",
     "method": ""
   },
   "B-X.n": {
     "value": 4,
-    "source": "out/run_metrics.csv rows track=B-X (from results/jsonl/B-X_*.jsonl)",
+    "source": "out/extended/run_metrics.csv rows track=B-X (from results/jsonl/B-X_*.jsonl)",
     "method": "complete (50-round) baseline runs"
   },
   "B-X.n_incomplete": {
     "value": 0,
-    "source": "out/run_metrics.csv rows track=B-X (from results/jsonl/B-X_*.jsonl)",
+    "source": "out/extended/run_metrics.csv rows track=B-X (from results/jsonl/B-X_*.jsonl)",
     "method": ""
   },
   "B-X.n_colluding_Y": {
     "value": 1,
-    "source": "out/run_metrics.csv rows track=B-X (from results/jsonl/B-X_*.jsonl)",
+    "source": "out/extended/run_metrics.csv rows track=B-X (from results/jsonl/B-X_*.jsonl)",
     "method": "pidx rounds 30-49 >= 0.5"
   },
   "B-X.n_crossed": {
     "value": 1,
-    "source": "out/run_metrics.csv rows track=B-X (from results/jsonl/B-X_*.jsonl)",
+    "source": "out/extended/run_metrics.csv rows track=B-X (from results/jsonl/B-X_*.jsonl)",
     "method": "20-round rolling mean of pidx above 0.5 at some round (the base-run criterion)"
   },
   "B-X.mean_Y": {
     "value": 0.288,
-    "source": "out/run_metrics.csv rows track=B-X (from results/jsonl/B-X_*.jsonl)",
+    "source": "out/extended/run_metrics.csv rows track=B-X (from results/jsonl/B-X_*.jsonl)",
     "method": ""
   },
   "B-X.models": {
     "value": [
       "openrouter:openai/gpt-5.6-sol|openrouter:openai/gpt-5.6-sol"
     ],
-    "source": "out/run_metrics.csv rows track=B-X (from results/jsonl/B-X_*.jsonl)",
+    "source": "out/extended/run_metrics.csv rows track=B-X (from results/jsonl/B-X_*.jsonl)",
     "method": ""
   },
   "screen.S_gem25flash_P0think_s0.crossing": {
@@ -3552,35 +3552,35 @@
     "value": {
       "lead": 4.0
     },
-    "source": "out/reaction.csv",
+    "source": "out/extended/reaction.csv",
     "method": "exploratory classification, thresholds 0.03 / 0.05 (see analyze.py)"
   },
   "OPI.R2.reaction_counts": {
     "value": {
       "lead": 4.0
     },
-    "source": "out/reaction.csv",
+    "source": "out/extended/reaction.csv",
     "method": "exploratory classification, thresholds 0.03 / 0.05 (see analyze.py)"
   },
   "OPI.R3.reaction_counts": {
     "value": {
       "lead": 4.0
     },
-    "source": "out/reaction.csv",
+    "source": "out/extended/reaction.csv",
     "method": "exploratory classification, thresholds 0.03 / 0.05 (see analyze.py)"
   },
   "OPI.R4.reaction_counts": {
     "value": {
       "lead": 4.0
     },
-    "source": "out/reaction.csv",
+    "source": "out/extended/reaction.csv",
     "method": "exploratory classification, thresholds 0.03 / 0.05 (see analyze.py)"
   },
   "OPI.RP.reaction_counts": {
     "value": {
       "lead": 4.0
     },
-    "source": "out/reaction.csv",
+    "source": "out/extended/reaction.csv",
     "method": "exploratory classification, thresholds 0.03 / 0.05 (see analyze.py)"
   },
   "F.R1.reaction_counts": {
@@ -3588,7 +3588,7 @@
       "hold, gap persists": 8.0,
       "lead": 8.0
     },
-    "source": "out/reaction.csv",
+    "source": "out/extended/reaction.csv",
     "method": "exploratory classification, thresholds 0.03 / 0.05 (see analyze.py)"
   },
   "F.R2.reaction_counts": {
@@ -3596,7 +3596,7 @@
       "hold, gap persists": 8.0,
       "lead": 8.0
     },
-    "source": "out/reaction.csv",
+    "source": "out/extended/reaction.csv",
     "method": "exploratory classification, thresholds 0.03 / 0.05 (see analyze.py)"
   },
   "F.R3.reaction_counts": {
@@ -3605,7 +3605,7 @@
       "lead": 6.0,
       "raise": 7.0
     },
-    "source": "out/reaction.csv",
+    "source": "out/extended/reaction.csv",
     "method": "exploratory classification, thresholds 0.03 / 0.05 (see analyze.py)"
   },
   "F.R4.reaction_counts": {
@@ -3613,7 +3613,7 @@
       "hold, gap persists": 7.0,
       "lead": 9.0
     },
-    "source": "out/reaction.csv",
+    "source": "out/extended/reaction.csv",
     "method": "exploratory classification, thresholds 0.03 / 0.05 (see analyze.py)"
   },
   "F.RN.reaction_counts": {
@@ -3621,7 +3621,7 @@
       "hold, gap persists": 12.0,
       "lead": 4.0
     },
-    "source": "out/reaction.csv",
+    "source": "out/extended/reaction.csv",
     "method": "exploratory classification, thresholds 0.03 / 0.05 (see analyze.py)"
   },
   "F.RNf.reaction_counts": {
@@ -3630,7 +3630,7 @@
       "lead": 1.0,
       "raise": 3.0
     },
-    "source": "out/reaction.csv",
+    "source": "out/extended/reaction.csv",
     "method": "exploratory classification, thresholds 0.03 / 0.05 (see analyze.py)"
   },
   "F.RX.reaction_counts": {
@@ -3639,7 +3639,7 @@
       "hold, gap persists": 12.0,
       "lead": 3.0
     },
-    "source": "out/reaction.csv",
+    "source": "out/extended/reaction.csv",
     "method": "exploratory classification, thresholds 0.03 / 0.05 (see analyze.py)"
   },
   "market.competitive_price": {
@@ -3729,17 +3729,17 @@
   },
   "checks.branches_complete": {
     "value": 192,
-    "source": "out/checks.md",
+    "source": "out/extended/checks.md",
     "method": ""
   },
   "checks.branches_incomplete": {
     "value": 0,
-    "source": "out/checks.md",
+    "source": "out/extended/checks.md",
     "method": ""
   },
   "checks.implausible_prices_post_swap": {
     "value": 0,
-    "source": "out/branch_metrics.csv n_below_cost + n_above_ceiling",
+    "source": "out/extended/branch_metrics.csv n_below_cost + n_above_ceiling",
     "method": ""
   }
 }

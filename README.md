@@ -14,8 +14,8 @@ the mean over markets, thin lines single markets, and the grey band marks the sc
 
 ## Question
 
-Replacing a pricing algorithm breaks Q-learning cartels, because each learned policy is fitted to its partner
-(Eschenbaum et al. 2022). LLM pricing agents in this harness keep no state between rounds: each round, each firm is a
+In simulations, replacing a pricing algorithm breaks Q-learning cartels, because each learned policy is fitted to its
+partner (Eschenbaum et al. 2022). LLM pricing agents in this harness keep no state between rounds: each round, each firm is a
 fresh model call that sees the last 100 rounds of prices and profits. If one agent is replaced, does the newcomer
 reset the market, or do the shared price record and the remaining firm keep prices high?
 
