@@ -734,6 +734,18 @@ class Pipeline:
             self.deviation("started the pre-authorized Track O fallback runs early (seeds 6-9 at P0 to 200 rounds, "
                            "and Track O-PI seeds 0-5) because all 6 Track O runs sat at the competitive price from "
                            "round 2 and the sequential fallback would end after the deadline")
+        if c.get("add_track_f_seeds") and "F" in self.s["tracks"]:
+            # More Track F markets after the pre-registered ones were analysed: reported as a robustness extension
+            # beside the pre-registered sample, never in place of it (src/analyze.py --extended).
+            t = self.s["tracks"]["F"]
+            new = [int(s) for s in c["add_track_f_seeds"]
+                   if run_name("F", t["model"], t["prefix"], t["think"], int(s)) not in self.s["bases"]]
+            for seed in new:
+                self.add_base("F", t["model"], t["prefix"], t["think"], seed, BASE_ROUNDS, 149, role="base")
+            if new:
+                self.deviation(f"Track F extended by seeds {new} (user decision after the Track F branches of seeds "
+                               "0-4 were analysed): seed 5 was in the pre-registered plan and had been dropped for "
+                               "budget; the primary analysis stays seeds 0-4 and all seeds are a robustness check")
         if c.get("pause"):  # operator stop: no new launches or relaunches; running jobs finish
             self.s["paused"] = now()
             (self.logs / "PAUSE").write_text(now(), encoding="utf-8")

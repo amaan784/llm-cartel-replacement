@@ -82,12 +82,21 @@ def main():
     ap.add_argument("mode", choices=["classify", "sample", "agreement"])
     ap.add_argument("--results_dir", default=str(REPO / "results"))
     ap.add_argument("--out", default=str(OUT))
+    ap.add_argument("--fresh", action="store_true", help="classify: relabel every item instead of reusing labels")
     a = ap.parse_args()
     out = Path(a.out)
     out.mkdir(parents=True, exist_ok=True)
     raw = out / "notice_raw.csv"
     if a.mode == "classify":
-        rows = classify(items(Path(a.results_dir)))
+        rows = items(Path(a.results_dir))
+        # keep earlier labels (the hand validation was scored against them); classify only new items
+        old = {} if a.fresh or not raw.exists() else {
+            (r["file"], r["k"]): r["label"] for r in csv.DictReader(open(raw, encoding="utf-8")) if r["label"] != "?"}
+        for r in rows:
+            r["label"] = old.get((r["file"], str(r["k"])))
+        new = [r for r in rows if r["label"] is None]
+        print(f"{len(rows) - len(new)} items reuse earlier labels; classifying {len(new)}")
+        classify(new)
         with open(raw, "w", newline="", encoding="utf-8") as f:
             w = csv.DictWriter(f, fieldnames=["file", "run", "track", "arm", "seed", "k", "label"], extrasaction="ignore")
             w.writeheader()

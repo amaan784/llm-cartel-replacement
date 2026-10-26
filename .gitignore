@@ -184,3 +184,7 @@ vendor/
 compute.env
 **/compute.env
 logs/
+# raw run and branch logs (~200 MB): published as a separate archive, see README
+results/
+# local helper for the sprint form
+SUBMISSION.md
